@@ -1,10 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
-import config from "./config";
 import Generation from "./Components/Generation";
 import PokeList from "./Components/PokeList";
-
-//console.log(config.BASE_API_DOMAIN + config.ENDPOINT_BERRY + "1");
 
 function App() {
   const [generation, setGeneration] = useState("");

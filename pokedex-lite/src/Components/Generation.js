@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import data from "react-native-ico-material-design/src/data";
 import config from "../config";
 import generationImg from "./generationImg";
 import generationSprites from "./generationSprites";
@@ -37,7 +36,7 @@ export default function Generation(props) {
       >
         <p>{data.name.replace("-", " ").toUpperCase()}</p>
         <div className="imageContainer">
-          <img src={generationImg[data.name]} />
+          <img src={generationImg[data.name]} alt={data.name} />
         </div>
       </div>
     ));

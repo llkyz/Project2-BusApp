@@ -79,14 +79,45 @@ code {
 }
 
 .generationDiv .sorting {
-  position: absolute;
-  left: 700px;
-  top: 165px;
-  right: 0;
+  display: inline-block;
+  margin-right: 6%;
+  font-size: 1em;
+}
+
+#sort {
+  font-size: 1em;
 }
 
 .generationDiv label {
   margin-right: 5px;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  line-height: 31px;
+}
+
+#search {
+  display: inline-block;
+}
+
+#searchInput {
+  font-size: 1.5em;
+  border: none;
+  border-bottom: 2px solid rgb(202, 154, 75);
+  background-color: transparent;
+  color: rgb(53, 53, 53);
+  outline: none;
+}
+
+#magnifyingGlass {
+  height: 30px;
+  width: 30px;
+  margin-left: 10%;
+  margin-right: 2%;
+  display: inline-block;
 }
 
 .pokemonContainer {
