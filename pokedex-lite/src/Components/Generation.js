@@ -45,8 +45,9 @@ export default function Generation(props) {
   return (
     <div className="generationDiv">
       <h1>
-        <u>Select a generation</u>
+        <u>Welcome to Pokédex Lite!</u>
       </h1>
+      <h2>Select a generation to begin</h2>
       <div>
         {generationData ? <ListGenerations /> : "Loading, please wait..."}
       </div>
