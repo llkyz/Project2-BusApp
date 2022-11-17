@@ -1,0 +1,126 @@
+body {
+  margin: 150px 0;
+
+  font-family: "Exo 2", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(255, 243, 224);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgb(202, 154, 75);
+  margin: auto;
+  z-index: 1;
+  color: white;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  font-size: 1.5em;
+  border-bottom: 4px dotted white;
+}
+
+.header h1 {
+  margin: auto;
+}
+
+.header h4 {
+  top: 0;
+  position: absolute;
+  right: 2%;
+  padding: 7px;
+  border: 3px solid white;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.imageContainer {
+  margin: auto;
+  height: 300px;
+  width: 80%;
+  line-height: 300px;
+  text-align: center;
+}
+
+.imageContainer img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+}
+
+.generation {
+  vertical-align: top;
+  position: relative;
+  width: 350px;
+  height: 400px;
+  cursor: pointer;
+  display: inline-block;
+  border: 5px solid grey;
+  margin: 0 2% 2% 2%;
+  background-color: white;
+  font-size: 2em;
+}
+
+.generation p {
+  margin: 3%;
+}
+
+.generationDiv h1 {
+  margin-bottom: 2%;
+}
+
+.generationDiv .sorting {
+  position: absolute;
+  left: 700px;
+  top: 165px;
+  right: 0;
+}
+
+.generationDiv label {
+  margin-right: 5px;
+}
+
+.pokemonContainer {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.pokemon {
+  vertical-align: top;
+  width: 12%;
+  height: 150px;
+  display: inline-block;
+  border: 4px solid rgb(202, 154, 75);
+  border-radius: 10px;
+  margin: 1%;
+  cursor: pointer;
+  padding: 1% 0.5%;
+  font-weight: bold;
+}
+
+.pokemonImageContainer {
+  margin: auto;
+  margin-bottom: 15px;
+  height: 100px;
+  width: 80%;
+  line-height: 100px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.pokemon img {
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 100px;
+  vertical-align: middle;
+}
