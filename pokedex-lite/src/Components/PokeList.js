@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import magnifyingGlass from "../Assets/search.svg";
-import Pokemon from "./Pokemon";
+import Species from "./Species";
 
 export default function PokeList(props) {
   const [pokeData, setPokeData] = useState("");
@@ -204,5 +204,13 @@ export default function PokeList(props) {
     );
   }
 
-  return <>{pokemon ? <Pokemon url={pokemon} /> : <RenderPokeList />}</>;
+  return (
+    <>
+      {pokemon ? (
+        <Species url={pokemon} back={setPokemon} />
+      ) : (
+        <RenderPokeList />
+      )}
+    </>
+  );
 }

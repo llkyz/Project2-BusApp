@@ -155,3 +155,12 @@ code {
   max-height: 100px;
   vertical-align: middle;
 }
+
+.back {
+  width: 13%;
+  border: 3px solid rgb(202, 154, 75);
+  border-radius: 10px;
+  padding: 0.5%;
+  text-align: center;
+  cursor: pointer;
+}
