@@ -29,7 +29,7 @@ export default function Region() {
         }
         key={index}
       >
-        <p>{data.name.toUpperCase()}</p>
+        <h1>{data.name.toUpperCase()}</h1>
         <div className="imageContainer">
           <img src={regionImg[data.name]} alt={data.name} />
         </div>
@@ -40,7 +40,7 @@ export default function Region() {
   return (
     <>
       <h1>
-        <u>Searching by Region</u>
+        <u>Search by Region</u>
       </h1>
       <div className="region">{regionData ? <ListRegions /> : ""}</div>
     </>

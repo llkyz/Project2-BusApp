@@ -53,7 +53,7 @@ export default function Generation() {
           ) : (
             <>
               <h1>
-                <u>Select a generation</u>
+                <u>Search by generation</u>
               </h1>
               <ListGenerations />
             </>

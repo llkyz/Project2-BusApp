@@ -273,8 +273,45 @@ a {
 
 .region {
   width: 80%;
+  margin: 0 auto;
+}
+
+.region h1 {
+  margin: 0;
+  margin-bottom: 15px;
+  color: rgb(202, 154, 75);
+  transition: 0.4s all;
 }
 
 .regionContainer {
   display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  margin: 2% 1%;
+  cursor: pointer;
+}
+
+.regionContainer .imageContainer {
+  width: 380px;
+  height: 270px;
+}
+
+.regionContainer .imageContainer img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border: 10px solid rgb(202, 154, 75);
+  border-radius: 50px;
+  transition: 0.4s all;
+  opacity: 0.6;
+  vertical-align: top;
+}
+
+.regionContainer:hover > h1 {
+  color: black;
+}
+
+.regionContainer:hover > .imageContainer img {
+  border: 10px solid black;
+  opacity: 1;
 }

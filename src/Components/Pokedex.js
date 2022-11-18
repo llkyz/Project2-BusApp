@@ -72,7 +72,7 @@ export default function Pokedex() {
       ) : (
         <div className="generationDiv">
           <h1>
-            <u>Searching entire Pokédex</u>
+            <u>Search entire Pokédex</u>
           </h1>
           <div className="pokemonContainer">
             <SearchBarPokemon
