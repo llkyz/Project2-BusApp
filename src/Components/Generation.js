@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import config from "../config";
-import generationImg from "./generationImg";
-import generationSprites from "./generationSprites";
+import generationImg from "../Assets/generationImg";
+import generationSprites from "../Assets/generationSprites";
 import PokeList from "./PokeList";
 
 export default function Generation() {

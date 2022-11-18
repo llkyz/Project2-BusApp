@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -13,7 +13,10 @@ export default function Home() {
           <div className="selectionContainer">
             <h1>GENERATION</h1>
             <div id="imageContainer">
-              <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/07/Pokemon-video-game-series-franchise.jpg" />
+              <img
+                src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/07/Pokemon-video-game-series-franchise.jpg"
+                alt="generation"
+              />
             </div>
           </div>
         </Link>
@@ -21,7 +24,10 @@ export default function Home() {
           <div className="selectionContainer">
             <h1>REGION</h1>
             <div id="imageContainer">
-              <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/07/Pokemon-video-game-series-franchise.jpg" />
+              <img
+                src="https://scarletviolet.pokemon.com/_images/news/aug_3/world-map.jpg"
+                alt="region"
+              />
             </div>
           </div>
         </Link>
@@ -29,7 +35,10 @@ export default function Home() {
           <div className="selectionContainer">
             <h1>POKÉDEX</h1>
             <div id="imageContainer">
-              <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/07/Pokemon-video-game-series-franchise.jpg" />
+              <img
+                src="https://cdn.dribbble.com/users/817492/screenshots/5814123/pokedex_dribbble.png"
+                alt="pokedex"
+              />
             </div>
           </div>
         </Link>
