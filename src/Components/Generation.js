@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import config from "../config";
 import generationImg from "./generationImg";
 import generationSprites from "./generationSprites";
+import PokeList from "./PokeList";
 
-export default function Generation(props) {
+export default function Generation() {
   const [generationData, setGenerationData] = useState("");
+  const [generation, setGeneration] = useState("");
 
   useEffect(() => {
     const getGeneration = async () => {
@@ -18,7 +20,7 @@ export default function Generation(props) {
   }, []);
 
   function selectGeneration(index, dataName) {
-    props.setGeneration({
+    setGeneration({
       url: generationData.results[index].url,
       sprite: generationSprites[dataName],
     });
@@ -44,12 +46,21 @@ export default function Generation(props) {
 
   return (
     <div className="generationDiv">
-      <h1>
-        <u>Welcome to Pokédex Lite!</u>
-      </h1>
-      <h2>Select a generation to begin</h2>
       <div>
-        {generationData ? <ListGenerations /> : "Loading, please wait..."}
+        {generationData ? (
+          generation ? (
+            <PokeList url={generation.url} sprite={generation.sprite} />
+          ) : (
+            <>
+              <h1>
+                <u>Select a generation</u>
+              </h1>
+              <ListGenerations />
+            </>
+          )
+        ) : (
+          "Loading, please wait..."
+        )}
       </div>
     </div>
   );

@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -28,17 +33,77 @@ code {
 }
 
 .header h1 {
+  left: 0;
+  right: 0;
   margin: auto;
+  position: absolute;
+  width: fit-content;
+}
+
+.searchBy {
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  line-height: 25px;
+  text-align: center;
+}
+
+.header p {
+  margin: 5px 5px;
+  padding: 0 5px;
+  font-size: 18px;
+  display: inline-block;
+  border: 2px solid white;
+}
+
+.header p:hover {
+  background-color: white;
+  color: rgb(202, 154, 75);
+  font-weight: bold;
 }
 
 .header h4 {
-  top: 0;
-  position: absolute;
-  right: 2%;
-  padding: 7px;
-  border: 3px solid white;
-  line-height: 20px;
+  margin: 2px 0 10px 0;
+}
+
+.selectionContainer {
+  width: 400px;
+  height: 450px;
+  display: inline-block;
   cursor: pointer;
+}
+
+.selectionContainer h1 {
+  margin: 0;
+  margin-bottom: 20px;
+  color: rgb(202, 154, 75);
+  transition: 0.4s all;
+}
+
+.selectionContainer:hover > h1 {
+  color: black;
+}
+
+.selectionContainer:hover > #imageContainer img {
+  border: 10px solid black;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.selectionContainer #imageContainer {
+  height: 360px;
+  width: 360px;
+  margin: 0 auto;
+}
+
+.selectionContainer #imageContainer img {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  border: 10px solid rgb(202, 154, 75);
+  border-radius: 50px;
+  transition: 0.4s all;
+  opacity: 0.6;
 }
 
 .imageContainer {
@@ -74,7 +139,7 @@ code {
   margin: 3%;
 }
 
-.generationDiv h2 {
+.generationDiv h1 {
   margin-bottom: 2%;
 }
 
