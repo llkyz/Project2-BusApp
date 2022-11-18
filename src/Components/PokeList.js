@@ -148,68 +148,63 @@ export default function PokeList(props) {
     }
   }
 
-  function RenderPokeList() {
-    return (
-      <div className="generationDiv">
-        <h1>
-          <u>
-            Browsing Generation {parseInt(props.url.split("/").slice(-2, -1))}
-          </u>
-        </h1>
-        <div>{pokemon ? "Chose " + pokemon : ""}</div>
-        <div className="pokemonContainer">
-          <div className="searchBar">
-            <div style={{ width: "50%", display: "flex" }}>
-              <img src={magnifyingGlass} id="magnifyingGlass" alt="search" />
-              <label id="search">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  id="searchInput"
-                  spellCheck="false"
-                  autoComplete="off"
-                  onChange={(event) =>
-                    setSearchQuery(event.currentTarget.value)
-                  }
-                />
-              </label>
-            </div>
-            <div className="sorting">
-              <label htmlFor="sorting">Sort by:</label>
-              <select
-                name="sorting"
-                id="sort"
-                onChange={(event) => doSort(event.target.value)}
-              >
-                <option value="pokedex-asc" defaultValue>
-                  Pokédex # Ascending
-                </option>
-                <option value="pokedex-dsc">Pokédex # Descending</option>
-                <option value="alphabet-asc">Alphabetical Ascending</option>
-                <option value="alphabet-dsc">Alphabetical Descending</option>
-              </select>
-            </div>
-          </div>
-          {pokeData ? (
-            searchQuery ? (
-              <MakeFilteredList />
-            ) : (
-              <MakeRegularList list={pokeData} />
-            )
-          ) : (
-            "Loading, Please wait..."
-          )}
-        </div>
-      </div>
-    );
-  }
-
   return (
     <>
       {pokemon ? (
         <Species url={pokemon} back={setPokemon} />
       ) : (
-        <RenderPokeList />
+        <div className="generationDiv">
+          <h1>
+            <u>
+              Browsing Generation {parseInt(props.url.split("/").slice(-2, -1))}
+            </u>
+          </h1>
+          <div>{pokemon ? "Chose " + pokemon : ""}</div>
+          <div className="pokemonContainer">
+            <div className="searchBar">
+              <div style={{ width: "50%", display: "flex" }}>
+                <img src={magnifyingGlass} id="magnifyingGlass" alt="search" />
+                <label id="search">
+                  <input
+                    type="text"
+                    placeholder="Search"
+                    id="searchInput"
+                    spellCheck="false"
+                    autoComplete="off"
+                    value={searchQuery}
+                    onChange={(event) =>
+                      setSearchQuery(event.currentTarget.value)
+                    }
+                  />
+                </label>
+              </div>
+              <div className="sorting">
+                <label htmlFor="sorting">Sort by:</label>
+                <select
+                  name="sorting"
+                  id="sort"
+                  onChange={(event) => doSort(event.target.value)}
+                >
+                  <option value="pokedex-asc" defaultValue>
+                    Pokédex # Ascending
+                  </option>
+                  <option value="pokedex-dsc">Pokédex # Descending</option>
+                  <option value="alphabet-asc">Alphabetical Ascending</option>
+                  <option value="alphabet-dsc">Alphabetical Descending</option>
+                </select>
+              </div>
+            </div>
+            {pokeData ? (
+              searchQuery ? (
+                <MakeFilteredList />
+              ) : (
+                <MakeRegularList list={pokeData} />
+              )
+            ) : (
+              "Loading, Please wait..."
+            )}
+          </div>
+        </div>
       )}
     </>
   );
