@@ -12,11 +12,11 @@ export default function Species(props) {
     const getSpeciesData = async () => {
       const response = await fetch(props.url);
       const data = await response.json();
-      nav.set("speciesData", data);
+      nav.set({ speciesData: data });
     };
     getSpeciesData();
     // eslint-disable-next-line
-  }, [props.url]);
+  }, []);
 
   const pokeid = props.url.split("/").slice(-2, -1);
 

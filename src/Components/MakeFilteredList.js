@@ -1,16 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { checkAgainstSearch } from "../Assets/sortPokemon";
 import SpeciesEntry from "./SpeciesEntry";
+import { Navigation } from "../App";
 
-export default function MakeFilteredList(props) {
-  function MakePokeList(myList, setPokemon) {
+export default function MakeFilteredList() {
+  const nav = useContext(Navigation);
+
+  function MakePokeListSprite(myList) {
     return myList.map((data, index) => {
-      return <SpeciesEntry index={index} data={data} setPokemon={setPokemon} />;
+      return <SpeciesEntry key={index} data={data} />;
     });
   }
-
-  let myList = props.list.filter((data) =>
-    checkAgainstSearch(data.name, data.pokeid, props.searchQuery)
+  let myList = nav.data.speciesList.filter((data) =>
+    checkAgainstSearch(data.name, data.pokeid, nav.data.searchQueryPokemon)
   );
-  return MakePokeList(myList, props.setPokemon);
+  return MakePokeListSprite(myList);
 }

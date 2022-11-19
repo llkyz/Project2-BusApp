@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState, createContext } from "react";
 import Home from "./Components/Home";
 import Generation from "./Components/Generation";
-import Region from "./Components/Region";
+import RegionList from "./Components/RegionList";
 import Pokedex from "./Components/Pokedex";
 import { Route, Routes, Link } from "react-router-dom";
 
@@ -18,16 +18,18 @@ function App() {
     speciesData: "",
     regionList: "",
     region: "",
+    regionData: "",
+    location: "",
   };
 
   const [data, setData] = useState(initialState);
 
-  function set(myKey, myValue) {
-    setData({ ...data, [myKey]: myValue });
+  function set(mydata) {
+    setData({ ...data, ...mydata });
   }
 
-  function clearNavigation(myKey, myValue) {
-    setData({ ...initialState, [myKey]: myValue });
+  function clearNavigation(myData) {
+    setData({ ...initialState, ...myData });
   }
 
   return (
@@ -42,20 +44,24 @@ function App() {
             <Link to="/generation">
               <p
                 onClick={() =>
-                  clearNavigation("generationList", data.generationList)
+                  clearNavigation({ generationList: data.generationList })
                 }
               >
                 Generation
               </p>
             </Link>
             <Link to="/region">
-              <p onClick={() => clearNavigation("regionList", data.regionList)}>
+              <p
+                onClick={() => clearNavigation({ regionList: data.regionList })}
+              >
                 Region
               </p>
             </Link>
             <Link to="/pokedex">
               <p
-                onClick={() => clearNavigation("speciesList", data.speciesList)}
+                onClick={() =>
+                  clearNavigation({ speciesList: data.speciesList })
+                }
               >
                 Pokedex
               </p>
@@ -66,7 +72,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/generation" element={<Generation />} />
-            <Route path="/region" element={<Region />} />
+            <Route path="/region" element={<RegionList />} />
             <Route path="/pokedex" element={<Pokedex />} />
           </Routes>
         </Navigation.Provider>

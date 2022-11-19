@@ -5,38 +5,36 @@ export default function BackButton(props) {
   const nav = useContext(Navigation);
 
   function fromPokeList() {
-    nav.set("generation", "");
-    window.scrollTo(0, 0);
-  }
-
-  function fromPokedex() {
-    nav.set("searchQueryPokemon", "");
-    nav.set("speciesList", "");
+    nav.set({ searchQueryPokemon: "", speciesList: "", generation: "" });
     window.scrollTo(0, 0);
   }
 
   function fromSpecies() {
-    nav.set("speciesData", "");
-    nav.set("species", "");
+    nav.set({ speciesData: "", species: "" });
     window.scrollTo(0, 0);
   }
 
   function fromGenerationList() {
-    nav.set("generationList", "");
+    nav.set({ generationList: "" });
     window.scrollTo(0, 0);
   }
 
   function fromRegionList() {
-    nav.set("regionList", "");
+    nav.set({ regionList: "" });
+    window.scrollTo(0, 0);
+  }
+
+  function fromRegion() {
+    nav.set({ region: "", regionData: "", location: "" });
     window.scrollTo(0, 0);
   }
 
   const backFunctions = {
     fromPokeList: fromPokeList,
-    fromPokedex: fromPokedex,
     fromSpecies: fromSpecies,
     fromGenerationList: fromGenerationList,
     fromRegionList: fromRegionList,
+    fromRegion: fromRegion,
   };
 
   return (

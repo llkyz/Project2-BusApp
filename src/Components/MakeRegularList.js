@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import SpeciesEntry from "./SpeciesEntry";
+import { Navigation } from "../App";
 
-export default function MakeRegularList(props) {
-  function MakePokeList(myList, setPokemon) {
+export default function MakeRegularList() {
+  const nav = useContext(Navigation);
+
+  function MakePokeListSprite(myList) {
     return myList.map((data, index) => {
-      return <SpeciesEntry index={index} data={data} setPokemon={setPokemon} />;
+      return <SpeciesEntry key={index} data={data} />;
     });
   }
 
-  return MakePokeList(props.list, props.setPokemon);
+  return MakePokeListSprite(nav.data.speciesList);
 }

@@ -21,7 +21,7 @@ export function sortPokedexAsc(myList) {
   return myList;
 }
 
-export function sortPokedexDsc(myList) {
+function sortPokedexDsc(myList) {
   myList.sort((a, b) => {
     let idA = a.pokeid;
     let idB = b.pokeid;
@@ -31,7 +31,7 @@ export function sortPokedexDsc(myList) {
   return myList;
 }
 
-export function sortNameAsc(myList) {
+function sortNameAsc(myList) {
   myList.sort((a, b) => {
     let idA = a.name.toLowerCase();
     let idB = b.name.toLowerCase();
@@ -41,7 +41,7 @@ export function sortNameAsc(myList) {
   return myList;
 }
 
-export function sortNameDsc(myList) {
+function sortNameDsc(myList) {
   myList.sort((a, b) => {
     let idA = a.name.toLowerCase();
     let idB = b.name.toLowerCase();
@@ -61,4 +61,30 @@ export function checkAgainstSearch(name, id, searchQuery) {
     name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     id.toString().includes(searchQuery.toLowerCase())
   );
+}
+
+export function doSort(sortType, nav) {
+  let newList = nav.data.speciesList.map((data) => data);
+  switch (sortType) {
+    case "pokedex-asc": {
+      nav.set({ speciesList: sortPokedexAsc(newList) });
+      break;
+    }
+    case "pokedex-dsc": {
+      nav.set({ speciesList: sortPokedexDsc(newList) });
+      break;
+    }
+    case "alphabet-asc": {
+      nav.set({ speciesList: sortNameAsc(newList) });
+      break;
+    }
+    case "alphabet-dsc": {
+      nav.set({ speciesList: sortNameDsc(newList) });
+      break;
+    }
+    default: {
+      nav.set({ speciesList: sortPokedexAsc(newList) });
+      break;
+    }
+  }
 }

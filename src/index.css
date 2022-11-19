@@ -314,12 +314,12 @@ label {
   color: rgb(202, 154, 75);
 }
 
-.region {
+.regionList {
   width: 80%;
   margin: 0 auto;
 }
 
-.region h1 {
+.regionList h1 {
   margin: 0;
   margin-bottom: 15px;
   color: rgb(202, 154, 75);
@@ -362,4 +362,90 @@ label {
 .regionContainer:hover > .imageContainer img {
   border: 10px solid black;
   opacity: 1;
+}
+
+.regionHeader {
+  width: 40%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.regionHeader h1 {
+  display: inline-block;
+  font-size: 3em;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.regionHeader h2 {
+  display: inline-block;
+  vertical-align: bottom;
+  border: 3px solid rgb(202, 154, 75);
+  border-radius: 10px;
+  height: fit-content;
+  padding: 3px 7px;
+  cursor: pointer;
+}
+
+.regionHeader h2:hover {
+  background-color: rgb(202, 154, 75);
+  font-weight: bold;
+  color: rgb(255, 243, 224);
+}
+
+.region {
+  margin-top: -30px;
+}
+
+.region img {
+  width: 40%;
+  display: block;
+  margin: 0 auto;
+  border: 10px solid rgb(202, 154, 75);
+}
+
+.locationList {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.locationEntry {
+  display: inline-block;
+  border: 3px solid rgb(202, 154, 75);
+  border-radius: 10px;
+  padding: 5px 7px;
+  margin: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s all;
+}
+
+.locationEntry:hover {
+  border: 3px solid black;
+  transform: scale(1.1);
+}
+
+.locationDetail {
+  border: 5px solid rgb(202, 154, 75);
+  border-radius: 50px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.locationDetail .locationHeader {
+  background-color: rgb(202, 154, 75);
+  border-radius: 40px 40px 0 0;
+  height: 100px;
+}
+
+.locationDetail h1 {
+  margin: 0;
+  padding-top: 19px;
+  color: rgb(255, 243, 224);
+  font-size: 2.5em;
 }

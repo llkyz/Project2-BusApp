@@ -15,6 +15,7 @@ const generationSprites = {
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-vii/ultra-sun-ultra-moon/",
   "generation-viii":
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-viii/icons/",
+  full: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/",
 };
 
 export default generationSprites;

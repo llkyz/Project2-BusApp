@@ -1,15 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import Species from "./Species";
 import SearchBarPokemon from "./SearchBarPokemon";
-import {
-  createPokeId,
-  sortPokedexAsc,
-  sortPokedexDsc,
-  sortNameAsc,
-  sortNameDsc,
-} from "../Assets/sortPokemon";
-import MakeRegularListSprite from "./MakeRegularListSprite";
-import MakeFilteredListSprite from "./MakeFilteredListSprite";
+import { createPokeId, sortPokedexAsc } from "../Assets/sortPokemon";
+import MakeRegularList from "./MakeRegularList";
+import MakeFilteredList from "./MakeFilteredList";
 import { Navigation } from "../App";
 import BackButton from "./BackButton";
 
@@ -22,38 +16,12 @@ export default function PokeList() {
       let data = await response.json();
       data = createPokeId(data.pokemon_species);
       data = sortPokedexAsc(data);
-      nav.set("speciesList", data);
+      nav.set({ speciesList: data });
     };
 
     getPokeList();
     // eslint-disable-next-line
   }, []);
-
-  function doSort(sortType) {
-    let newList = nav.data.speciesList.map((data) => data);
-    switch (sortType) {
-      case "pokedex-asc": {
-        nav.set("speciesList", sortPokedexAsc(newList));
-        break;
-      }
-      case "pokedex-dsc": {
-        nav.set("speciesList", sortPokedexDsc(newList));
-        break;
-      }
-      case "alphabet-asc": {
-        nav.set("speciesList", sortNameAsc(newList));
-        break;
-      }
-      case "alphabet-dsc": {
-        nav.set("speciesList", sortNameDsc(newList));
-        break;
-      }
-      default: {
-        nav.set("speciesList", sortPokedexAsc(newList));
-        break;
-      }
-    }
-  }
 
   return (
     <>
@@ -66,32 +34,19 @@ export default function PokeList() {
               <h1>
                 <u>
                   Browsing Generation{" "}
-                  {parseInt(nav.data.generation.url.split("/").slice(-2, -1))}
+                  {nav.data.generation.name.split("-")[1].toUpperCase()}
                 </u>
               </h1>
-              <SearchBarPokemon
-                doSort={doSort}
-                searchQuery={nav.data.searchQueryPokemon}
-                setSearchQuery={nav.set}
-              />
+              <SearchBarPokemon />
             </div>
           </div>
           <BackButton back={"fromPokeList"} />
           <div className="pokemonContainer">
             {nav.data.speciesList ? (
               nav.data.searchQueryPokemon ? (
-                <MakeFilteredListSprite
-                  list={nav.data.speciesList}
-                  searchQuery={nav.data.searchQueryPokemon}
-                  setPokemon={nav.set}
-                  sprite={nav.data.generation.sprite}
-                />
+                <MakeFilteredList />
               ) : (
-                <MakeRegularListSprite
-                  list={nav.data.speciesList}
-                  setPokemon={nav.set}
-                  sprite={nav.data.generation.sprite}
-                />
+                <MakeRegularList />
               )
             ) : (
               "Loading Pokemon, Please wait..."

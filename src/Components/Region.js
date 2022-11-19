@@ -1,66 +1,108 @@
-import React, { useState, useEffect } from "react";
-import config from "../config";
-import regionImg from "../Assets/regionImg";
-import Location from "./Location";
-import { Link } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
+import { Navigation } from "../App";
 import BackButton from "./BackButton";
+import regionImg from "../Assets/regionImg";
+import { Link } from "react-router-dom";
+import generationSprites from "../Assets/generationSprites";
+import config from "../config";
+import Location from "./Location";
+import { cleanTitle } from "../Assets/cleanup";
 
 export default function Region() {
-  const [regionData, setRegionData] = useState("");
-  const [region, setRegion] = useState("");
+  const nav = useContext(Navigation);
 
   useEffect(() => {
-    const getRegions = async () => {
-      const response = await fetch(
-        config.BASE_API_DOMAIN + config.ENDPOINT_REGION
-      );
+    const getRegion = async () => {
+      const response = await fetch(nav.data.region);
       let data = await response.json();
-      setRegionData(data.results);
+      nav.set({ regionData: data });
     };
 
-    getRegions();
+    getRegion();
+    // eslint-disable-next-line
   }, []);
 
-  function ListRegions() {
-    return regionData.map((data, index) => (
-      <div
-        onClick={() => setRegion(data.url)}
-        className="regionContainer"
-        id={
-          "region" +
-          data.url.substring(data.url.length - 2, data.url.length - 1)
-        }
-        key={index}
-      >
-        <h1>{data.name.toUpperCase()}</h1>
-        <div className="imageContainer">
-          <img src={regionImg[data.name]} alt={data.name} />
+  function goToGeneration() {
+    let generationNum = nav.data.region.split("/");
+    generationNum = generationNum[generationNum.length - 2];
+    let generationData = {
+      name: nav.data.regionData.main_generation.name,
+      sprite: generationSprites[nav.data.regionData.main_generation.name],
+      url: config.BASE_API_DOMAIN + config.ENDPOINT_GENERATION + generationNum,
+    };
+    nav.set({
+      region: "",
+      regionData: "",
+      regionList: "",
+      generation: generationData,
+    });
+  }
+
+  function ListLocations() {
+    return nav.data.regionData.locations.map((data, index) => {
+      return (
+        <div
+          key={index}
+          className="locationEntry"
+          onClick={() => nav.set({ location: data.url })}
+        >
+          {cleanTitle(data.name)}
         </div>
-      </div>
-    ));
+      );
+    });
+  }
+
+  function GenerationLink() {
+    return (
+      <Link to="/generation">
+        <h2 onClick={goToGeneration}>
+          {nav.data.regionData.main_generation.name
+            .replace("-", " ")
+            .toUpperCase()}
+        </h2>
+      </Link>
+    );
+  }
+
+  function DisplayRegion() {
+    return (
+      <>
+        <BackButton back={"fromRegion"} />
+        <div className="region">
+          <div className="regionHeader">
+            <h1>{nav.data.regionData.name.toUpperCase()}</h1>
+            {nav.data.regionData.main_generation ? (
+              <GenerationLink />
+            ) : (
+              <h2>NO GENERATION</h2>
+            )}
+          </div>
+          <img
+            src={regionImg[nav.data.regionData.name]}
+            alt={nav.data.regionData.name}
+          />
+          {nav.data.regionData.locations.length !== 0 ? (
+            <>
+              <h1>Locations</h1>
+              <div className="locationList">
+                {nav.data.location ? <Location /> : <ListLocations />}
+              </div>
+            </>
+          ) : (
+            <h1>No Locations Found</h1>
+          )}
+        </div>
+      </>
+    );
   }
 
   return (
-    <>
-      {regionData ? (
-        region ? (
-          <Location url={region} />
-        ) : (
-          <>
-            <h1>
-              <u>Search by Region</u>
-            </h1>
-            <Link to="/">
-              <BackButton back={"fromRegionList"} />
-            </Link>
-            <div className="region">
-              <ListRegions />
-            </div>
-          </>
-        )
+    <div>
+      {nav.data.regionData ? (
+        <DisplayRegion />
       ) : (
-        "Loading Regions, please wait..."
+        "Loading Region, please wait..."
       )}
-    </>
+    </div>
   );
 }

@@ -16,16 +16,19 @@ export default function Generation() {
         config.BASE_API_DOMAIN + config.ENDPOINT_GENERATION
       );
       const data = await response.json();
-      nav.set("generationList", data);
+      nav.set({ generationList: data });
     };
     getGeneration();
     // eslint-disable-next-line
   }, []);
 
   function selectGeneration(index, dataName) {
-    nav.set("generation", {
-      url: nav.data.generationList.results[index].url,
-      sprite: generationSprites[dataName],
+    nav.set({
+      generation: {
+        url: nav.data.generationList.results[index].url,
+        sprite: generationSprites[dataName],
+        name: dataName,
+      },
     });
   }
 
