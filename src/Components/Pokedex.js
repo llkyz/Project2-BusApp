@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import config from "../config";
 import Species from "./Species";
 import SearchBarPokemon from "./SearchBarPokemon";
@@ -11,11 +11,12 @@ import {
 } from "../Assets/sortPokemon";
 import MakeRegularList from "./MakeRegularList";
 import MakeFilteredList from "./MakeFilteredList";
+import { Navigation } from "../App";
+import { Link } from "react-router-dom";
+import BackButton from "./BackButton";
 
 export default function Pokedex() {
-  const [pokedexData, setPokedexData] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [pokemon, setPokemon] = useState("");
+  const nav = useContext(Navigation);
 
   useEffect(() => {
     const getPokedexList = async () => {
@@ -33,33 +34,34 @@ export default function Pokedex() {
       data = await response2.json();
       data = createPokeId(data.results);
       data = sortPokedexAsc(data);
-      setPokedexData(data);
+      nav.set("speciesList", data);
     };
 
     getPokedexList();
+    // eslint-disable-next-line
   }, []);
 
   function doSort(sortType) {
-    let newList = pokedexData.map((data) => data);
+    let newList = nav.data.speciesList.map((data) => data);
     switch (sortType) {
       case "pokedex-asc": {
-        setPokedexData(sortPokedexAsc(newList));
+        nav.set("speciesList", sortPokedexAsc(newList));
         break;
       }
       case "pokedex-dsc": {
-        setPokedexData(sortPokedexDsc(newList));
+        nav.set("speciesList", sortPokedexDsc(newList));
         break;
       }
       case "alphabet-asc": {
-        setPokedexData(sortNameAsc(newList));
+        nav.set("speciesList", sortNameAsc(newList));
         break;
       }
       case "alphabet-dsc": {
-        setPokedexData(sortNameDsc(newList));
+        nav.set("speciesList", sortNameDsc(newList));
         break;
       }
       default: {
-        setPokedexData(sortPokedexAsc(newList));
+        nav.set("speciesList", sortPokedexAsc(newList));
         break;
       }
     }
@@ -67,31 +69,41 @@ export default function Pokedex() {
 
   return (
     <>
-      {pokemon ? (
-        <Species url={pokemon} back={setPokemon} />
+      {nav.data.species ? (
+        <Species url={nav.data.species} />
       ) : (
-        <div className="generationDiv">
-          <h1>
-            <u>Search entire Pokédex</u>
-          </h1>
+        <div>
+          <div className="fixedBar">
+            <div id="container">
+              <h1>
+                <u>Search entire Pokédex</u>
+              </h1>
+              <SearchBarPokemon
+                doSort={doSort}
+                searchQuery={nav.data.searchQueryPokemon}
+                setSearchQuery={nav.set}
+              />
+            </div>
+          </div>
+          <Link to="/">
+            <BackButton back={"fromPokedex"} />
+          </Link>
           <div className="pokemonContainer">
-            <SearchBarPokemon
-              setSearchQuery={setSearchQuery}
-              doSort={doSort}
-              searchQuery={searchQuery}
-            />
-            {pokedexData ? (
-              searchQuery ? (
+            {nav.data.speciesList ? (
+              nav.data.searchQueryPokemon ? (
                 <MakeFilteredList
-                  list={pokedexData}
-                  searchQuery={searchQuery}
-                  setPokemon={setPokemon}
+                  list={nav.data.speciesList}
+                  searchQuery={nav.data.searchQueryPokemon}
+                  setPokemon={nav.set}
                 />
               ) : (
-                <MakeRegularList list={pokedexData} setPokemon={setPokemon} />
+                <MakeRegularList
+                  list={nav.data.speciesList}
+                  setPokemon={nav.set}
+                />
               )
             ) : (
-              "Loading, Please wait..."
+              "Loading Pokemon, Please wait..."
             )}
           </div>
         </div>

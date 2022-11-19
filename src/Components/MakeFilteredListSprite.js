@@ -1,29 +1,19 @@
 import React from "react";
 import { replaceImage } from "../Assets/sortPokemon";
 import { checkAgainstSearch } from "../Assets/sortPokemon";
+import SpeciesEntrySprite from "./SpeciesEntrySprite";
 
 export default function MakeFilteredListSprite(props) {
   function MakePokeListSprite(myList, setPokemon, sprite) {
     return myList.map((data, index) => {
       return (
-        <div
-          className="pokemon"
-          key={index}
-          onClick={() => setPokemon(data.url)}
-        >
-          <div className="pokemonImageContainer">
-            <img
-              src={sprite + data.pokeid + ".png"}
-              alt={data.name}
-              onError={(event) => replaceImage(event)}
-            />
-          </div>
-          <div>
-            #{data.pokeid}
-            <br />
-            {data.name}
-          </div>
-        </div>
+        <SpeciesEntrySprite
+          index={index}
+          data={data}
+          setPokemon={setPokemon}
+          sprite={sprite}
+          replaceImage={replaceImage}
+        />
       );
     });
   }

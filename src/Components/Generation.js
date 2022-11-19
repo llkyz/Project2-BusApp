@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import config from "../config";
 import generationImg from "../Assets/generationImg";
 import generationSprites from "../Assets/generationSprites";
 import PokeList from "./PokeList";
+import { Navigation } from "../App";
+import { Link } from "react-router-dom";
+import BackButton from "./BackButton";
 
 export default function Generation() {
-  const [generationData, setGenerationData] = useState("");
-  const [generation, setGeneration] = useState("");
+  const nav = useContext(Navigation);
 
   useEffect(() => {
     const getGeneration = async () => {
@@ -14,22 +16,26 @@ export default function Generation() {
         config.BASE_API_DOMAIN + config.ENDPOINT_GENERATION
       );
       const data = await response.json();
-      setGenerationData(data);
+      nav.set("generationList", data);
     };
     getGeneration();
+    // eslint-disable-next-line
   }, []);
 
   function selectGeneration(index, dataName) {
-    setGeneration({
-      url: generationData.results[index].url,
+    nav.set("generation", {
+      url: nav.data.generationList.results[index].url,
       sprite: generationSprites[dataName],
     });
   }
 
   function ListGenerations() {
-    return generationData.results.map((data, index) => (
+    return nav.data.generationList.results.map((data, index) => (
       <div
-        onClick={() => selectGeneration(index, data.name)}
+        onClick={() => {
+          selectGeneration(index, data.name);
+          window.scrollTo(0, 0);
+        }}
         className="generation"
         id={
           "gen" + data.url.substring(data.url.length - 2, data.url.length - 1)
@@ -45,23 +51,26 @@ export default function Generation() {
   }
 
   return (
-    <div className="generationDiv">
-      <div>
-        {generationData ? (
-          generation ? (
-            <PokeList url={generation.url} sprite={generation.sprite} />
-          ) : (
-            <>
+    <>
+      {nav.data.generationList ? (
+        nav.data.generation ? (
+          <PokeList />
+        ) : (
+          <>
+            <Link to="/">
+              <BackButton back={"fromGenerationList"} />
+            </Link>
+            <div className="generationDiv">
               <h1>
                 <u>Search by generation</u>
               </h1>
               <ListGenerations />
-            </>
-          )
-        ) : (
-          "Loading, please wait..."
-        )}
-      </div>
-    </div>
+            </div>
+          </>
+        )
+      ) : (
+        "Loading Generations, please wait..."
+      )}
+    </>
   );
 }

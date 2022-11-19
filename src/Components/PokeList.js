@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Species from "./Species";
 import SearchBarPokemon from "./SearchBarPokemon";
 import {
@@ -10,45 +10,46 @@ import {
 } from "../Assets/sortPokemon";
 import MakeRegularListSprite from "./MakeRegularListSprite";
 import MakeFilteredListSprite from "./MakeFilteredListSprite";
+import { Navigation } from "../App";
+import BackButton from "./BackButton";
 
-export default function PokeList(props) {
-  const [pokeData, setPokeData] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [pokemon, setPokemon] = useState("");
+export default function PokeList() {
+  const nav = useContext(Navigation);
 
   useEffect(() => {
     const getPokeList = async () => {
-      const response = await fetch(props.url);
+      const response = await fetch(nav.data.generation.url);
       let data = await response.json();
       data = createPokeId(data.pokemon_species);
       data = sortPokedexAsc(data);
-      setPokeData(data);
+      nav.set("speciesList", data);
     };
 
     getPokeList();
-  }, [props.url]);
+    // eslint-disable-next-line
+  }, []);
 
   function doSort(sortType) {
-    let newList = pokeData.map((data) => data);
+    let newList = nav.data.speciesList.map((data) => data);
     switch (sortType) {
       case "pokedex-asc": {
-        setPokeData(sortPokedexAsc(newList));
+        nav.set("speciesList", sortPokedexAsc(newList));
         break;
       }
       case "pokedex-dsc": {
-        setPokeData(sortPokedexDsc(newList));
+        nav.set("speciesList", sortPokedexDsc(newList));
         break;
       }
       case "alphabet-asc": {
-        setPokeData(sortNameAsc(newList));
+        nav.set("speciesList", sortNameAsc(newList));
         break;
       }
       case "alphabet-dsc": {
-        setPokeData(sortNameDsc(newList));
+        nav.set("speciesList", sortNameDsc(newList));
         break;
       }
       default: {
-        setPokeData(sortPokedexAsc(newList));
+        nav.set("speciesList", sortPokedexAsc(newList));
         break;
       }
     }
@@ -56,41 +57,47 @@ export default function PokeList(props) {
 
   return (
     <>
-      {pokemon ? (
-        <Species url={pokemon} back={setPokemon} />
+      {nav.data.species ? (
+        <Species url={nav.data.species} />
       ) : (
-        <div className="generationDiv">
-          <h1>
-            <u>
-              Browsing Generation {parseInt(props.url.split("/").slice(-2, -1))}
-            </u>
-          </h1>
+        <>
+          <div className="fixedBar">
+            <div id="container">
+              <h1>
+                <u>
+                  Browsing Generation{" "}
+                  {parseInt(nav.data.generation.url.split("/").slice(-2, -1))}
+                </u>
+              </h1>
+              <SearchBarPokemon
+                doSort={doSort}
+                searchQuery={nav.data.searchQueryPokemon}
+                setSearchQuery={nav.set}
+              />
+            </div>
+          </div>
+          <BackButton back={"fromPokeList"} />
           <div className="pokemonContainer">
-            <SearchBarPokemon
-              setSearchQuery={setSearchQuery}
-              doSort={doSort}
-              searchQuery={searchQuery}
-            />
-            {pokeData ? (
-              searchQuery ? (
+            {nav.data.speciesList ? (
+              nav.data.searchQueryPokemon ? (
                 <MakeFilteredListSprite
-                  list={pokeData}
-                  searchQuery={searchQuery}
-                  setPokemon={setPokemon}
-                  sprite={props.sprite}
+                  list={nav.data.speciesList}
+                  searchQuery={nav.data.searchQueryPokemon}
+                  setPokemon={nav.set}
+                  sprite={nav.data.generation.sprite}
                 />
               ) : (
                 <MakeRegularListSprite
-                  list={pokeData}
-                  setPokemon={setPokemon}
-                  sprite={props.sprite}
+                  list={nav.data.speciesList}
+                  setPokemon={nav.set}
+                  sprite={nav.data.generation.sprite}
                 />
               )
             ) : (
-              "Loading, Please wait..."
+              "Loading Pokemon, Please wait..."
             )}
           </div>
-        </div>
+        </>
       )}
     </>
   );

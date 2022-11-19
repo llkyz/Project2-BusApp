@@ -15,7 +15,10 @@ export default function SearchBarPokemon(props) {
             autoComplete="off"
             value={props.searchQuery}
             onChange={(event) =>
-              props.setSearchQuery(event.currentTarget.value)
+              props.setSearchQuery(
+                "searchQueryPokemon",
+                event.currentTarget.value
+              )
             }
           />
         </label>

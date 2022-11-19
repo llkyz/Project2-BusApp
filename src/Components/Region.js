@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import config from "../config";
 import regionImg from "../Assets/regionImg";
+import Location from "./Location";
+import { Link } from "react-router-dom";
+import BackButton from "./BackButton";
 
 export default function Region() {
   const [regionData, setRegionData] = useState("");
@@ -39,10 +42,25 @@ export default function Region() {
 
   return (
     <>
-      <h1>
-        <u>Search by Region</u>
-      </h1>
-      <div className="region">{regionData ? <ListRegions /> : ""}</div>
+      {regionData ? (
+        region ? (
+          <Location url={region} />
+        ) : (
+          <>
+            <h1>
+              <u>Search by Region</u>
+            </h1>
+            <Link to="/">
+              <BackButton back={"fromRegionList"} />
+            </Link>
+            <div className="region">
+              <ListRegions />
+            </div>
+          </>
+        )
+      ) : (
+        "Loading Regions, please wait..."
+      )}
     </>
   );
 }

@@ -1,21 +1,10 @@
 import React from "react";
+import SpeciesEntry from "./SpeciesEntry";
 
 export default function MakeRegularList(props) {
   function MakePokeList(myList, setPokemon) {
     return myList.map((data, index) => {
-      return (
-        <div
-          className="pokedex"
-          key={index}
-          onClick={() => setPokemon(data.url)}
-        >
-          <div>
-            #{data.pokeid}
-            <br />
-            {data.name}
-          </div>
-        </div>
-      );
+      return <SpeciesEntry index={index} data={data} setPokemon={setPokemon} />;
     });
   }
 

@@ -23,7 +23,7 @@ a {
   width: 100%;
   background-color: rgb(202, 154, 75);
   margin: auto;
-  z-index: 1;
+  z-index: 998;
   color: white;
   height: 100px;
   line-height: 100px;
@@ -42,7 +42,7 @@ a {
 
 .searchBy {
   position: absolute;
-  left: 15px;
+  right: 10%;
   top: 10px;
   line-height: 25px;
   text-align: center;
@@ -157,7 +157,7 @@ a {
 }
 
 .generationDiv h1 {
-  margin-bottom: 2%;
+  margin-bottom: 4%;
 }
 
 .generationDiv .sorting {
@@ -166,11 +166,15 @@ a {
   font-size: 1em;
 }
 
+.sorting {
+  margin-right: 5%;
+}
+
 #sort {
   font-size: 1em;
 }
 
-.generationDiv label {
+label {
   margin-right: 5px;
 }
 
@@ -179,6 +183,20 @@ a {
   justify-content: space-between;
   margin-bottom: 5px;
   line-height: 31px;
+}
+
+.fixedBar {
+  position: fixed;
+  width: 100%;
+  background-color: rgb(255, 243, 224);
+  top: 100px;
+  padding-bottom: 20px;
+  z-index: 900;
+}
+
+.fixedBar #container {
+  width: 70%;
+  margin: 0 auto;
 }
 
 #search {
@@ -223,6 +241,7 @@ a {
 .pokemonContainer {
   width: 70%;
   margin: 0 auto;
+  padding-top: 100px;
 }
 
 .pokemon {
@@ -262,13 +281,37 @@ a {
   vertical-align: middle;
 }
 
+.speciesContainer {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.fixedBack {
+  position: fixed;
+  width: 100%;
+  top: 100px;
+  background-color: rgb(255, 243, 224);
+}
+
 .back {
-  width: 13%;
-  border: 3px solid rgb(202, 154, 75);
+  position: fixed;
+  top: 0;
+  width: fit-content;
+  border: 3px solid white;
   border-radius: 10px;
-  padding: 0.5%;
+  padding: 6px 25px;
   text-align: center;
   cursor: pointer;
+  margin-left: 10%;
+  margin-top: 28px;
+  z-index: 999;
+  color: white;
+}
+
+.back:hover {
+  background-color: white;
+  font-weight: bold;
+  color: rgb(202, 154, 75);
 }
 
 .region {
@@ -289,6 +332,7 @@ a {
   height: fit-content;
   margin: 2% 1%;
   cursor: pointer;
+  transition: 0.4s all;
 }
 
 .regionContainer .imageContainer {
@@ -305,6 +349,10 @@ a {
   transition: 0.4s all;
   opacity: 0.6;
   vertical-align: top;
+}
+
+.regionContainer:hover {
+  transform: scale(1.1);
 }
 
 .regionContainer:hover > h1 {
