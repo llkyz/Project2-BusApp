@@ -3,8 +3,13 @@ import magnifyingGlass from "../Assets/search.svg";
 import { Navigation } from "../App";
 import { doSort } from "../Assets/sortPokemon";
 
-export default function SearchBarPokemon(props) {
+export default function SearchBarPokemon() {
   const nav = useContext(Navigation);
+
+  function sortSelected(event) {
+    let newList = doSort(event.target.value, nav);
+    nav.set({ speciesList: newList, sortQueryPokemon: event.target.value });
+  }
 
   return (
     <div className="searchBar">
@@ -31,11 +36,10 @@ export default function SearchBarPokemon(props) {
         <select
           name="sorting"
           id="sort"
-          onChange={(event) => doSort(event.target.value, nav)}
+          onChange={(event) => sortSelected(event)}
+          defaultValue={nav.data.sortQueryPokemon}
         >
-          <option value="pokedex-asc" defaultValue>
-            Pokédex # Ascending
-          </option>
+          <option value="pokedex-asc">Pokédex # Ascending</option>
           <option value="pokedex-dsc">Pokédex # Descending</option>
           <option value="alphabet-asc">Alphabetical Ascending</option>
           <option value="alphabet-dsc">Alphabetical Descending</option>

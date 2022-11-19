@@ -1,13 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Navigation } from "../App";
 import { cleanTitle } from "../Assets/cleanup";
+import Area from "./Area";
 
 export default function Location() {
   const nav = useContext(Navigation);
-
   const [locationData, setLocationData] = useState("");
-
-  console.log(locationData);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -22,23 +20,35 @@ export default function Location() {
 
   function ListAreas(props) {
     return (
-      <div>
-        <h3>{cleanTitle(props.data.name)}</h3>
-        <h4>{props.data.url}</h4>
+      <div className="areaContainer">
+        <h1>{cleanTitle(props.data.name)}</h1>
+        <h4>
+          <Area url={props.data.url} />
+        </h4>
       </div>
     );
+  }
+
+  function goBack() {
+    nav.set({ location: "" });
+    setLocationData("");
   }
 
   function ShowLocation() {
     return (
       <>
         <div className="locationHeader">
+          <i className="arrowBack" onClick={goBack}></i>
           <h1>{cleanTitle(locationData.name)}</h1>
         </div>
-        <div>
-          {locationData.areas.map((data, index) => (
-            <ListAreas key={index} data={data} />
-          ))}
+        <div className="areas">
+          {locationData.areas.length !== 0 ? (
+            locationData.areas.map((data, index) => (
+              <ListAreas key={index} data={data} />
+            ))
+          ) : (
+            <h3>No areas found</h3>
+          )}
         </div>
       </>
     );
@@ -48,9 +58,11 @@ export default function Location() {
     return (
       <>
         <div className="locationHeader">
-          <h1>Loading Location, please wait...</h1>
+          <h1>Loading...</h1>
         </div>
-        <div>Loading...</div>
+        <div>
+          <h2>Loading areas, please wait...</h2>
+        </div>
       </>
     );
   }

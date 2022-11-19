@@ -441,6 +441,7 @@ label {
   background-color: rgb(202, 154, 75);
   border-radius: 40px 40px 0 0;
   height: 100px;
+  position: relative;
 }
 
 .locationDetail h1 {
@@ -448,4 +449,230 @@ label {
   padding-top: 19px;
   color: rgb(255, 243, 224);
   font-size: 2.5em;
+}
+
+.arrowBack {
+  border: solid rgb(255, 243, 224);
+  border-width: 0 10px 10px 0;
+  display: inline-block;
+  padding: 10px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  position: absolute;
+  cursor: pointer;
+  top: 29px;
+  left: 5%;
+}
+
+.arrowBack:hover {
+  border: solid black;
+  border-width: 0 10px 10px 0;
+}
+
+.areas {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.areaContainer {
+  display: inline-block;
+  text-align: left;
+}
+
+.areaContainer h1 {
+  color: black;
+  font-size: 2em;
+}
+
+.areaContainer2 {
+  vertical-align: middle;
+  margin-bottom: 10px;
+}
+
+.versionContainerPokemon {
+  display: inline-block;
+  margin: 0;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.versionContainer {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.version {
+  width: fit-content;
+  height: 20px;
+  padding: 2px 5px;
+  border-radius: 7px;
+  line-height: 20px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.versionRed {
+  background-color: rgb(251, 27, 27);
+  color: white;
+}
+
+.versionBlue {
+  background-color: rgb(0, 50, 190);
+  color: white;
+}
+
+.versionYellow {
+  background-color: rgb(255, 224, 0);
+  color: black;
+}
+
+.versionGold {
+  background-color: rgb(255, 196, 70);
+  color: black;
+}
+
+.versionSilver {
+  background-color: rgb(204, 204, 204);
+  color: black;
+}
+
+.versionCrystal {
+  background-color: rgb(128, 221, 245);
+  color: black;
+}
+
+.versionFireRed {
+  background-color: rgb(251, 27, 27);
+  color: white;
+}
+
+.versionLeafGreen {
+  background-color: rgb(28, 197, 70);
+  color: black;
+}
+
+.versionHeartGold {
+  background-color: rgb(255, 196, 70);
+  color: black;
+}
+
+.versionSoulSilver {
+  background-color: rgb(204, 204, 204);
+  color: black;
+}
+
+.versionRuby {
+  background-color: rgb(187, 7, 7);
+  color: white;
+}
+
+.versionSapphire {
+  background-color: rgb(24, 58, 153);
+  color: white;
+}
+
+.versionEmerald {
+  background-color: rgb(29, 151, 60);
+  color: white;
+}
+
+.versionDiamond {
+  background-color: rgb(66, 114, 174);
+  color: white;
+}
+
+.versionPearl {
+  background-color: rgb(154, 88, 155);
+  color: white;
+}
+
+.versionPlatinum {
+  background-color: rgb(185, 186, 188);
+  color: black;
+}
+
+.versionBlack {
+  background-color: rgb(15, 15, 15);
+  color: white;
+}
+
+.versionWhite {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  color: black;
+}
+
+.versionBlack2 {
+  background-color: rgb(15, 15, 15);
+  color: white;
+}
+
+.versionWhite2 {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  color: black;
+}
+
+.versionX {
+  background-color: rgb(0, 125, 199);
+  color: white;
+}
+
+.versionY {
+  background-color: rgb(238, 28, 37);
+  color: white;
+}
+
+.versionOmegaRuby {
+  background-color: rgb(187, 7, 7);
+  color: white;
+}
+
+.versionAlphaSapphire {
+  background-color: rgb(24, 58, 153);
+  color: white;
+}
+
+.versionSun {
+  background-color: rgb(251, 168, 26);
+  color: black;
+}
+
+.versionMoon {
+  background-color: rgb(40, 192, 241);
+  color: black;
+}
+
+.versionUltraSun {
+  background-color: rgb(251, 168, 26);
+  color: black;
+}
+
+.versionUltraMoon {
+  background-color: rgb(40, 192, 241);
+  color: black;
+}
+
+.versionSword {
+  background-color: rgb(0, 161, 233);
+  color: white;
+}
+
+.versionShield {
+  background-color: rgb(229, 0, 90);
+  color: white;
+}
+
+.versionBrilliantDiamond {
+  background-color: rgb(66, 114, 174);
+  color: white;
+}
+
+.versionShiningPearl {
+  background-color: rgb(154, 88, 155);
+  color: white;
 }

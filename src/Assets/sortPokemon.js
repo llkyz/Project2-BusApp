@@ -1,9 +1,10 @@
+import { cleanName } from "./cleanup";
+
 export function createPokeId(myData) {
   let myList = [];
   myList = myData.map((data) => {
     return {
-      name:
-        data.name[0].toUpperCase() + data.name.substring(1, data.name.length),
+      name: cleanName(data.name),
       url: data.url,
       pokeid: parseInt(data.url.split("/").slice(-2, -1)),
     };
@@ -63,28 +64,55 @@ export function checkAgainstSearch(name, id, searchQuery) {
   );
 }
 
+// export function doSort(sortType, nav) {
+//   let newList = nav.data.speciesList.map((data) => data);
+//   switch (sortType) {
+//     case "pokedex-asc": {
+//       nav.set({ speciesList: sortPokedexAsc(newList) });
+//       break;
+//     }
+//     case "pokedex-dsc": {
+//       nav.set({ speciesList: sortPokedexDsc(newList) });
+//       break;
+//     }
+//     case "alphabet-asc": {
+//       nav.set({ speciesList: sortNameAsc(newList) });
+//       break;
+//     }
+//     case "alphabet-dsc": {
+//       nav.set({ speciesList: sortNameDsc(newList) });
+//       break;
+//     }
+//     default: {
+//       nav.set({ speciesList: sortPokedexAsc(newList) });
+//       break;
+//     }
+//   }
+// }
+
 export function doSort(sortType, nav) {
   let newList = nav.data.speciesList.map((data) => data);
   switch (sortType) {
     case "pokedex-asc": {
-      nav.set({ speciesList: sortPokedexAsc(newList) });
+      newList = sortPokedexAsc(newList);
       break;
     }
     case "pokedex-dsc": {
-      nav.set({ speciesList: sortPokedexDsc(newList) });
+      newList = sortPokedexDsc(newList);
       break;
     }
     case "alphabet-asc": {
-      nav.set({ speciesList: sortNameAsc(newList) });
+      newList = sortNameAsc(newList);
       break;
     }
     case "alphabet-dsc": {
-      nav.set({ speciesList: sortNameDsc(newList) });
+      newList = sortNameDsc(newList);
       break;
     }
     default: {
-      nav.set({ speciesList: sortPokedexAsc(newList) });
+      newList = sortPokedexAsc(newList);
       break;
     }
   }
+  return newList;
 }

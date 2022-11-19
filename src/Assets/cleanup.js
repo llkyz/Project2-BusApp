@@ -11,3 +11,7 @@ export function cleanTitle(title) {
 
   return title;
 }
+
+export function cleanName(name) {
+  return name[0].toUpperCase() + name.substring(1, name.length);
+}

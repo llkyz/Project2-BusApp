@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Navigation } from "../App";
 import BackButton from "./BackButton";
+import { cleanName } from "../Assets/cleanup";
 
 export default function Species(props) {
   const nav = useContext(Navigation);
@@ -25,13 +26,7 @@ export default function Species(props) {
       <>
         <BackButton back={"fromSpecies"} />
         <div className="speciesContainer">
-          <h1>
-            {nav.data.speciesData.name[0].toUpperCase() +
-              nav.data.speciesData.name.substring(
-                1,
-                nav.data.speciesData.name.length
-              )}
-          </h1>
+          <h1>{cleanName(nav.data.speciesData.name)}</h1>
           <img
             src={artwork + pokeid + ".png"}
             alt={nav.data.speciesData.name}

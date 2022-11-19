@@ -11,6 +11,7 @@ export const Navigation = createContext();
 function App() {
   const initialState = {
     searchQueryPokemon: "",
+    sortQueryPokemon: "",
     generation: "",
     generationList: "",
     speciesList: "",

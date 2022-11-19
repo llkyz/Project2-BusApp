@@ -5,7 +5,12 @@ export default function BackButton(props) {
   const nav = useContext(Navigation);
 
   function fromPokeList() {
-    nav.set({ searchQueryPokemon: "", speciesList: "", generation: "" });
+    nav.set({
+      searchQueryPokemon: "",
+      speciesList: "",
+      generation: "",
+      sortQueryPokemon: "",
+    });
     window.scrollTo(0, 0);
   }
 
