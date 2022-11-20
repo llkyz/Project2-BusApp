@@ -64,32 +64,6 @@ export function checkAgainstSearch(name, id, searchQuery) {
   );
 }
 
-// export function doSort(sortType, nav) {
-//   let newList = nav.data.speciesList.map((data) => data);
-//   switch (sortType) {
-//     case "pokedex-asc": {
-//       nav.set({ speciesList: sortPokedexAsc(newList) });
-//       break;
-//     }
-//     case "pokedex-dsc": {
-//       nav.set({ speciesList: sortPokedexDsc(newList) });
-//       break;
-//     }
-//     case "alphabet-asc": {
-//       nav.set({ speciesList: sortNameAsc(newList) });
-//       break;
-//     }
-//     case "alphabet-dsc": {
-//       nav.set({ speciesList: sortNameDsc(newList) });
-//       break;
-//     }
-//     default: {
-//       nav.set({ speciesList: sortPokedexAsc(newList) });
-//       break;
-//     }
-//   }
-// }
-
 export function doSort(sortType, nav) {
   let newList = nav.data.speciesList.map((data) => data);
   switch (sortType) {
@@ -115,4 +89,11 @@ export function doSort(sortType, nav) {
     }
   }
   return newList;
+}
+
+export async function pokemonToSpecies(nav, url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log(data.species.url);
+  nav.set({ species: data.species.url });
 }

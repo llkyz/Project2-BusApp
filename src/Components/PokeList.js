@@ -26,7 +26,7 @@ export default function PokeList() {
   return (
     <>
       {nav.data.species ? (
-        <Species url={nav.data.species} />
+        <Species />
       ) : (
         <>
           <div className="fixedBar">

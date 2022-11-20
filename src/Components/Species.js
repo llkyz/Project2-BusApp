@@ -2,16 +2,16 @@ import React, { useEffect, useContext } from "react";
 import { Navigation } from "../App";
 import BackButton from "./BackButton";
 import { cleanName } from "../Assets/cleanup";
+import config from "../config";
+import { EvolutionChain } from "../Assets/speciesFunctions";
+import pokemonColors from "../Assets/pokemonColors";
 
-export default function Species(props) {
+export default function Species() {
   const nav = useContext(Navigation);
-
-  const artwork =
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
 
   useEffect(() => {
     const getSpeciesData = async () => {
-      const response = await fetch(props.url);
+      const response = await fetch(nav.data.species);
       const data = await response.json();
       nav.set({ speciesData: data });
     };
@@ -19,7 +19,7 @@ export default function Species(props) {
     // eslint-disable-next-line
   }, []);
 
-  const pokeid = props.url.split("/").slice(-2, -1);
+  const pokeid = nav.data.species.split("/").slice(-2, -1);
 
   function RenderSpecies() {
     return (
@@ -28,26 +28,31 @@ export default function Species(props) {
         <div className="speciesContainer">
           <h1>{cleanName(nav.data.speciesData.name)}</h1>
           <img
-            src={artwork + pokeid + ".png"}
+            src={config.ARTWORK + pokeid + ".png"}
             alt={nav.data.speciesData.name}
           />
           <p>Base Happiness: {nav.data.speciesData.base_happiness}</p>
           <p>Capture Rate: {nav.data.speciesData.capture_rate}</p>
-          <p>Color: {JSON.stringify(nav.data.speciesData.color)}</p>
+          <p>Color:</p>
+          <div
+            className="pokemonColor"
+            style={pokemonColors[nav.data.speciesData.color.name]}
+          >
+            {nav.data.speciesData.color.name.toUpperCase()}
+          </div>
           <p>Egg Groups: {JSON.stringify(nav.data.speciesData.egg_groups)}</p>
-          <p>
+          <div>
             Evolution Chain:{" "}
-            {JSON.stringify(nav.data.speciesData.evolution_chain)}
-          </p>
-          <p>
-            Evolves from Species:{" "}
-            {JSON.stringify(nav.data.speciesData.evolves_from_species)}
-          </p>
+            {<EvolutionChain data={nav.data.speciesData.evolution_chain} />}
+          </div>
           <p>
             Flavor Text Entries:{" "}
             {JSON.stringify(nav.data.speciesData.flavor_text_entries)}
           </p>
-          <p>Form Descriptions: {nav.data.speciesData.form_descriptions}</p>
+          <p>
+            Form Descriptions:{" "}
+            {JSON.stringify(nav.data.speciesData.form_descriptions)}
+          </p>
           <p>Form Switchable: {nav.data.speciesData.forms_switchable}</p>
           <p>Gender Rate: {nav.data.speciesData.gender_rate}</p>
           <p>Genera: {JSON.stringify(nav.data.speciesData.genera)}</p>

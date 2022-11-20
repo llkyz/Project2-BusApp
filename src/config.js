@@ -6,6 +6,8 @@ const config = {
   ENDPOINT_POKEDEX: process.env.REACT_APP_ENDPOINT_POKEDEX,
   ENDPOINT_VERSION: process.env.REACT_APP_ENDPOINT_VERSION,
   ENDPOINT_BERRY: process.env.REACT_APP_ENDPOINT_BERRY,
+  ARTWORK:
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/",
 };
 
 export default config;

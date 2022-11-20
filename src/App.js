@@ -5,6 +5,7 @@ import Generation from "./Components/Generation";
 import RegionList from "./Components/RegionList";
 import Pokedex from "./Components/Pokedex";
 import { Route, Routes, Link } from "react-router-dom";
+import generationSprites from "./Assets/generationSprites";
 
 export const Navigation = createContext();
 
@@ -61,7 +62,10 @@ function App() {
             <Link to="/pokedex">
               <p
                 onClick={() =>
-                  clearNavigation({ speciesList: data.speciesList })
+                  clearNavigation({
+                    speciesList: data.speciesList,
+                    generation: { sprite: generationSprites.full },
+                  })
                 }
               >
                 Pokedex

@@ -7,6 +7,7 @@ import generationSprites from "../Assets/generationSprites";
 import config from "../config";
 import Location from "./Location";
 import { cleanTitle } from "../Assets/cleanup";
+import Species from "./Species";
 
 export default function Region() {
   const nav = useContext(Navigation);
@@ -97,12 +98,18 @@ export default function Region() {
   }
 
   return (
-    <div>
-      {nav.data.regionData ? (
-        <DisplayRegion />
+    <>
+      {nav.data.species ? (
+        <Species />
       ) : (
-        "Loading Region, please wait..."
+        <div>
+          {nav.data.regionData ? (
+            <DisplayRegion />
+          ) : (
+            "Loading Region, please wait..."
+          )}
+        </div>
       )}
-    </div>
+    </>
   );
 }

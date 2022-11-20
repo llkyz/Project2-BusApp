@@ -42,7 +42,7 @@ export default function Pokedex() {
   return (
     <>
       {nav.data.species ? (
-        <Species url={nav.data.species} />
+        <Species />
       ) : (
         <div>
           <div className="fixedBar">
