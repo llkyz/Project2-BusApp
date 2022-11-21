@@ -1,14 +1,12 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import config from "../config";
 import generationImg from "../Assets/Generations/generationImg";
-import generationSprites from "../Assets/generationSprites";
-import PokeList from "./PokeList";
-import { Navigation } from "../App";
+// import generationSprites from "../Assets/generationSprites";
 import { Link } from "react-router-dom";
 import BackButton from "./BackButton";
 
 export default function Generation() {
-  const nav = useContext(Navigation);
+  const [generationList, setGenerationList] = useState("");
 
   useEffect(() => {
     const getGeneration = async () => {
@@ -16,61 +14,52 @@ export default function Generation() {
         config.BASE_API_DOMAIN + config.ENDPOINT_GENERATION
       );
       const data = await response.json();
-      nav.set({ generationList: data });
+      setGenerationList(data);
     };
     getGeneration();
     // eslint-disable-next-line
   }, []);
 
-  function selectGeneration(index, dataName) {
-    nav.set({
-      generation: {
-        url: nav.data.generationList.results[index].url,
-        sprite: generationSprites[dataName],
-        name: dataName,
-      },
-    });
-  }
-
   function ListGenerations() {
-    return nav.data.generationList.results.map((data, index) => (
-      <div
-        onClick={() => {
-          selectGeneration(index, data.name);
-          window.scrollTo(0, 0);
-        }}
-        className="generation"
-        id={
-          "gen" + data.url.substring(data.url.length - 2, data.url.length - 1)
-        }
+    return generationList.results.map((data, index) => (
+      <Link
         key={index}
+        to="/pokedex/generation"
+        state={{
+          source: generationList.results[index].url,
+          title: "Browsing Generation " + data.name.split("-")[1].toUpperCase(),
+          id: data.name,
+        }}
       >
-        <p>{data.name.replace("-", " ").toUpperCase()}</p>
-        <div className="imageContainer">
-          <img src={generationImg[data.name]} alt={data.name} />
+        <div
+          className="generation"
+          id={
+            "gen" + data.url.substring(data.url.length - 2, data.url.length - 1)
+          }
+        >
+          <p>{data.name.replace("-", " ").toUpperCase()}</p>
+          <div className="imageContainer">
+            <img src={generationImg[data.name]} alt={data.name} />
+          </div>
         </div>
-      </div>
+      </Link>
     ));
   }
 
   return (
     <>
-      {nav.data.generationList ? (
-        nav.data.generation ? (
-          <PokeList />
-        ) : (
-          <>
-            <Link to="/">
-              <BackButton back={"fromGenerationList"} />
-            </Link>
-            <div className="generationDiv">
-              <h1>
-                <u>Search by generation</u>
-              </h1>
-              <ListGenerations />
-            </div>
-          </>
-        )
+      {generationList ? (
+        <>
+          <Link to="/">
+            <BackButton back={"fromGenerationList"} />
+          </Link>
+          <div className="generationDiv">
+            <h1>
+              <u>Search by Generation</u>
+            </h1>
+            <ListGenerations />
+          </div>
+        </>
       ) : (
         "Loading Generations, please wait..."
       )}

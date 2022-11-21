@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navigation } from "../App";
 import BackButton from "./BackButton";
 import regionImg from "../Assets/Regions/regionImg";
@@ -10,6 +10,7 @@ import { cleanTitle } from "../Assets/cleanup";
 import Species from "./Species";
 
 export default function Region() {
+  const [species, setSpecies] = useState();
   const nav = useContext(Navigation);
 
   useEffect(() => {
@@ -86,7 +87,11 @@ export default function Region() {
             <>
               <h1>Locations</h1>
               <div className="locationList">
-                {nav.data.location ? <Location /> : <ListLocations />}
+                {nav.data.location ? (
+                  <Location setSpecies={setSpecies} />
+                ) : (
+                  <ListLocations />
+                )}
               </div>
             </>
           ) : (
@@ -99,8 +104,8 @@ export default function Region() {
 
   return (
     <>
-      {nav.data.species ? (
-        <Species />
+      {species ? (
+        <Species data={species} />
       ) : (
         <div>
           {nav.data.regionData ? (

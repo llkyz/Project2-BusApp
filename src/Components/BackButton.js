@@ -8,7 +8,6 @@ export default function BackButton(props) {
     nav.set({
       searchQueryPokemon: "",
       speciesList: "",
-      generation: "",
       sortQueryPokemon: "",
     });
     window.scrollTo(0, 0);
@@ -20,7 +19,6 @@ export default function BackButton(props) {
   }
 
   function fromGenerationList() {
-    nav.set({ generationList: "" });
     window.scrollTo(0, 0);
   }
 

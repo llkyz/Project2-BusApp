@@ -64,8 +64,8 @@ export function checkAgainstSearch(name, id, searchQuery) {
   );
 }
 
-export function doSort(sortType, nav) {
-  let newList = nav.data.speciesList.map((data) => data);
+export function doSort(sortType, pokemonData) {
+  let newList = pokemonData.speciesList.map((data) => data);
   switch (sortType) {
     case "pokedex-asc": {
       newList = sortPokedexAsc(newList);
@@ -91,9 +91,8 @@ export function doSort(sortType, nav) {
   return newList;
 }
 
-export async function pokemonToSpecies(nav, url) {
+export async function pokemonToSpecies(url, setSpecies) {
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data.species.url);
-  nav.set({ species: data.species.url });
+  setSpecies(data.species.url);
 }

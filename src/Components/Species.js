@@ -1,5 +1,4 @@
-import React, { useEffect, useContext } from "react";
-import { Navigation } from "../App";
+import React, { useState, useEffect } from "react";
 import BackButton from "./BackButton";
 import { cleanName } from "../Assets/cleanup";
 import config from "../config";
@@ -7,83 +6,88 @@ import { EvolutionChain } from "../Assets/Species/EvolutionChain";
 import pokemonColors from "../Assets/pokemonColors";
 import FlavorText from "../Assets/Species/FlavorText";
 import Genus from "../Assets/Species/Genus";
+import GenderRate from "../Assets/Species/GenderRate";
+import EggGroups from "../Assets/Species/EggGroups";
+import Generation from "../Assets/Species/Generation";
+import Habitat from "../Assets/Species/Habitat";
+import Shape from "../Assets/Species/Shape";
 
-export default function Species() {
-  const nav = useContext(Navigation);
+export default function Species(props) {
+  const [speciesData, setSpeciesData] = useState();
 
   useEffect(() => {
     const getSpeciesData = async () => {
-      const response = await fetch(nav.data.species);
+      const response = await fetch(props.data);
       const data = await response.json();
-      nav.set({ speciesData: data });
+      setSpeciesData(data);
     };
     getSpeciesData();
     // eslint-disable-next-line
   }, []);
 
-  const pokeid = nav.data.species.split("/").slice(-2, -1);
-
-//Add URLS: color, egg groups, generation, habitat, shape, varieties
-
-// Gender Rate
-// -1: Genderless
-// 0: M only
-// 1: 1F:7M
-// 2: 1F:3M
-// 3: N/A
-// 4: 1F:1M
-// 5: N/A
-// 6: 3F:1M
-// 7: 7F:1M
-// 8: F only
+  //Add URLS: color, egg groups, generation, habitat, shape, varieties
 
   function RenderSpecies() {
     return (
       <>
         <BackButton back={"fromSpecies"} />
         <div className="speciesContainer">
-          <h1>{cleanName(nav.data.speciesData.name)}</h1>
+          <h1>{cleanName(speciesData.name)}</h1>
           <img
-            src={config.ARTWORK + pokeid + ".png"}
-            alt={nav.data.speciesData.name}
+            src={config.ARTWORK + speciesData.id + ".png"}
+            alt={speciesData.name}
           />
-          <p>Base Happiness: {nav.data.speciesData.base_happiness}</p>
-          <p>Capture Rate: {nav.data.speciesData.capture_rate}</p>
+          <p>Base Happiness: {speciesData.base_happiness}</p>
+          <p>Capture Rate: {speciesData.capture_rate}</p>
           <p>Color:</p>
           <div
             className="pokemonColor"
-            style={pokemonColors[nav.data.speciesData.color.name]}
+            style={pokemonColors[speciesData.color.name]}
           >
-          {nav.data.speciesData.color.name.toUpperCase()}
+            {speciesData.color.name.toUpperCase()}
           </div>
           <div>
             Evolution Chain:{" "}
-            {<EvolutionChain data={nav.data.speciesData.evolution_chain} />}
+            {
+              <EvolutionChain
+                data={speciesData.evolution_chain}
+                pokeid={speciesData.id}
+                setSpeciesData={setSpeciesData}
+              />
+            }
           </div>
-          <FlavorText data={nav.data.speciesData.flavor_text_entries} />
-          <p>Egg Hatching: ~{nav.data.speciesData.hatch_counter*256} steps</p>
-          <Genus data={nav.data.speciesData.genera}/>
-          <p>Pokedex ID: {nav.data.speciesData.id}</p>
-          <p>Growth: {nav.data.speciesData.growth_rate.name.split("-").map((speed)=> speed[0].toUpperCase() + speed.substring(1, speed.length)).join(" - ")}</p>
-          
-          <p>Egg Groups: {JSON.stringify(nav.data.speciesData.egg_groups)}</p>
+          <FlavorText data={speciesData.flavor_text_entries} />
+          <p>Egg Hatching: ~{speciesData.hatch_counter * 256} steps</p>
+          <Genus data={speciesData.genera} />
+          <p>Pokedex ID: {speciesData.id}</p>
           <p>
-            Form Descriptions:{" "}
-            {JSON.stringify(nav.data.speciesData.form_descriptions)}
+            Growth:{" "}
+            {speciesData.growth_rate.name
+              .split("-")
+              .map(
+                (speed) =>
+                  speed[0].toUpperCase() + speed.substring(1, speed.length)
+              )
+              .join(" - ")}
           </p>
-          <p>Form Switchable: {nav.data.speciesData.forms_switchable}</p>
-          <p>Gender Rate: {nav.data.speciesData.gender_rate}</p>
-          <p>Generation: {JSON.stringify(nav.data.speciesData.generation)}</p>
-          <p>Habitat: {JSON.stringify(nav.data.speciesData.habitat)}</p>
+          <GenderRate data={speciesData.gender_rate} />
+          <EggGroups data={speciesData.egg_groups} />
           <p>
             Has Gender Differences:{" "}
-            {nav.data.speciesData.has_gender_differences ? "Yes" : "No"}
+            {speciesData.has_gender_differences ? "Yes" : "No"}
           </p>
-          <p>Is Baby: {nav.data.speciesData.is_baby ? "Yes" : "No"}</p>
-          <p>Is Legendary: {nav.data.speciesData.is_legendary ? "Yes" : "No"}</p>
-          <p>Is Mythical: {nav.data.speciesData.is_mythical ? "Yes" : "No"}</p>
-          <p>Shape: {JSON.stringify(nav.data.speciesData.shape)}</p>
-          <p>Varieties: {JSON.stringify(nav.data.speciesData.varieties)}</p>
+          <p>Is Baby: {speciesData.is_baby ? "Yes" : "No"}</p>
+          <p>Is Legendary: {speciesData.is_legendary ? "Yes" : "No"}</p>
+          <p>Is Mythical: {speciesData.is_mythical ? "Yes" : "No"}</p>
+          <Generation data={speciesData.generation} />
+          <Habitat data={speciesData.habitat} />
+          <Shape data={speciesData.shape} />
+          <p>Form Switchable: {speciesData.forms_switchable ? "Yes" : "No"}</p>
+
+          <p>
+            Form Descriptions: {JSON.stringify(speciesData.form_descriptions)}
+          </p>
+          <p>Varieties: {JSON.stringify(speciesData.varieties)}</p>
         </div>
       </>
     );
@@ -91,11 +95,7 @@ export default function Species() {
 
   return (
     <div>
-      {nav.data.speciesData ? (
-        <RenderSpecies />
-      ) : (
-        "Loading Species, please wait..."
-      )}
+      {speciesData ? <RenderSpecies /> : "Loading Species, please wait..."}
     </div>
   );
 }

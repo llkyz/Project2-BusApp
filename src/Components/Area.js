@@ -1,13 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { cleanName } from "../Assets/cleanup";
 import versions from "../Assets/versions";
-import { Navigation } from "../App";
 import { pokemonToSpecies } from "../Assets/sortPokemon";
 
 export default function Area(props) {
   const [areaData, setAreaData] = useState("");
-
-  const nav = useContext(Navigation);
 
   useEffect(() => {
     const getArea = async () => {
@@ -19,6 +16,7 @@ export default function Area(props) {
     getArea();
     // eslint-disable-next-line
   }, []);
+
   function GetVersions(props) {
     return props.data.version_details.map((data2, index) => {
       return (
@@ -39,8 +37,7 @@ export default function Area(props) {
           <h3
             className="versionContainerPokemon"
             onClick={() => {
-              console.log(data.pokemon.url);
-              pokemonToSpecies(nav, data.pokemon.url);
+              pokemonToSpecies(data.pokemon.url, props.setSpecies);
               window.scrollTo(0, 0);
             }}
           >

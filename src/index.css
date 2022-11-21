@@ -664,7 +664,7 @@ label {
 }
 
 .versionLetsGoEevee {
-  background-color: rgb(136,82,9);
+  background-color: rgb(136, 82, 9);
   color: white;
 }
 
@@ -772,9 +772,9 @@ label {
 
 .flavor {
   border: 10px solid rgb(202, 154, 75);
-  -webkit-box-shadow:inset 0px 0px 0px 2px rgb(202, 154, 75);
-  -moz-box-shadow:inset 0px 0px 0px 2px rgb(202, 154, 75);
-  box-shadow:inset 0px 0px 0px 2px rgb(202, 154, 75);
+  -webkit-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  -moz-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
   border-radius: 50px;
   width: 70%;
   margin: 25px auto;
@@ -797,16 +797,15 @@ label {
   padding: 5px;
   cursor: pointer;
   display: inline-block;
-
 }
 
 .flavor .tabSelected {
   width: fit-content;
   height: fit-content;
   padding: 7px 5px;
-  -webkit-box-shadow:inset 0px 0px 0px 3px rgb(255, 243, 224);
-  -moz-box-shadow:inset 0px 0px 0px 3px rgb(255, 243, 224);
-  box-shadow:inset 0px 0px 0px 3px rgb(255, 243, 224);
+  -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
   display: inline-block;
   border-radius: 12px;
 }
@@ -814,4 +813,32 @@ label {
 .flavorVersions {
   background-color: rgb(202, 154, 75);
   padding: 10px;
+}
+
+.genderRatioContainer {
+  position: relative;
+  width: 160px;
+  height: 20px;
+  margin: 0 auto;
+}
+
+.genderRatioContainer .female {
+  display: inline-block;
+  background-color: pink;
+  border-radius: 10px 0 0 10px;
+  height: 20px;
+}
+
+.genderRatioContainer .male {
+  display: inline-block;
+  background-color: skyblue;
+  border-radius: 0 10px 10px 0;
+  height: 20px;
+}
+
+.genderRatioContainer .genderless {
+  display: inline-block;
+  background-color: indigo;
+  border-radius: 10px 10px 10px 10px;
+  height: 20px;
 }

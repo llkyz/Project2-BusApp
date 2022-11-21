@@ -1,67 +1,78 @@
-import React, { useEffect, useContext } from "react";
-import config from "../config";
+import React, { useState, useEffect } from "react";
 import Species from "./Species";
 import SearchBarPokemon from "./SearchBarPokemon";
-import { createPokeId, sortPokedexAsc } from "../Assets/sortPokemon";
 import MakeRegularList from "./MakeRegularList";
 import MakeFilteredList from "./MakeFilteredList";
-import { Navigation } from "../App";
-import { Link } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import BackButton from "./BackButton";
-import generationSprites from "../Assets/generationSprites";
+import {
+  fullPokedex,
+  otherSearch,
+  generationSearch,
+} from "../Assets/pokedexSearch";
 
 export default function Pokedex() {
-  const nav = useContext(Navigation);
+  const [pokemonData, setPokemonData] = useState("");
+  const [searchBar, setSearchBar] = useState({
+    searchQuery: "",
+    sortQuery: "",
+  });
+  const [species, setSpecies] = useState();
+  const params = useParams();
+  const location = useLocation();
 
-  useEffect(() => {
-    const getPokedexList = async () => {
-      const response = await fetch(
-        config.BASE_API_DOMAIN + config.ENDPOINT_SPECIES + "?offset=0&limit=0"
-      );
-      let data = await response.json();
-
-      const response2 = await fetch(
-        config.BASE_API_DOMAIN +
-          config.ENDPOINT_SPECIES +
-          "?offset=0&limit=" +
-          data.count
-      );
-      data = await response2.json();
-      data = createPokeId(data.results);
-      data = sortPokedexAsc(data);
-      nav.set({
-        speciesList: data,
-        generation: { sprite: generationSprites.full },
-      });
-    };
-
-    getPokedexList();
+  useEffect(
+    () => {
+      if (params.type === "full") {
+        setSpecies();
+        fullPokedex(setPokemonData);
+      } else if (params.type === "generation") {
+        setSpecies();
+        generationSearch(setPokemonData, location.state);
+      } else if (params.type === "other") {
+        setSpecies();
+        otherSearch(setPokemonData, location.state.source);
+      }
+    },
     // eslint-disable-next-line
-  }, []);
+    [params.type, location.state]
+  );
 
   return (
     <>
-      {nav.data.species ? (
-        <Species />
+      {species ? (
+        <Species data={species} />
       ) : (
         <div>
           <div className="fixedBar">
             <div id="container">
               <h1>
-                <u>Search entire Pokédex</u>
+                <u>{location.state.title}</u>
               </h1>
-              <SearchBarPokemon />
+              <SearchBarPokemon
+                setSearchBar={setSearchBar}
+                searchBar={searchBar}
+                setPokemonData={setPokemonData}
+                pokemonData={pokemonData}
+              />
             </div>
           </div>
           <Link to="/">
             <BackButton back={"fromPokeList"} />
           </Link>
           <div className="pokemonContainer">
-            {nav.data.speciesList ? (
-              nav.data.searchQueryPokemon ? (
-                <MakeFilteredList />
+            {pokemonData ? (
+              searchBar.searchQuery ? (
+                <MakeFilteredList
+                  pokemonData={pokemonData}
+                  searchBar={searchBar}
+                  setSpecies={setSpecies}
+                />
               ) : (
-                <MakeRegularList />
+                <MakeRegularList
+                  pokemonData={pokemonData}
+                  setSpecies={setSpecies}
+                />
               )
             ) : (
               "Loading Pokemon, Please wait..."

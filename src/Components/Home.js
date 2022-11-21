@@ -14,10 +14,7 @@ export default function Home() {
           <div className="selectionContainer">
             <h1>GENERATION</h1>
             <div id="imageContainer">
-              <img
-                src={homeImg.generation}
-                alt="generation"
-              />
+              <img src={homeImg.generation} alt="generation" />
             </div>
           </div>
         </Link>
@@ -25,21 +22,18 @@ export default function Home() {
           <div className="selectionContainer">
             <h1>REGION</h1>
             <div id="imageContainer">
-              <img
-                src={homeImg.region}
-                alt="region"
-              />
+              <img src={homeImg.region} alt="region" />
             </div>
           </div>
         </Link>
-        <Link to="/pokedex">
+        <Link
+          to="/pokedex/full"
+          state={{ source: "None", title: "Searching entire Pokédex" }}
+        >
           <div className="selectionContainer">
             <h1>POKÉDEX</h1>
             <div id="imageContainer">
-              <img
-                src={homeImg.pokedex}
-                alt="pokedex"
-              />
+              <img src={homeImg.pokedex} alt="pokedex" />
             </div>
           </div>
         </Link>

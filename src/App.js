@@ -5,19 +5,11 @@ import Generation from "./Components/Generation";
 import RegionList from "./Components/RegionList";
 import Pokedex from "./Components/Pokedex";
 import { Route, Routes, Link } from "react-router-dom";
-import generationSprites from "./Assets/generationSprites";
 
 export const Navigation = createContext();
 
 function App() {
   const initialState = {
-    searchQueryPokemon: "",
-    sortQueryPokemon: "",
-    generation: "",
-    generationList: "",
-    speciesList: "",
-    species: "",
-    speciesData: "",
     regionList: "",
     region: "",
     regionData: "",
@@ -44,13 +36,7 @@ function App() {
           <div className="searchBy">
             <h4>Search By</h4>
             <Link to="/generation">
-              <p
-                onClick={() =>
-                  clearNavigation({ generationList: data.generationList })
-                }
-              >
-                Generation
-              </p>
+              <p onClick={() => clearNavigation()}>Generation</p>
             </Link>
             <Link to="/region">
               <p
@@ -59,17 +45,11 @@ function App() {
                 Region
               </p>
             </Link>
-            <Link to="/pokedex">
-              <p
-                onClick={() =>
-                  clearNavigation({
-                    speciesList: data.speciesList,
-                    generation: { sprite: generationSprites.full },
-                  })
-                }
-              >
-                Pokedex
-              </p>
+            <Link
+              to="/pokedex/full"
+              state={{ source: "None", title: "Searching entire Pokédex" }}
+            >
+              <p onClick={() => clearNavigation()}>Pokedex</p>
             </Link>
           </div>
         </div>
@@ -78,7 +58,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/generation" element={<Generation />} />
             <Route path="/region" element={<RegionList />} />
-            <Route path="/pokedex" element={<Pokedex />} />
+            <Route path="/pokedex/:type" element={<Pokedex />} />
           </Routes>
         </Navigation.Provider>
       </div>

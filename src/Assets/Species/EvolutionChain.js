@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import generationSprites from "../generationSprites";
 import { cleanName } from "../cleanup";
-import { Navigation } from "../../App";
 
 export function EvolutionChain(props) {
-  const nav = useContext(Navigation);
   const [evolutionData, setEvolutionData] = useState("");
 
   useEffect(() => {
@@ -17,12 +15,12 @@ export function EvolutionChain(props) {
     // eslint-disable-next-line
   }, []);
 
-  const currentPoke = nav.data.species.split("/").slice(-2, -1);
+  const currentPoke = props.pokeid.toString();
 
   const getSpeciesData = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
-    nav.set({ species: url, speciesData: data });
+    props.setSpeciesData(data);
     window.scrollTo(0, 0);
   };
 
@@ -31,7 +29,7 @@ export function EvolutionChain(props) {
 
     return (
       <>
-        {currentPoke[0] === pokeid[0] ? (
+        {currentPoke === pokeid[0] ? (
           <div className="evolutionNodeSelf">
             <img
               src={generationSprites["full"] + pokeid + ".png"}

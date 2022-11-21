@@ -3,7 +3,7 @@ import { Navigation } from "../App";
 import { cleanTitle } from "../Assets/cleanup";
 import Area from "./Area";
 
-export default function Location() {
+export default function Location(props) {
   const nav = useContext(Navigation);
   const [locationData, setLocationData] = useState("");
 
@@ -23,7 +23,7 @@ export default function Location() {
       <div className="areaContainer">
         <h1>{cleanTitle(props.data.name)}</h1>
         <h4>
-          <Area url={props.data.url} />
+          <Area url={props.data.url} setSpecies={props.setSpecies} />
         </h4>
       </div>
     );
@@ -44,7 +44,11 @@ export default function Location() {
         <div className="areas">
           {locationData.areas.length !== 0 ? (
             locationData.areas.map((data, index) => (
-              <ListAreas key={index} data={data} />
+              <ListAreas
+                key={index}
+                data={data}
+                setSpecies={props.setSpecies}
+              />
             ))
           ) : (
             <h3>No areas found</h3>
