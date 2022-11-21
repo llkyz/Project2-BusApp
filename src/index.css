@@ -658,6 +658,16 @@ label {
   color: black;
 }
 
+.versionLetsGoPikachu {
+  background-color: rgb(255, 224, 0);
+  color: black;
+}
+
+.versionLetsGoEevee {
+  background-color: rgb(136,82,9);
+  color: white;
+}
+
 .versionSword {
   background-color: rgb(0, 161, 233);
   color: white;
@@ -675,6 +685,11 @@ label {
 
 .versionShiningPearl {
   background-color: rgb(154, 88, 155);
+  color: white;
+}
+
+.versionLegendsArceus {
+  background-color: rgb(54, 89, 123);
   color: white;
 }
 
@@ -753,4 +768,50 @@ label {
   margin: 0 auto;
   text-align: center;
   line-height: 50px;
+}
+
+.flavor {
+  border: 10px solid rgb(202, 154, 75);
+  -webkit-box-shadow:inset 0px 0px 0px 2px rgb(202, 154, 75);
+  -moz-box-shadow:inset 0px 0px 0px 2px rgb(202, 154, 75);
+  box-shadow:inset 0px 0px 0px 2px rgb(202, 154, 75);
+  border-radius: 50px;
+  width: 70%;
+  margin: 25px auto;
+}
+
+.flavor h1 {
+  margin: 0;
+  background-color: rgb(202, 154, 75);
+  border-radius: 35px 35px 0 0;
+  height: 65px;
+  line-height: 65px;
+  position: relative;
+  font-size: 2.5em;
+  color: rgb(255, 243, 224);
+}
+
+.flavor .tab {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-block;
+
+}
+
+.flavor .tabSelected {
+  width: fit-content;
+  height: fit-content;
+  padding: 7px 5px;
+  -webkit-box-shadow:inset 0px 0px 0px 3px rgb(255, 243, 224);
+  -moz-box-shadow:inset 0px 0px 0px 3px rgb(255, 243, 224);
+  box-shadow:inset 0px 0px 0px 3px rgb(255, 243, 224);
+  display: inline-block;
+  border-radius: 12px;
+}
+
+.flavorVersions {
+  background-color: rgb(202, 154, 75);
+  padding: 10px;
 }

@@ -21,16 +21,20 @@ const versions = {
   "white-2": { letter: "W2", col: "versionWhite2" },
   x: { letter: "X", col: "versionX" },
   y: { letter: "Y", col: "versionY" },
-  omegaruby: { letter: "OR", col: "versionOmegaRuby" },
-  alphasapphire: { letter: "AS", col: "versionAlphaSapphire" },
+  "omega-ruby": { letter: "OR", col: "versionOmegaRuby" },
+  "alpha-sapphire": { letter: "AS", col: "versionAlphaSapphire" },
   sun: { letter: "Su", col: "versionSun" },
   moon: { letter: "M", col: "versionMoon" },
-  ultrasun: { letter: "US", col: "versionUltraSun" },
-  ultramoon: { letter: "UM", col: "versionUltraMoon" },
+  "ultra-sun": { letter: "US", col: "versionUltraSun" },
+  "ultra-moon": { letter: "UM", col: "versionUltraMoon" },
+  "lets-go-pikachu":  { letter: "LGP", col: "versionLetsGoPikachu" },
+  "lets-go-eevee":  { letter: "LGE", col: "versionLetsGoEevee" },
   sword: { letter: "Sw", col: "versionSword" },
-  shield: { letter: "Sh", col: "versionshield" },
-  brilliantdiamond: { letter: "BD", col: "versionBrilliantDiamond" },
-  shiningpearl: { letter: "SP", col: "versionShiningPearl" },
+  shield: { letter: "Sh", col: "versionShield" },
+  "brilliant-diamond": { letter: "BD", col: "versionBrilliantDiamond" },
+  "shining-pearl": { letter: "SP", col: "versionShiningPearl" },
+  "legends-arceus": { letter: "PLA", col: "versionLegendsArceus"}
+
 };
 
 export default versions;

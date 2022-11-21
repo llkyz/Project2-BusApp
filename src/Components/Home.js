@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import homeImg from "../Assets/Home/homeImg";
 
 export default function Home() {
   return (
@@ -14,7 +15,7 @@ export default function Home() {
             <h1>GENERATION</h1>
             <div id="imageContainer">
               <img
-                src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2021/07/Pokemon-video-game-series-franchise.jpg"
+                src={homeImg.generation}
                 alt="generation"
               />
             </div>
@@ -25,7 +26,7 @@ export default function Home() {
             <h1>REGION</h1>
             <div id="imageContainer">
               <img
-                src="https://scarletviolet.pokemon.com/_images/news/aug_3/world-map.jpg"
+                src={homeImg.region}
                 alt="region"
               />
             </div>
@@ -36,7 +37,7 @@ export default function Home() {
             <h1>POKÉDEX</h1>
             <div id="imageContainer">
               <img
-                src="https://cdn.dribbble.com/users/817492/screenshots/5814123/pokedex_dribbble.png"
+                src={homeImg.pokedex}
                 alt="pokedex"
               />
             </div>

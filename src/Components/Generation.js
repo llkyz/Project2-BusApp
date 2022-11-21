@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import config from "../config";
-import generationImg from "../Assets/generationImg";
+import generationImg from "../Assets/Generations/generationImg";
 import generationSprites from "../Assets/generationSprites";
 import PokeList from "./PokeList";
 import { Navigation } from "../App";

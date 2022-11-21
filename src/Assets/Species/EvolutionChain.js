@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import generationSprites from "../Assets/generationSprites";
-import { cleanName } from "./cleanup";
-import { Navigation } from "../App";
+import generationSprites from "../generationSprites";
+import { cleanName } from "../cleanup";
+import { Navigation } from "../../App";
 
 export function EvolutionChain(props) {
   const nav = useContext(Navigation);

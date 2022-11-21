@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Navigation } from "../App";
 import BackButton from "./BackButton";
-import regionImg from "../Assets/regionImg";
+import regionImg from "../Assets/Regions/regionImg";
 import { Link } from "react-router-dom";
 import generationSprites from "../Assets/generationSprites";
 import config from "../config";

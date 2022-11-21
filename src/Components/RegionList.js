@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import config from "../config";
-import regionImg from "../Assets/regionImg";
+import regionImg from "../Assets/Regions/regionImg";
 import Region from "./Region";
 import { Link } from "react-router-dom";
 import BackButton from "./BackButton";
