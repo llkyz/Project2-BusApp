@@ -842,3 +842,11 @@ label {
   border-radius: 10px 10px 10px 10px;
   height: 20px;
 }
+
+.form {
+  font-weight: normal;
+}
+
+.formSelected {
+  font-weight: bold;
+}

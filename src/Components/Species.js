@@ -11,9 +11,11 @@ import EggGroups from "../Assets/Species/EggGroups";
 import Generation from "../Assets/Species/Generation";
 import Habitat from "../Assets/Species/Habitat";
 import Shape from "../Assets/Species/Shape";
+import Forms from "../Assets/Species/Forms";
 
 export default function Species(props) {
   const [speciesData, setSpeciesData] = useState();
+  const [pokemonData, setPokemonData] = useState();
 
   useEffect(() => {
     const getSpeciesData = async () => {
@@ -88,6 +90,7 @@ export default function Species(props) {
             Form Descriptions: {JSON.stringify(speciesData.form_descriptions)}
           </p>
           <p>Varieties: {JSON.stringify(speciesData.varieties)}</p>
+          <Forms data={speciesData.varieties} setPokemonData={setPokemonData} />
         </div>
       </>
     );
