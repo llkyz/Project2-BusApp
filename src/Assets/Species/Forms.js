@@ -1,40 +1,22 @@
-import { useState, useEffect } from "react";
-
 export default function Forms(props) {
-  const [formData, setFormData] = useState();
-  const [formSelected, setFormSelected] = useState();
-
-  //   useEffect(() => {
-  //     processForms();
-  //     // eslint-disable-next-line
-  //   }, []);
-
-  async function getPokemonData(url) {
-    const response = await fetch(url);
-    let data = await response.json();
-    props.setPokemonData(data);
-  }
-
   function ProcessForms() {
     return props.data.map((data, index) => {
-      let name = "";
-
+      let name = ""
       if (data.is_default) {
-        setFormSelected(index);
-        getPokemonData(data.pokemon.url);
-        name = "REGULAR";
+
+        name = data.pokemon.name.replace(props.defaultName,"").split("-")
+        name = name.map((data)=>data.toUpperCase()).join(" ");
+        if (name.length === 0) {
+          name = "REGULAR";
+        }
       } else {
-        name = data.pokemon.name.split("-")[1].toUpperCase();
+        name = data.pokemon.name.replace(props.defaultName,"").split("-")
+        name = name.map((data)=>data.toUpperCase()).join(" ");
       }
-      console.log(name);
+
       return (
-        <div
-          className={index === formSelected ? "formSelected" : "form"}
-          onClick={setFormSelected(index)}
-        >
-          {name}
-        </div>
-      );
+        <div key={index} className={index === props.formSelected ? "formSelected" : "form"} onClick={()=>{props.setFormSelected(index)}}>{name}</div>
+      )
     });
   }
 

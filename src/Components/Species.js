@@ -12,20 +12,61 @@ import Generation from "../Assets/Species/Generation";
 import Habitat from "../Assets/Species/Habitat";
 import Shape from "../Assets/Species/Shape";
 import Forms from "../Assets/Species/Forms";
+import Stats from "../Assets/Species/Stats";
+import Types from "../Assets/Species/Types";
+import Abilities from "../Assets/Species/Abilities";
 
 export default function Species(props) {
   const [speciesData, setSpeciesData] = useState();
   const [pokemonData, setPokemonData] = useState();
+  const [formSelected, setFormSelected] = useState(0);
+  //props.selectForm is the url to specific pokemon
+  const [formFromPokedex, setformFromPokedex] = useState(props.selectForm)
 
   useEffect(() => {
     const getSpeciesData = async () => {
       const response = await fetch(props.data);
       const data = await response.json();
       setSpeciesData(data);
-    };
+
+      const response2 = await fetch(data.varieties[formSelected].pokemon.url);
+      const data2 = await response2.json();
+      setPokemonData(data2)
+    }
     getSpeciesData();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    const getPokemonData = async () => {
+      const response = await fetch(speciesData.varieties[formSelected].pokemon.url);
+      const data = await response.json();
+      setPokemonData(data)
+    }
+
+    if (speciesData) {
+        getPokemonData();
+    }
+    // eslint-disable-next-line
+  }, [formSelected, speciesData])
+
+  useEffect(()=>{
+    function preselectedForm() {
+      speciesData.varieties.forEach((data, index) => {
+        console.log(data.pokemon.url)
+        console.log(formFromPokedex)
+        if (data.pokemon.url === formFromPokedex) {
+          setFormSelected(index)
+        }
+      })
+      setformFromPokedex()
+    }
+
+    if (speciesData && formFromPokedex) {
+      preselectedForm()
+    }
+    // eslint-disable-next-line
+  },[speciesData])
 
   //Add URLS: color, egg groups, generation, habitat, shape, varieties
 
@@ -34,9 +75,15 @@ export default function Species(props) {
       <>
         <BackButton back={"fromSpecies"} />
         <div className="speciesContainer">
+          {pokemonData.abilities.map((data)=><Abilities data={data}/>)}
+          <div>Height: {pokemonData.height/10}m</div>
+          <div>Weight: {pokemonData.weight/10}kg</div>
+          <Stats data={pokemonData.stats}/>
+          <Types data={pokemonData.types}/>
+          <Forms data={speciesData.varieties} formSelected={formSelected} setFormSelected={setFormSelected} defaultName={speciesData.name} selectForm={props.selectForm}/>
           <h1>{cleanName(speciesData.name)}</h1>
           <img
-            src={config.ARTWORK + speciesData.id + ".png"}
+            src={config.ARTWORK + pokemonData.id + ".png"}
             alt={speciesData.name}
           />
           <p>Base Happiness: {speciesData.base_happiness}</p>
@@ -84,13 +131,8 @@ export default function Species(props) {
           <Generation data={speciesData.generation} />
           <Habitat data={speciesData.habitat} />
           <Shape data={speciesData.shape} />
-          <p>Form Switchable: {speciesData.forms_switchable ? "Yes" : "No"}</p>
-
-          <p>
-            Form Descriptions: {JSON.stringify(speciesData.form_descriptions)}
-          </p>
-          <p>Varieties: {JSON.stringify(speciesData.varieties)}</p>
-          <Forms data={speciesData.varieties} setPokemonData={setPokemonData} />
+          <p>Multiple Forms: {speciesData.forms_switchable ? "Yes" : "No"}</p>
+          <div>{JSON.stringify(pokemonData)}</div>
         </div>
       </>
     );
@@ -98,7 +140,7 @@ export default function Species(props) {
 
   return (
     <div>
-      {speciesData ? <RenderSpecies /> : "Loading Species, please wait..."}
+      {pokemonData ? <RenderSpecies /> : "Loading Species, please wait..."}
     </div>
   );
 }

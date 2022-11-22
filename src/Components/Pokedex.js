@@ -9,6 +9,7 @@ import {
   fullPokedex,
   otherSearch,
   generationSearch,
+  typeSearch,
 } from "../Assets/pokedexSearch";
 
 export default function Pokedex() {
@@ -18,8 +19,13 @@ export default function Pokedex() {
     sortQuery: "",
   });
   const [species, setSpecies] = useState();
+  const [selectForm, setSelectForm] = useState()
   const params = useParams();
   const location = useLocation();
+  let extended = false
+  if (params.type === "type") {
+    extended = true
+  }
 
   useEffect(
     () => {
@@ -32,6 +38,9 @@ export default function Pokedex() {
       } else if (params.type === "other") {
         setSpecies();
         otherSearch(setPokemonData, location.state.source);
+      } else if (params.type === "type") {
+        setSpecies();
+        typeSearch(setPokemonData, location.state.source);
       }
     },
     // eslint-disable-next-line
@@ -41,7 +50,7 @@ export default function Pokedex() {
   return (
     <>
       {species ? (
-        <Species data={species} />
+        <Species data={species} selectForm={selectForm}/>
       ) : (
         <div>
           <div className="fixedBar">
@@ -67,11 +76,15 @@ export default function Pokedex() {
                   pokemonData={pokemonData}
                   searchBar={searchBar}
                   setSpecies={setSpecies}
+                  extended={extended}
+                  setSelectForm={setSelectForm}
                 />
               ) : (
                 <MakeRegularList
                   pokemonData={pokemonData}
                   setSpecies={setSpecies}
+                  extended={extended}
+                  setSelectForm={setSelectForm}
                 />
               )
             ) : (

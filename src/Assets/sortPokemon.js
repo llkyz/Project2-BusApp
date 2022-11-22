@@ -12,6 +12,25 @@ export function createPokeId(myData) {
   return myList;
 }
 
+export function createPokeIdType(myData) {
+  let myList = [];
+  myList = myData.map((data) => {
+    let name = data.name.split("-")
+    let firstName = cleanName(name[0])
+    name.shift()
+    if (name.length > 0) {
+      name = "(" + name.map((data)=>data.toUpperCase()).join(" ") + ")"
+    }
+
+    return {
+      name: `${firstName}\n${name}`,
+      url: data.url,
+      pokeid: parseInt(data.url.split("/").slice(-2, -1)),
+    };
+  });
+  return myList;
+}
+
 export function sortPokedexAsc(myList) {
   myList.sort((a, b) => {
     let idA = a.pokeid;

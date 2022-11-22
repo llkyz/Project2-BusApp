@@ -10,6 +10,8 @@ export default function MakeRegularList(props) {
           data={data}
           sprite={props.pokemonData.sprite}
           setSpecies={props.setSpecies}
+          extended={props.extended}
+          setSelectForm={props.setSelectForm}
         />
       );
     });

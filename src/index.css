@@ -258,6 +258,10 @@ label {
   transition: 0.4s all;
 }
 
+.extended {
+  height: 170px;
+}
+
 .pokemon:hover {
   border: 4px solid black;
   transform: scale(1.1);
@@ -845,8 +849,20 @@ label {
 
 .form {
   font-weight: normal;
+  cursor: pointer;
 }
 
 .formSelected {
   font-weight: bold;
+}
+
+.statBarContainer {
+  margin: 0 auto;
+  width: 200px;
+  height: 20px
+}
+
+.statBar {
+  height: 20px;
+  background-color: red;
 }

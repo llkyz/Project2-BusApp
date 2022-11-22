@@ -1,4 +1,4 @@
-import { createPokeId, sortPokedexAsc } from "../Assets/sortPokemon";
+import { createPokeId, createPokeIdType, sortPokedexAsc } from "../Assets/sortPokemon";
 import config from "../config";
 import generationSprites from "./generationSprites";
 
@@ -42,5 +42,16 @@ export const generationSearch = async (setPokemonData, state) => {
   setPokemonData({
     speciesList: data,
     sprite: generationSprites[state.id],
+  });
+};
+
+export const typeSearch = async (setPokemonData, source) => {
+  const response = await fetch(source);
+  let data = await response.json();
+  data = createPokeIdType(data.pokemon.map((data)=>{return {name: data.pokemon.name, url: data.pokemon.url}}));
+  data = sortPokedexAsc(data);
+  setPokemonData({
+    speciesList: data,
+    sprite: generationSprites.full,
   });
 };
