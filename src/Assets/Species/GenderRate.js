@@ -14,7 +14,10 @@ export default function GenderRate(props) {
         setGenderBar({ ...genderBar, genderless: { width: "160px" } });
         return "Genderless";
       case 0:
-        setGenderBar({ ...genderBar, male: { width: "160px" } });
+        setGenderBar({
+          ...genderBar,
+          male: { width: "160px", borderRadius: "10px 10px 10px 10px" },
+        });
         return "Male only";
       case 1:
         setGenderBar({
@@ -56,7 +59,10 @@ export default function GenderRate(props) {
         });
         return "87.5% Female : 12.5% Male";
       case 8:
-        setGenderBar({ ...genderBar, male: { width: "160px" } });
+        setGenderBar({
+          ...genderBar,
+          male: { width: "160px", borderRadius: "10px 10px 10px 10px" },
+        });
         return "Female only";
       default:
         return "Error";

@@ -15,13 +15,16 @@ import Forms from "../Assets/Species/Forms";
 import Stats from "../Assets/Species/Stats";
 import Types from "../Assets/Species/Types";
 import Abilities from "../Assets/Species/Abilities";
+import Encounters from "../Assets/Species/Encounters";
+import Moves from "../Assets/Species/Moves";
+import HatchCounter from "../Assets/Species/HatchCounter";
 
 export default function Species(props) {
   const [speciesData, setSpeciesData] = useState();
   const [pokemonData, setPokemonData] = useState();
   const [formSelected, setFormSelected] = useState(0);
   //props.selectForm is the url to specific pokemon
-  const [formFromPokedex, setformFromPokedex] = useState(props.selectForm)
+  const [formFromPokedex, setformFromPokedex] = useState(props.selectForm);
 
   useEffect(() => {
     const getSpeciesData = async () => {
@@ -31,42 +34,44 @@ export default function Species(props) {
 
       const response2 = await fetch(data.varieties[formSelected].pokemon.url);
       const data2 = await response2.json();
-      setPokemonData(data2)
-    }
+      setPokemonData(data2);
+    };
     getSpeciesData();
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     const getPokemonData = async () => {
-      const response = await fetch(speciesData.varieties[formSelected].pokemon.url);
+      const response = await fetch(
+        speciesData.varieties[formSelected].pokemon.url
+      );
       const data = await response.json();
-      setPokemonData(data)
-    }
+      setPokemonData(data);
+    };
 
     if (speciesData) {
-        getPokemonData();
+      getPokemonData();
     }
     // eslint-disable-next-line
-  }, [formSelected, speciesData])
+  }, [formSelected, speciesData]);
 
-  useEffect(()=>{
+  useEffect(() => {
     function preselectedForm() {
       speciesData.varieties.forEach((data, index) => {
-        console.log(data.pokemon.url)
-        console.log(formFromPokedex)
+        console.log(data.pokemon.url);
+        console.log(formFromPokedex);
         if (data.pokemon.url === formFromPokedex) {
-          setFormSelected(index)
+          setFormSelected(index);
         }
-      })
-      setformFromPokedex()
+      });
+      setformFromPokedex();
     }
 
     if (speciesData && formFromPokedex) {
-      preselectedForm()
+      preselectedForm();
     }
     // eslint-disable-next-line
-  },[speciesData])
+  }, [speciesData]);
 
   //Add URLS: color, egg groups, generation, habitat, shape, varieties
 
@@ -75,12 +80,20 @@ export default function Species(props) {
       <>
         <BackButton back={"fromSpecies"} />
         <div className="speciesContainer">
-          {pokemonData.abilities.map((data)=><Abilities data={data}/>)}
-          <div>Height: {pokemonData.height/10}m</div>
-          <div>Weight: {pokemonData.weight/10}kg</div>
-          <Stats data={pokemonData.stats}/>
-          <Types data={pokemonData.types}/>
-          <Forms data={speciesData.varieties} formSelected={formSelected} setFormSelected={setFormSelected} defaultName={speciesData.name} selectForm={props.selectForm}/>
+          {pokemonData.abilities.map((data) => (
+            <Abilities data={data} />
+          ))}
+          <div>Height: {pokemonData.height / 10}m</div>
+          <div>Weight: {pokemonData.weight / 10}kg</div>
+          <Stats data={pokemonData.stats} />
+          <Types data={pokemonData.types} />
+          <Forms
+            data={speciesData.varieties}
+            formSelected={formSelected}
+            setFormSelected={setFormSelected}
+            defaultName={speciesData.name}
+            selectForm={props.selectForm}
+          />
           <h1>{cleanName(speciesData.name)}</h1>
           <img
             src={config.ARTWORK + pokemonData.id + ".png"}
@@ -96,17 +109,20 @@ export default function Species(props) {
             {speciesData.color.name.toUpperCase()}
           </div>
           <div>
-            Evolution Chain:{" "}
+            <h1>Evolution Chain</h1>
             {
               <EvolutionChain
                 data={speciesData.evolution_chain}
                 pokeid={speciesData.id}
                 setSpeciesData={setSpeciesData}
+                setFormSelected={setFormSelected}
               />
             }
           </div>
           <FlavorText data={speciesData.flavor_text_entries} />
-          <p>Egg Hatching: ~{speciesData.hatch_counter * 256} steps</p>
+          <Encounters data={pokemonData.location_area_encounters} />
+          <Moves data={pokemonData.moves} />
+          <HatchCounter data={speciesData.hatch_counter} />
           <Genus data={speciesData.genera} />
           <p>Pokedex ID: {speciesData.id}</p>
           <p>
@@ -132,7 +148,6 @@ export default function Species(props) {
           <Habitat data={speciesData.habitat} />
           <Shape data={speciesData.shape} />
           <p>Multiple Forms: {speciesData.forms_switchable ? "Yes" : "No"}</p>
-          <div>{JSON.stringify(pokemonData)}</div>
         </div>
       </>
     );

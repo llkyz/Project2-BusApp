@@ -1,6 +1,8 @@
 export function cleanTitle(title) {
   function makeUpperCase(n, index) {
-    if (n.length !== 0 && isNaN(n)) {
+    if (/\d/.test(n) || n.length < 2) {
+      title[index] = n.toUpperCase();
+    } else {
       title[index] = n[0].toUpperCase() + n.substring(1, n.length);
     }
   }

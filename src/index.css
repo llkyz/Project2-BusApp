@@ -859,10 +859,142 @@ label {
 .statBarContainer {
   margin: 0 auto;
   width: 200px;
-  height: 20px
+  height: 20px;
 }
 
 .statBar {
   height: 20px;
   background-color: red;
+}
+
+.encounter {
+  border: 10px solid rgb(202, 154, 75);
+  -webkit-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  -moz-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  border-radius: 50px;
+  width: 70%;
+  margin: 25px auto;
+}
+
+.encounter h1 {
+  margin: 0;
+  background-color: rgb(202, 154, 75);
+  border-radius: 35px 35px 0 0;
+  height: 65px;
+  line-height: 65px;
+  position: relative;
+  font-size: 2.5em;
+  color: rgb(255, 243, 224);
+  top: -8px;
+}
+
+.encounter .tab {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.encounter .tabSelected {
+  width: fit-content;
+  height: fit-content;
+  padding: 7px 5px;
+  -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  display: inline-block;
+  border-radius: 12px;
+}
+
+.encounterVersions {
+  background-color: rgb(202, 154, 75);
+  padding: 10px;
+}
+
+.moves {
+  border: 10px solid rgb(202, 154, 75);
+  -webkit-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  -moz-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  border-radius: 50px;
+  width: 70%;
+  margin: 25px auto;
+}
+
+.moves h1 {
+  margin: 0;
+  background-color: rgb(202, 154, 75);
+  border-radius: 35px 35px 0 0;
+  height: 65px;
+  line-height: 65px;
+  position: relative;
+  font-size: 2.5em;
+  color: rgb(255, 243, 224);
+}
+
+.moves .tab {
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.moves .tabSelected {
+  width: fit-content;
+  height: fit-content;
+  padding: 7px 5px;
+  -webkit-box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  -moz-box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  box-shadow: inset 0px 0px 0px 3px rgb(255, 243, 224);
+  display: inline-block;
+  border-radius: 12px;
+}
+
+.moveVersions {
+  background-color: rgb(202, 154, 75);
+  padding: 10px;
+}
+
+.versionMove {
+  background-color: rgb(229, 0, 90);
+  color: white;
+}
+
+.moveTable {
+  margin: 0 auto 30px auto;
+  width: 70%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.moveTable th {
+  border-spacing: 0;
+  background: rgb(255, 243, 224);
+}
+
+.moveTable h2 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.moveTable h3 {
+  margin: 0 0 10px 0;
+}
+
+.moveTable p {
+  margin: 5px auto;
+}
+
+.moveTable .description {
+  margin-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.moveTable .sticky {
+  position: sticky;
+  top: 100px; /* Don't forget this, required for the stickiness */
 }

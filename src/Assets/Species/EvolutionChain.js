@@ -11,7 +11,11 @@ export function EvolutionChain(props) {
       let data = await response.json();
       setEvolutionData(data.chain);
     };
-    getEvolutionData();
+    if (props.data === null) {
+      setEvolutionData("None");
+    } else {
+      getEvolutionData();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -20,6 +24,7 @@ export function EvolutionChain(props) {
   const getSpeciesData = async (url) => {
     const response = await fetch(url);
     const data = await response.json();
+    props.setFormSelected(0);
     props.setSpeciesData(data);
     window.scrollTo(0, 0);
   };
@@ -56,54 +61,62 @@ export function EvolutionChain(props) {
   }
 
   function ProcessEvolutionData() {
-    return (
-      <div>
-        <div className="layer1">
-          <ProcessPokemon evolData={evolutionData.species} />
-          {evolutionData.evolves_to.length !== 0 ? (
-            <>
-              <div className="evolutionArrow" />
-              {evolutionData.evolves_to.length > 1 ? (
-                <div className="separator" />
-              ) : (
-                ""
-              )}
-              {evolutionData.evolves_to.map((data, index) => {
-                return (
-                  <div key={index} className="layer2">
-                    <div className="evolutionArrow" />
-                    <ProcessPokemon evolData={data.species} />
-                    {data.evolves_to.length !== 0 ? (
-                      <>
-                        <div className="evolutionArrow" />
-                        {data.evolves_to.length > 1 ? (
-                          <div className="separator" />
-                        ) : (
-                          ""
-                        )}
-                        <div />
-                        {data.evolves_to.map((data2, index2) => {
-                          return (
-                            <div key={index2} className="layer3">
-                              <div className="evolutionArrow" />
-                              <ProcessPokemon evolData={data2.species} />
-                            </div>
-                          );
-                        })}
-                      </>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            ""
-          )}
+    if (evolutionData !== "None") {
+      return (
+        <div>
+          <div className="layer1">
+            <ProcessPokemon evolData={evolutionData.species} />
+            {evolutionData.evolves_to.length !== 0 ? (
+              <>
+                <div className="evolutionArrow" />
+                {evolutionData.evolves_to.length > 1 ? (
+                  <div className="separator" />
+                ) : (
+                  ""
+                )}
+                {evolutionData.evolves_to.map((data, index) => {
+                  return (
+                    <div key={index} className="layer2">
+                      <div className="evolutionArrow" />
+                      <ProcessPokemon evolData={data.species} />
+                      {data.evolves_to.length !== 0 ? (
+                        <>
+                          <div className="evolutionArrow" />
+                          {data.evolves_to.length > 1 ? (
+                            <div className="separator" />
+                          ) : (
+                            ""
+                          )}
+                          <div />
+                          {data.evolves_to.map((data2, index2) => {
+                            return (
+                              <div key={index2} className="layer3">
+                                <div className="evolutionArrow" />
+                                <ProcessPokemon evolData={data2.species} />
+                              </div>
+                            );
+                          })}
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              ""
+            )}
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div>
+          <h3>No evolution data available</h3>
+        </div>
+      );
+    }
   }
 
   return <>{evolutionData ? <ProcessEvolutionData /> : "Loading..."}</>;
