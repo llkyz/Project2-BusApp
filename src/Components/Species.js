@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BackButton from "./BackButton";
 import { cleanName } from "../Assets/cleanup";
+import PokeballImg from "../Assets/Images/Pokeball.png";
 import config from "../config";
 import { EvolutionChain } from "../Assets/Species/EvolutionChain";
 import pokemonColors from "../Assets/pokemonColors";
@@ -98,6 +99,7 @@ export default function Species(props) {
           <img
             src={config.ARTWORK + pokemonData.id + ".png"}
             alt={speciesData.name}
+            onError={(event) => (event.target.src = PokeballImg)}
           />
           <p>Base Happiness: {speciesData.base_happiness}</p>
           <p>Capture Rate: {speciesData.capture_rate}</p>
