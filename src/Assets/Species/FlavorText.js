@@ -51,7 +51,7 @@ export default function FlavorText(props) {
   }
 
   return (
-    <div className="flavor">
+    <div className="flavor" style={{ marginBottom: "300px" }}>
       <h1>Flavor Text</h1>
       {entries ? <DisplayEntries /> : ""}
     </div>

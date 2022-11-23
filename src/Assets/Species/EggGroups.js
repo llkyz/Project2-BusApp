@@ -11,31 +11,29 @@ export default function EggGroups(props) {
 
   function ProcessGroups() {
     return props.data.map((data, index) => {
-      let name =
-        data.name[0].toUpperCase() + data.name.substring(1, data.name.length);
+      let name = data.name.toUpperCase();
 
       return (
         <Link
           key={index}
           to="/pokedex/other"
-          state={{ source: data.url, title: `Browsing Egg Group (${name})` }}
+          state={{
+            source: data.url,
+            title: `Searching by Egg Group (${name})`,
+          }}
         >
-          <p>{name}</p>
+          <p
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+            className="link"
+          >
+            {name}
+          </p>
         </Link>
       );
     });
   }
 
-  return (
-    <div>
-      {group ? (
-        <>
-          <p>Egg Groups</p>
-          <ProcessGroups />
-        </>
-      ) : (
-        ""
-      )}
-    </div>
-  );
+  return <>{group ? <ProcessGroups /> : ""}</>;
 }

@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import { Navigation } from "../App";
 import { cleanTitle } from "../Assets/cleanup";
 import Area from "./Area";
+import { LoadingImg } from "../Assets/cleanup";
+import { LoadingImgLarge } from "../Assets/cleanup";
 
 export default function Location(props) {
   const nav = useContext(Navigation);
@@ -62,10 +64,10 @@ export default function Location(props) {
     return (
       <>
         <div className="locationHeader">
-          <h1>Loading...</h1>
+          <LoadingImg />
         </div>
         <div>
-          <h2>Loading areas, please wait...</h2>
+          <LoadingImgLarge />
         </div>
       </>
     );

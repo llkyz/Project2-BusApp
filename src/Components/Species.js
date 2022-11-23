@@ -2,23 +2,18 @@ import React, { useState, useEffect } from "react";
 import BackButton from "./BackButton";
 import { cleanName } from "../Assets/cleanup";
 import PokeballImg from "../Assets/Images/Pokeball.png";
+import { LoadingImg } from "../Assets/cleanup";
+import crosshair from "../Assets/Images/Crosshair/crosshair";
 import config from "../config";
 import { EvolutionChain } from "../Assets/Species/EvolutionChain";
-import pokemonColors from "../Assets/pokemonColors";
 import FlavorText from "../Assets/Species/FlavorText";
-import Genus from "../Assets/Species/Genus";
-import GenderRate from "../Assets/Species/GenderRate";
-import EggGroups from "../Assets/Species/EggGroups";
-import Generation from "../Assets/Species/Generation";
-import Habitat from "../Assets/Species/Habitat";
-import Shape from "../Assets/Species/Shape";
 import Forms from "../Assets/Species/Forms";
 import Stats from "../Assets/Species/Stats";
-import Types from "../Assets/Species/Types";
 import Abilities from "../Assets/Species/Abilities";
 import Encounters from "../Assets/Species/Encounters";
 import Moves from "../Assets/Species/Moves";
-import HatchCounter from "../Assets/Species/HatchCounter";
+import AttrTable from "../Assets/Species/AttrTable";
+import { LoadingImgLarge } from "../Assets/cleanup";
 
 export default function Species(props) {
   const [speciesData, setSpeciesData] = useState();
@@ -26,6 +21,7 @@ export default function Species(props) {
   const [formSelected, setFormSelected] = useState(0);
   //props.selectForm is the url to specific pokemon
   const [formFromPokedex, setformFromPokedex] = useState(props.selectForm);
+  const [LoadingImage, setLoadingImage] = useState(false);
 
   useEffect(() => {
     const getSpeciesData = async () => {
@@ -59,8 +55,6 @@ export default function Species(props) {
   useEffect(() => {
     function preselectedForm() {
       speciesData.varieties.forEach((data, index) => {
-        console.log(data.pokemon.url);
-        console.log(formFromPokedex);
         if (data.pokemon.url === formFromPokedex) {
           setFormSelected(index);
         }
@@ -80,36 +74,56 @@ export default function Species(props) {
     return (
       <>
         <BackButton back={"fromSpecies"} />
-        <div className="speciesContainer">
-          {pokemonData.abilities.map((data) => (
-            <Abilities data={data} />
-          ))}
-          <div>Height: {pokemonData.height / 10}m</div>
-          <div>Weight: {pokemonData.weight / 10}kg</div>
-          <Stats data={pokemonData.stats} />
-          <Types data={pokemonData.types} />
-          <Forms
-            data={speciesData.varieties}
-            formSelected={formSelected}
-            setFormSelected={setFormSelected}
-            defaultName={speciesData.name}
-            selectForm={props.selectForm}
-          />
-          <h1>{cleanName(speciesData.name)}</h1>
-          <img
-            src={config.ARTWORK + pokemonData.id + ".png"}
-            alt={speciesData.name}
-            onError={(event) => (event.target.src = PokeballImg)}
-          />
-          <p>Base Happiness: {speciesData.base_happiness}</p>
-          <p>Capture Rate: {speciesData.capture_rate}</p>
-          <p>Color:</p>
-          <div
-            className="pokemonColor"
-            style={pokemonColors[speciesData.color.name]}
-          >
-            {speciesData.color.name.toUpperCase()}
+        <div className="showcaseContainer">
+          <div className="showcase">
+            <Forms
+              data={speciesData.varieties}
+              formSelected={formSelected}
+              setFormSelected={setFormSelected}
+              defaultName={speciesData.name}
+              selectForm={props.selectForm}
+            />
           </div>
+          <div className="showcase">
+            <h1 style={{ fontSize: "3.5em", marginTop: "0" }}>
+              {cleanName(speciesData.name)}
+            </h1>
+            <div className="showcaseImage">
+              <img
+                className="crosshair1"
+                src={crosshair.crosshair1}
+                alt="crosshair"
+              />
+              <img
+                className="crosshair2"
+                src={crosshair.crosshair2}
+                alt="crosshair"
+              />
+              <img
+                className="crosshair3"
+                src={crosshair.crosshair3}
+                alt="crosshair"
+              />
+              <img
+                className="crosshair4"
+                src={crosshair.crosshair4}
+                alt="crosshair"
+              />
+              {LoadingImage ? "" : <LoadingImg />}
+              <img
+                src={config.ARTWORK + pokemonData.id + ".png"}
+                alt={speciesData.name}
+                onError={(event) => (event.target.src = PokeballImg)}
+                onLoad={setLoadingImage(true)}
+              />
+            </div>
+          </div>
+          <div className="showcase">
+            <Stats data={pokemonData.stats} />
+          </div>
+        </div>
+        <div className="speciesContainer">
+          <AttrTable pokemonData={pokemonData} speciesData={speciesData} />
           <div>
             <h1>Evolution Chain</h1>
             {
@@ -121,43 +135,14 @@ export default function Species(props) {
               />
             }
           </div>
-          <FlavorText data={speciesData.flavor_text_entries} />
-          <Encounters data={pokemonData.location_area_encounters} />
+          <Abilities data={pokemonData.abilities} />
           <Moves data={pokemonData.moves} />
-          <HatchCounter data={speciesData.hatch_counter} />
-          <Genus data={speciesData.genera} />
-          <p>Pokedex ID: {speciesData.id}</p>
-          <p>
-            Growth:{" "}
-            {speciesData.growth_rate.name
-              .split("-")
-              .map(
-                (speed) =>
-                  speed[0].toUpperCase() + speed.substring(1, speed.length)
-              )
-              .join(" - ")}
-          </p>
-          <GenderRate data={speciesData.gender_rate} />
-          <EggGroups data={speciesData.egg_groups} />
-          <p>
-            Has Gender Differences:{" "}
-            {speciesData.has_gender_differences ? "Yes" : "No"}
-          </p>
-          <p>Is Baby: {speciesData.is_baby ? "Yes" : "No"}</p>
-          <p>Is Legendary: {speciesData.is_legendary ? "Yes" : "No"}</p>
-          <p>Is Mythical: {speciesData.is_mythical ? "Yes" : "No"}</p>
-          <Generation data={speciesData.generation} />
-          <Habitat data={speciesData.habitat} />
-          <Shape data={speciesData.shape} />
-          <p>Multiple Forms: {speciesData.forms_switchable ? "Yes" : "No"}</p>
+          <Encounters data={pokemonData.location_area_encounters} />
+          <FlavorText data={speciesData.flavor_text_entries} />
         </div>
       </>
     );
   }
 
-  return (
-    <div>
-      {pokemonData ? <RenderSpecies /> : "Loading Species, please wait..."}
-    </div>
-  );
+  return <div>{pokemonData ? <RenderSpecies /> : <LoadingImgLarge />}</div>;
 }

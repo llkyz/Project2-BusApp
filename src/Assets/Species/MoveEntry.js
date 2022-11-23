@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { LoadingImg } from "../cleanup";
 
 export default function MoveEntry(props) {
   const [visibility, setVisibility] = useState();
@@ -88,7 +89,7 @@ function MoveDetails(props) {
       ) : (
         <tr>
           <th colSpan="3">
-            <p>Loading...</p>
+            <LoadingImg />
           </th>
         </tr>
       )}

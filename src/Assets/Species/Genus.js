@@ -1,14 +1,12 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 
 export default function Genus(props) {
-    const [genus, setGenus] = useState("")
+  const [genus, setGenus] = useState("");
 
-    useEffect(()=>{
-        let found = props.data.filter((data)=>data.language.name === "en")
-        setGenus(found[0].genus)
-    },[props.data])
+  useEffect(() => {
+    let found = props.data.filter((data) => data.language.name === "en");
+    setGenus(found[0].genus);
+  }, [props.data]);
 
-    return (
-        <div>Genus: {genus}</div>
-    )
+  return <p>{genus}</p>;
 }

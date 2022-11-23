@@ -5,6 +5,7 @@ import Region from "./Region";
 import { Link } from "react-router-dom";
 import BackButton from "./BackButton";
 import { Navigation } from "../App";
+import { LoadingImgLarge } from "../Assets/cleanup";
 
 export default function RegionList() {
   const nav = useContext(Navigation);
@@ -59,7 +60,7 @@ export default function RegionList() {
           </>
         )
       ) : (
-        "Loading Regions, please wait..."
+        <LoadingImgLarge />
       )}
     </>
   );

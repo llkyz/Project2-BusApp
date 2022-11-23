@@ -8,6 +8,7 @@ import config from "../config";
 import Location from "./Location";
 import { cleanTitle } from "../Assets/cleanup";
 import Species from "./Species";
+import { LoadingImgLarge } from "../Assets/cleanup";
 
 export default function Region() {
   const [species, setSpecies] = useState();
@@ -80,6 +81,7 @@ export default function Region() {
             )}
           </div>
           <img
+            class="regionImg"
             src={regionImg[nav.data.regionData.name]}
             alt={nav.data.regionData.name}
           />
@@ -108,11 +110,7 @@ export default function Region() {
         <Species data={species} />
       ) : (
         <div>
-          {nav.data.regionData ? (
-            <DisplayRegion />
-          ) : (
-            "Loading Region, please wait..."
-          )}
+          {nav.data.regionData ? <DisplayRegion /> : <LoadingImgLarge />}
         </div>
       )}
     </>

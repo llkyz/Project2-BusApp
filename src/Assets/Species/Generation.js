@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 
 export default function Generation(props) {
-  let name = "Generation " + props.data.name.split("-")[1].toUpperCase();
+  let name = "GENERATION " + props.data.name.split("-")[1].toUpperCase();
 
   return (
-    <div>
-      <p>Origin</p>
+    <>
       <Link
         to="/pokedex/generation"
         state={{
@@ -14,8 +13,15 @@ export default function Generation(props) {
           id: props.data.name,
         }}
       >
-        <p>{name}</p>
+        <p
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
+          className="link"
+        >
+          {name}
+        </p>
       </Link>
-    </div>
+    </>
   );
 }

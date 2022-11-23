@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
+import { LoadingImg } from "../cleanup";
 
 export default function Abilities(props) {
+  return (
+    <div className="abilities">
+      <h1>Abilities</h1>
+      {props.data.map((data) => (
+        <Ability data={data} />
+      ))}
+    </div>
+  );
+}
+
+function Ability(props) {
   const [visibility, setVisibility] = useState();
 
   let name = props.data.ability.name.split("-");
@@ -17,8 +29,10 @@ export default function Abilities(props) {
   }
 
   return (
-    <div>
-      <div onClick={toggleVisibility}>{name}</div>
+    <div style={{ width: "fit-content", margin: "0 auto" }}>
+      <h2 onClick={toggleVisibility} style={{ cursor: "pointer" }}>
+        {name}
+      </h2>
       {visibility ? <AbilityDetails data={props.data.ability.url} /> : ""}
     </div>
   );
@@ -47,14 +61,14 @@ function AbilityDetails(props) {
   }, []);
 
   return (
-    <div>
+    <div style={{ width: "70%", margin: "0 auto 50px auto" }}>
       {details ? (
         <>
-          <p>{details.shortEffect}</p>
+          <p style={{ fontWeight: "bold" }}>{details.shortEffect}</p>
           <p>{details.effect}</p>
         </>
       ) : (
-        "Loading..."
+        <LoadingImg />
       )}
     </div>
   );

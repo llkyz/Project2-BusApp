@@ -5,6 +5,7 @@ import MakeRegularList from "./MakeRegularList";
 import MakeFilteredList from "./MakeFilteredList";
 import { Link, useParams, useLocation } from "react-router-dom";
 import BackButton from "./BackButton";
+import { LoadingImgLarge } from "../Assets/cleanup";
 import {
   fullPokedex,
   otherSearch,
@@ -19,12 +20,12 @@ export default function Pokedex() {
     sortQuery: "",
   });
   const [species, setSpecies] = useState();
-  const [selectForm, setSelectForm] = useState()
+  const [selectForm, setSelectForm] = useState();
   const params = useParams();
   const location = useLocation();
-  let extended = false
+  let extended = false;
   if (params.type === "type") {
-    extended = true
+    extended = true;
   }
 
   useEffect(
@@ -50,7 +51,7 @@ export default function Pokedex() {
   return (
     <>
       {species ? (
-        <Species data={species} selectForm={selectForm}/>
+        <Species data={species} selectForm={selectForm} />
       ) : (
         <div>
           <div className="fixedBar">
@@ -88,7 +89,7 @@ export default function Pokedex() {
                 />
               )
             ) : (
-              "Loading Pokemon, Please wait..."
+              <LoadingImgLarge />
             )}
           </div>
         </div>

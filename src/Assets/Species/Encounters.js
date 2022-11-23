@@ -77,8 +77,8 @@ export default function Encounters(props) {
               );
             })}
           </div>
-          {encounterList[currentVersion][1].map((data) => {
-            return <h3 onClick={() => console.log(data.url)}>{data.name}</h3>;
+          {encounterList[currentVersion][1].map((data, index) => {
+            return <h3 key={index}>{data.name}</h3>;
           })}
         </>
       );

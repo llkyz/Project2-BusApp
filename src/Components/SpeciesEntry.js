@@ -2,14 +2,13 @@ import React from "react";
 import { replaceImage } from "../Assets/sortPokemon";
 
 export default function SpeciesEntry(props) {
-
   function catchType() {
     if (props.extended) {
       const getSpecies = async () => {
         const response = await fetch(props.data.url);
         let data = await response.json();
         props.setSpecies(data.species.url);
-        props.setSelectForm(props.data.url)
+        props.setSelectForm(props.data.url);
         window.scrollTo(0, 0);
       };
       getSpecies();

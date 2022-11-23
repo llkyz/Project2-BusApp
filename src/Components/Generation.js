@@ -4,6 +4,7 @@ import generationImg from "../Assets/Generations/generationImg";
 // import generationSprites from "../Assets/generationSprites";
 import { Link } from "react-router-dom";
 import BackButton from "./BackButton";
+import { LoadingImgLarge } from "../Assets/cleanup";
 
 export default function Generation() {
   const [generationList, setGenerationList] = useState("");
@@ -61,7 +62,7 @@ export default function Generation() {
           </div>
         </>
       ) : (
-        "Loading Generations, please wait..."
+        <LoadingImgLarge />
       )}
     </>
   );

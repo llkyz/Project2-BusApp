@@ -1,36 +1,56 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+
+const abbreviation = {
+  hp: "HP",
+  attack: "ATK",
+  defense: "DEF",
+  "special-attack": "SP. ATK",
+  "special-defense": "SP. DEF",
+  speed: "SPD",
+};
 
 export default function Stats(props) {
-    const [stats, setStats] = useState()
+  const [stats, setStats] = useState();
 
-    useEffect(()=> {
-        function processStats() {
-            let statList = props.data.map((data)=>{
-                return {stat: data.stat.name, value: data.base_stat}
-            })
-            setStats(statList)
-        }
-        processStats()
-    }, [props.data])
-
-    function DisplayStats() {
-        return (
-            stats.map((data)=>{
-
-                return (
-                    <>
-                    <div>{data.stat.toUpperCase()}: {data.value}</div>
-                    <div className="statBarContainer">
-                        <div className="statBar" style={{width: `${data.value/255*100}%`}}/>
-                    </div>
-                    </>
-                )
-            })
-        )
+  useEffect(() => {
+    function processStats() {
+      let statList = props.data.map((data) => {
+        return { stat: data.stat.name, value: data.base_stat };
+      });
+      setStats(statList);
     }
-    
+    processStats();
+  }, [props.data]);
 
-    return (
-<div>{stats ? <DisplayStats/> : ""}</div>
-    )
+  function DisplayStats() {
+    return stats.map((data) => {
+      return (
+        <>
+          <p>
+            {abbreviation[data.stat]}: {data.value}
+          </p>
+          <div className="statBarContainer">
+            <div
+              className="statBar"
+              style={{ maxWidth: `${(data.value / 255) * 100}%` }}
+            />
+          </div>
+          <div className="statBarIndicator" />
+        </>
+      );
+    });
+  }
+
+  return (
+    <div className="stats">
+      {stats ? (
+        <>
+          <h1>STATS</h1>
+          <DisplayStats />
+        </>
+      ) : (
+        ""
+      )}
+    </div>
+  );
 }

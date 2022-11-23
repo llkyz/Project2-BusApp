@@ -7,5 +7,5 @@ export default function HatchCounter(props) {
     result = `~${props.data * 256} steps`;
   }
 
-  return <div>Egg Hatching: {result}</div>;
+  return <p>{result}</p>;
 }

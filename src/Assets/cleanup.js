@@ -1,3 +1,5 @@
+import PokeballImg from "./Images/Pokeball.png";
+
 export function cleanTitle(title) {
   function makeUpperCase(n, index) {
     if (/\d/.test(n) || n.length < 2) {
@@ -16,4 +18,12 @@ export function cleanTitle(title) {
 
 export function cleanName(name) {
   return name[0].toUpperCase() + name.substring(1, name.length);
+}
+
+export function LoadingImg() {
+  return <img className="loadingImg" src={PokeballImg} alt="loading" />;
+}
+
+export function LoadingImgLarge() {
+  return <img className="loadingImgLarge" src={PokeballImg} alt="loading" />;
 }

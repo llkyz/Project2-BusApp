@@ -79,7 +79,6 @@ export default function GenderRate(props) {
 
   return (
     <div>
-      Gender Ratio
       <div className="genderRatioContainer">
         <div className="female" style={genderBar.female} />
         <div className="male" style={genderBar.male} />

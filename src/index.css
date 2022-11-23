@@ -1,3 +1,5 @@
+@import "./Assets/CSS/typeColors.css";
+
 body {
   margin: 150px 0;
 
@@ -403,7 +405,7 @@ label {
   margin-top: -30px;
 }
 
-.region img {
+.region .regionImg {
   width: 40%;
   display: block;
   margin: 0 auto;
@@ -700,7 +702,7 @@ label {
 .separator {
   height: 4px;
   background-color: black;
-  width: calc(100% - 126px);
+  width: calc(100% - 128px);
   margin: 0 auto;
 }
 
@@ -727,7 +729,8 @@ label {
   display: inline-block;
   margin: 0 10px;
   padding: 10px 3px;
-  border: 2px solid black;
+  border: 3px solid black;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -745,7 +748,8 @@ label {
   display: inline-block;
   margin: 0 10px;
   padding: 10px 3px;
-  border: 2px solid black;
+  border: 3px solid black;
+  border-radius: 20px;
   background-color: rgb(228, 198, 150);
 }
 
@@ -764,14 +768,6 @@ label {
   height: 15px;
   background-color: black;
   margin: 0 auto;
-}
-
-.pokemonColor {
-  width: 70px;
-  height: 50px;
-  margin: 0 auto;
-  text-align: center;
-  line-height: 50px;
 }
 
 .flavor {
@@ -847,24 +843,115 @@ label {
   height: 20px;
 }
 
+.pokemonForms {
+  margin-right: 20%;
+  margin-top: 150px;
+  transform: skew(0deg, -20deg);
+  text-align: right;
+}
+
+.pokemonForms h1 {
+  font-size: 2.5em;
+  width: fit-content;
+  margin-left: auto;
+}
+
 .form {
+  font-size: 1.5em;
   font-weight: normal;
   cursor: pointer;
+  width: fit-content;
+  margin-left: auto;
+}
+
+.form:hover {
+  font-weight: bold;
+  padding: 2px 10px;
+  border: 3px solid rgb(202, 154, 75);
+  border-radius: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .formSelected {
+  font-size: 1.5em;
   font-weight: bold;
+  width: fit-content;
+  margin-left: auto;
+  padding: 5px 10px;
+  background-color: rgb(202, 154, 75);
+  color: white;
+  border-radius: 15px;
+}
+
+.stats {
+  margin-top: 150px;
+  margin-left: 20%;
+  text-align: left;
+  transform: skew(0deg, 20deg);
+}
+
+.stats h1 {
+  font-size: 2.5em;
+}
+
+.stats p {
+  font-size: 1.5em;
+  margin: 10px 0;
+  margin-bottom: 20px;
+  margin-left: 25px;
 }
 
 .statBarContainer {
-  margin: 0 auto;
-  width: 200px;
+  position: relative;
+  width: 250px;
   height: 20px;
 }
 
 .statBar {
+  position: absolute;
   height: 20px;
   background-color: red;
+  transition: 2s all;
+  width: 0%;
+  animation: width 1s linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes width {
+  to {
+    width: 100%;
+  }
+}
+
+.statBar:before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  bottom: 20px;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(180, 0, 0);
+  transform: skewX(-45deg);
+}
+
+.statBar:after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 10px;
+  height: 100%;
+  width: 20px;
+  background-color: rgb(130, 0, 0);
+  transform: skewY(-45deg);
+}
+
+.statBarIndicator {
+  margin-top: 2px;
+  width: 250px;
+  height: 3px;
+  background-color: rgb(202, 154, 75);
 }
 
 .encounter {
@@ -886,7 +973,6 @@ label {
   position: relative;
   font-size: 2.5em;
   color: rgb(255, 243, 224);
-  top: -8px;
 }
 
 .encounter .tab {
@@ -955,7 +1041,7 @@ label {
 
 .moveVersions {
   background-color: rgb(202, 154, 75);
-  padding: 10px;
+  padding: 10px 20px;
 }
 
 .versionMove {
@@ -997,4 +1083,221 @@ label {
 .moveTable .sticky {
   position: sticky;
   top: 100px; /* Don't forget this, required for the stickiness */
+}
+
+.abilities {
+  border: 10px solid rgb(202, 154, 75);
+  -webkit-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  -moz-box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  box-shadow: inset 0px 0px 0px 2px rgb(202, 154, 75);
+  border-radius: 50px;
+  width: 70%;
+  margin: 25px auto;
+}
+
+.abilities h1 {
+  margin: 0;
+  background-color: rgb(202, 154, 75);
+  border-radius: 35px 35px 0 0;
+  height: 65px;
+  line-height: 65px;
+  position: relative;
+  font-size: 2.5em;
+  color: rgb(255, 243, 224);
+}
+
+.attrTableContainer {
+  box-shadow: inset 0px 0px 0px 2px rgb(202 154 75);
+  border: 10px solid rgb(202, 154, 75);
+  border-radius: 50px;
+  width: 70%;
+  margin: 0 auto;
+  background-color: rgb(202, 154, 75);
+}
+
+.attrTableContainer h1 {
+  margin: 0;
+  background-color: rgb(202, 154, 75);
+  border-radius: 35px 35px 0 0;
+  height: 65px;
+  line-height: 65px;
+  position: relative;
+  font-size: 2.5em;
+  color: rgb(255, 243, 224);
+}
+
+.attrTable {
+  margin: 0 auto;
+  width: 95%;
+  border-spacing: 0;
+  background-color: rgb(202, 154, 75);
+}
+
+.attrTable th {
+  padding-top: 20px;
+  height: 50px;
+}
+
+.attrTable td {
+  background-color: rgb(255, 243, 224);
+  padding: 10px 0 10px 0;
+}
+
+.attrTable th p {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 5px 20px;
+  color: rgb(255, 243, 224);
+  font-size: 1.5em;
+}
+
+.attrTable .link {
+  display: inline-block;
+  color: rgb(202, 154, 75);
+  font-weight: bold;
+  margin: 10px 5px;
+  padding: 5px 10px;
+  border: 3px solid rgb(202, 154, 75);
+  border-radius: 15px;
+}
+
+.attrTable .link:hover {
+  background-color: rgb(202, 154, 75);
+  color: rgb(255, 243, 224);
+}
+
+.attrTableEnd {
+  height: 70px;
+  width: 100%;
+  background-color: rgb(202, 154, 75);
+  border-radius: 0 0 35px 35px;
+}
+
+.checkbox {
+  height: 40px;
+  width: 40px;
+}
+
+.loadingImg {
+  margin: 20px;
+  height: 30px;
+  width: 30px;
+  max-height: 80%;
+  border: none;
+  animation: rotate 1.5s linear infinite;
+}
+
+.loadingImgLarge {
+  margin: 30px;
+  height: 200px;
+  width: 200px;
+  max-height: 80%;
+  border: none;
+  animation: rotate 1.5s linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.showcaseContainer {
+  margin-top: -20px;
+  margin-bottom: 100px;
+  vertical-align: top;
+}
+
+.showcase {
+  width: 30%;
+  margin: 0 auto;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.showcaseImage {
+  position: relative;
+  margin-top: 100px;
+}
+
+.showcaseImage img {
+  left: 0;
+  right: 0;
+  width: 100%;
+}
+
+.showcaseImage .crosshair1 {
+  position: absolute;
+  width: 120%;
+  left: -10%;
+  top: -10%;
+  opacity: 0.7;
+  z-index: 2;
+  animation: pulse 5s ease-in-out infinite;
+}
+
+.showcaseImage .crosshair2 {
+  position: absolute;
+  width: 120%;
+  left: -10%;
+  top: -10%;
+  opacity: 0.85;
+  z-index: 2;
+  animation: rotate 25s linear infinite;
+}
+
+.showcaseImage .crosshair3 {
+  position: absolute;
+  width: 120%;
+  left: -10%;
+  top: -10%;
+  opacity: 1;
+  z-index: 2;
+  animation: pulseStrong 5s ease-in-out infinite;
+}
+
+.showcaseImage .crosshair4 {
+  position: absolute;
+  width: 120%;
+  left: -10%;
+  top: -10%;
+  opacity: 1;
+  z-index: 2;
+  animation: pulseInner 5s linear infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulseStrong {
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.7);
+  }
+}
+
+@keyframes pulseInner {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(-180deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(-360deg) scale(1);
+  }
 }

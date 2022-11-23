@@ -1,0 +1,179 @@
+.typeColor {
+  display: inline-block;
+  font-weight: bold;
+  margin: 10px 5px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  color: black;
+}
+
+.typeNormal {
+  border: 3px solid rgb(168, 168, 120);
+}
+
+.typeNormal:hover {
+  background-color: rgb(168, 168, 120);
+  color: white;
+}
+
+.typeFire {
+  border: 3px solid rgb(240, 128, 48);
+}
+
+.typeFire:hover {
+  background-color: rgb(240, 128, 48);
+  color: white;
+}
+
+.typeFighting {
+  border: 3px solid rgb(192, 48, 40);
+}
+
+.typeFighting:hover {
+  background-color: rgb(192, 48, 40);
+  color: white;
+}
+
+.typeWater {
+  border: 3px solid rgb(104, 144, 240);
+}
+
+.typeWater:hover {
+  background-color: rgb(104, 144, 240);
+  color: white;
+}
+
+.typeFlying {
+  border: 3px solid rgb(168, 144, 240);
+}
+
+.typeFlying:hover {
+  background-color: rgb(168, 144, 240);
+  color: white;
+}
+
+.typeGrass {
+  border: 3px solid rgb(120, 200, 80);
+}
+
+.typeGrass:hover {
+  background-color: rgb(120, 200, 80);
+  color: white;
+}
+
+.typePoison {
+  border: 3px solid rgb(160, 64, 160);
+}
+
+.typePoison:hover {
+  background-color: rgb(160, 64, 160);
+  color: white;
+}
+
+.typeElectric {
+  border: 3px solid rgb(248, 208, 48);
+}
+
+.typeElectric:hover {
+  background-color: rgb(248, 208, 48);
+  color: white;
+}
+
+.typeGround {
+  border: 3px solid rgb(224, 192, 104);
+}
+
+.typeGround:hover {
+  background-color: rgb(224, 192, 104);
+  color: white;
+}
+
+.typePsychic {
+  border: 3px solid rgb(248, 88, 136);
+}
+
+.typePsychic:hover {
+  background-color: rgb(248, 88, 136);
+  color: white;
+}
+
+.typeRock {
+  border: 3px solid rgb(184, 160, 56);
+}
+
+.typeRock:hover {
+  background-color: rgb(184, 160, 56);
+  color: white;
+}
+
+.typeIce {
+  border: 3px solid rgb(152, 216, 216);
+}
+
+.typeIce:hover {
+  background-color: rgb(152, 216, 216);
+  color: white;
+}
+
+.typeBug {
+  border: 3px solid rgb(168, 184, 32);
+}
+
+.typeBug:hover {
+  background-color: rgb(168, 184, 32);
+  color: white;
+}
+
+.typeDragon {
+  border: 3px solid rgb(112, 56, 248);
+}
+
+.typeDragon:hover {
+  background-color: rgb(112, 56, 248);
+  color: white;
+}
+
+.typeGhost {
+  border: 3px solid rgb(112, 88, 152);
+}
+
+.typeGhost:hover {
+  background-color: rgb(112, 88, 152);
+  color: white;
+}
+
+.typeDark {
+  border: 3px solid rgb(112, 88, 72);
+}
+
+.typeDark:hover {
+  background-color: rgb(112, 88, 72);
+  color: white;
+}
+
+.typeSteel {
+  border: 3px solid rgb(184, 184, 208);
+}
+
+.typeSteel:hover {
+  background-color: rgb(184, 184, 208);
+  color: white;
+}
+
+.typeFairy {
+  border: 3px solid rgb(238, 153, 172);
+}
+
+.typeFairy:hover {
+  background-color: rgb(238, 153, 172);
+  color: white;
+}
+
+.typeUnknown {
+  border: 3px solid rgb(104, 160, 144);
+}
+
+.typeUnknown:hover {
+  background-color: rgb(104, 160, 144);
+  color: white;
+}
