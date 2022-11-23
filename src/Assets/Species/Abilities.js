@@ -5,8 +5,8 @@ export default function Abilities(props) {
   return (
     <div className="abilities">
       <h1>Abilities</h1>
-      {props.data.map((data) => (
-        <Ability data={data} />
+      {props.data.map((data, index) => (
+        <Ability key={index} data={data} />
       ))}
     </div>
   );
@@ -48,13 +48,17 @@ function AbilityDetails(props) {
       let shortEffect = "";
       let effect = "";
 
-      for (let x of data.effect_entries) {
-        if (x.language.name === "en") {
-          shortEffect = x.short_effect;
-          effect = x.effect;
+      if (data.effect_entries.length === 0) {
+        setDetails({ shortEffect: "No details found", effect: "" });
+      } else {
+        for (let x of data.effect_entries) {
+          if (x.language.name === "en") {
+            shortEffect = x.short_effect;
+            effect = x.effect;
+          }
         }
+        setDetails({ shortEffect: shortEffect, effect: effect });
       }
-      setDetails({ shortEffect: shortEffect, effect: effect });
     };
     getDetails();
     // eslint-disable-next-line

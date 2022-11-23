@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import config from "../config";
 import generationImg from "../Assets/Generations/generationImg";
-// import generationSprites from "../Assets/generationSprites";
 import { Link } from "react-router-dom";
-import BackButton from "./BackButton";
 import { LoadingImgLarge } from "../Assets/cleanup";
 
 export default function Generation() {
@@ -50,17 +48,12 @@ export default function Generation() {
   return (
     <>
       {generationList ? (
-        <>
-          <Link to="/">
-            <BackButton back={"fromGenerationList"} />
-          </Link>
-          <div className="generationDiv">
-            <h1>
-              <u>Search by Generation</u>
-            </h1>
-            <ListGenerations />
-          </div>
-        </>
+        <div className="generationDiv">
+          <h1>
+            <u>Search by Generation</u>
+          </h1>
+          <ListGenerations />
+        </div>
       ) : (
         <LoadingImgLarge />
       )}

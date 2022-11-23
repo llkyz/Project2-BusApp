@@ -1,53 +1,36 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Navigation } from "../App";
-import BackButton from "./BackButton";
+import React, { useState, useEffect } from "react";
 import regionImg from "../Assets/Regions/regionImg";
-import { Link } from "react-router-dom";
-import generationSprites from "../Assets/generationSprites";
-import config from "../config";
+import { Link, useParams } from "react-router-dom";
 import Location from "./Location";
 import { cleanTitle } from "../Assets/cleanup";
-import Species from "./Species";
 import { LoadingImgLarge } from "../Assets/cleanup";
+import config from "../config";
 
 export default function Region() {
-  const [species, setSpecies] = useState();
-  const nav = useContext(Navigation);
+  const params = useParams();
+  const [regionData, setRegionData] = useState();
+  const [location, setLocation] = useState();
 
   useEffect(() => {
     const getRegion = async () => {
-      const response = await fetch(nav.data.region);
+      const response = await fetch(
+        config.BASE_API_DOMAIN + config.ENDPOINT_REGION + params.id
+      );
       let data = await response.json();
-      nav.set({ regionData: data });
+      setRegionData(data);
     };
 
     getRegion();
     // eslint-disable-next-line
   }, []);
 
-  function goToGeneration() {
-    let generationNum = nav.data.region.split("/");
-    generationNum = generationNum[generationNum.length - 2];
-    let generationData = {
-      name: nav.data.regionData.main_generation.name,
-      sprite: generationSprites[nav.data.regionData.main_generation.name],
-      url: config.BASE_API_DOMAIN + config.ENDPOINT_GENERATION + generationNum,
-    };
-    nav.set({
-      region: "",
-      regionData: "",
-      regionList: "",
-      generation: generationData,
-    });
-  }
-
   function ListLocations() {
-    return nav.data.regionData.locations.map((data, index) => {
+    return regionData.locations.map((data, index) => {
       return (
         <div
           key={index}
           className="locationEntry"
-          onClick={() => nav.set({ location: data.url })}
+          onClick={() => setLocation(data.url)}
         >
           {cleanTitle(data.name)}
         </div>
@@ -57,11 +40,18 @@ export default function Region() {
 
   function GenerationLink() {
     return (
-      <Link to="/generation">
-        <h2 onClick={goToGeneration}>
-          {nav.data.regionData.main_generation.name
-            .replace("-", " ")
-            .toUpperCase()}
+      <Link
+        to="/pokedex/generation"
+        state={{
+          source: regionData.main_generation.url,
+          title:
+            "Browsing Generation " +
+            regionData.main_generation.name.split("-")[1].toUpperCase(),
+          id: regionData.main_generation.name,
+        }}
+      >
+        <h2>
+          {regionData.main_generation.name.replace("-", " ").toUpperCase()}
         </h2>
       </Link>
     );
@@ -69,50 +59,37 @@ export default function Region() {
 
   function DisplayRegion() {
     return (
-      <>
-        <BackButton back={"fromRegion"} />
-        <div className="region">
-          <div className="regionHeader">
-            <h1>{nav.data.regionData.name.toUpperCase()}</h1>
-            {nav.data.regionData.main_generation ? (
-              <GenerationLink />
-            ) : (
-              <h2>NO GENERATION</h2>
-            )}
-          </div>
-          <img
-            class="regionImg"
-            src={regionImg[nav.data.regionData.name]}
-            alt={nav.data.regionData.name}
-          />
-          {nav.data.regionData.locations.length !== 0 ? (
-            <>
-              <h1>Locations</h1>
-              <div className="locationList">
-                {nav.data.location ? (
-                  <Location setSpecies={setSpecies} />
-                ) : (
-                  <ListLocations />
-                )}
-              </div>
-            </>
+      <div className="region">
+        <div className="regionHeader">
+          <h1>{regionData.name.toUpperCase()}</h1>
+          {regionData.main_generation ? (
+            <GenerationLink />
           ) : (
-            <h1>No Locations Found</h1>
+            <h2>NO GENERATION</h2>
           )}
         </div>
-      </>
+        <img
+          className="regionImg"
+          src={regionImg[regionData.name]}
+          alt={regionData.name}
+        />
+        {regionData.locations.length !== 0 ? (
+          <>
+            <h1>Locations</h1>
+            <div className="locationList">
+              {location ? (
+                <Location data={location} reset={setLocation} />
+              ) : (
+                <ListLocations />
+              )}
+            </div>
+          </>
+        ) : (
+          <h1>No Locations Found</h1>
+        )}
+      </div>
     );
   }
 
-  return (
-    <>
-      {species ? (
-        <Species data={species} />
-      ) : (
-        <div>
-          {nav.data.regionData ? <DisplayRegion /> : <LoadingImgLarge />}
-        </div>
-      )}
-    </>
-  );
+  return <div>{regionData ? <DisplayRegion /> : <LoadingImgLarge />}</div>;
 }

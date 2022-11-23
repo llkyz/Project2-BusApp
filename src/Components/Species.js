@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import BackButton from "./BackButton";
+import { useParams, useLocation } from "react-router-dom";
 import { cleanName } from "../Assets/cleanup";
+import Star from "../Assets/Species/Star.js";
 import PokeballImg from "../Assets/Images/Pokeball.png";
-import { LoadingImg } from "../Assets/cleanup";
 import crosshair from "../Assets/Images/Crosshair/crosshair";
 import config from "../config";
 import { EvolutionChain } from "../Assets/Species/EvolutionChain";
@@ -15,27 +15,41 @@ import Moves from "../Assets/Species/Moves";
 import AttrTable from "../Assets/Species/AttrTable";
 import { LoadingImgLarge } from "../Assets/cleanup";
 
-export default function Species(props) {
+export default function Species() {
+  const params = useParams();
+  const location = useLocation();
+
   const [speciesData, setSpeciesData] = useState();
   const [pokemonData, setPokemonData] = useState();
   const [formSelected, setFormSelected] = useState(0);
-  //props.selectForm is the url to specific pokemon
-  const [formFromPokedex, setformFromPokedex] = useState(props.selectForm);
-  const [LoadingImage, setLoadingImage] = useState(false);
+  const [formFromPokedex, setformFromPokedex] = useState(location.state);
 
   useEffect(() => {
     const getSpeciesData = async () => {
-      const response = await fetch(props.data);
+      const response = await fetch(
+        config.BASE_API_DOMAIN + config.ENDPOINT_SPECIES + params.id
+      );
       const data = await response.json();
       setSpeciesData(data);
 
-      const response2 = await fetch(data.varieties[formSelected].pokemon.url);
+      let myIndex = 0;
+      if (formFromPokedex !== null) {
+        data.varieties.forEach((data, index) => {
+          if (data.pokemon.url === formFromPokedex) {
+            setFormSelected(index);
+            myIndex = index;
+          }
+        });
+        setformFromPokedex();
+      }
+
+      const response2 = await fetch(data.varieties[myIndex].pokemon.url);
       const data2 = await response2.json();
       setPokemonData(data2);
     };
     getSpeciesData();
     // eslint-disable-next-line
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     const getPokemonData = async () => {
@@ -52,28 +66,9 @@ export default function Species(props) {
     // eslint-disable-next-line
   }, [formSelected, speciesData]);
 
-  useEffect(() => {
-    function preselectedForm() {
-      speciesData.varieties.forEach((data, index) => {
-        if (data.pokemon.url === formFromPokedex) {
-          setFormSelected(index);
-        }
-      });
-      setformFromPokedex();
-    }
-
-    if (speciesData && formFromPokedex) {
-      preselectedForm();
-    }
-    // eslint-disable-next-line
-  }, [speciesData]);
-
-  //Add URLS: color, egg groups, generation, habitat, shape, varieties
-
   function RenderSpecies() {
     return (
       <>
-        <BackButton back={"fromSpecies"} />
         <div className="showcaseContainer">
           <div className="showcase">
             <Forms
@@ -81,13 +76,22 @@ export default function Species(props) {
               formSelected={formSelected}
               setFormSelected={setFormSelected}
               defaultName={speciesData.name}
-              selectForm={props.selectForm}
+              selectForm={location.state}
             />
           </div>
           <div className="showcase">
-            <h1 style={{ fontSize: "3.5em", marginTop: "0" }}>
+            <h1
+              style={{
+                fontSize: "3.5em",
+                marginTop: "0",
+                marginRight: "20px",
+                marginBottom: "0",
+                display: "inline-block",
+              }}
+            >
               {cleanName(speciesData.name)}
             </h1>
+            <Star pokeid={speciesData.id} />
             <div className="showcaseImage">
               <img
                 className="crosshair1"
@@ -109,12 +113,10 @@ export default function Species(props) {
                 src={crosshair.crosshair4}
                 alt="crosshair"
               />
-              {LoadingImage ? "" : <LoadingImg />}
               <img
                 src={config.ARTWORK + pokemonData.id + ".png"}
                 alt={speciesData.name}
                 onError={(event) => (event.target.src = PokeballImg)}
-                onLoad={setLoadingImage(true)}
               />
             </div>
           </div>

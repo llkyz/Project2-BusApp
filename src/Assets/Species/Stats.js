@@ -23,9 +23,9 @@ export default function Stats(props) {
   }, [props.data]);
 
   function DisplayStats() {
-    return stats.map((data) => {
+    return stats.map((data, index) => {
       return (
-        <>
+        <div key={index}>
           <p>
             {abbreviation[data.stat]}: {data.value}
           </p>
@@ -36,7 +36,7 @@ export default function Stats(props) {
             />
           </div>
           <div className="statBarIndicator" />
-        </>
+        </div>
       );
     });
   }

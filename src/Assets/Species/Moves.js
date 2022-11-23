@@ -61,12 +61,18 @@ export default function Moves(props) {
 
     newList.map((data) => {
       return data[1].sort(function (a, b) {
-        a = a.level;
-        b = b.level;
-        if (a > b) {
+        // a = a.level;
+        // b = b.level;
+        if (a.level > b.level) {
           return 1;
-        } else {
+        } else if (a.level < b.level) {
           return -1;
+        } else if (a.method > b.method) {
+          return 1;
+        } else if (a.method < b.method) {
+          return -1;
+        } else {
+          return 0;
         }
       });
     });
@@ -97,20 +103,22 @@ export default function Moves(props) {
             })}
           </div>
           <table className="moveTable">
-            <tr bgcolor="rgb(255, 243, 224)">
-              <th className="sticky">
-                <h2>Move</h2>
-              </th>
-              <th className="sticky">
-                <h2>Level</h2>
-              </th>
-              <th className="sticky">
-                <h2>Source</h2>
-              </th>
-            </tr>
-            {moveList[currentVersion][1].map((data, index) => {
-              return <MoveEntry key={index} data={data} />;
-            })}
+            <tbody>
+              <tr bgcolor="rgb(255, 243, 224)">
+                <th className="sticky">
+                  <h2>Move</h2>
+                </th>
+                <th className="sticky">
+                  <h2>Level</h2>
+                </th>
+                <th className="sticky">
+                  <h2>Source</h2>
+                </th>
+              </tr>
+              {moveList[currentVersion][1].map((data, index) => {
+                return <MoveEntry key={index} data={data} />;
+              })}
+            </tbody>
           </table>
         </>
       );

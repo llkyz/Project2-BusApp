@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import generationSprites from "../generationSprites";
 import { cleanName } from "../cleanup";
+import { Link } from "react-router-dom";
 
 export function EvolutionChain(props) {
   const [evolutionData, setEvolutionData] = useState("");
@@ -21,14 +22,6 @@ export function EvolutionChain(props) {
 
   const currentPoke = props.pokeid.toString();
 
-  const getSpeciesData = async (url) => {
-    const response = await fetch(url);
-    const data = await response.json();
-    props.setFormSelected(0);
-    props.setSpeciesData(data);
-    window.scrollTo(0, 0);
-  };
-
   function ProcessPokemon(props) {
     const pokeid = props.evolData.url.split("/").slice(-2, -1);
 
@@ -43,18 +36,20 @@ export function EvolutionChain(props) {
             <p>{cleanName(props.evolData.name)}</p>
           </div>
         ) : (
-          <div
-            className="evolutionNode"
-            onClick={() => {
-              getSpeciesData(props.evolData.url);
-            }}
-          >
-            <img
-              src={generationSprites["full"] + pokeid + ".png"}
-              alt={props.evolData.name}
-            />
-            <p>{cleanName(props.evolData.name)}</p>
-          </div>
+          <Link to={`/pokemon/${pokeid}`}>
+            <div
+              className="evolutionNode"
+              onClick={() => {
+                window.scrollTo(0, 0);
+              }}
+            >
+              <img
+                src={generationSprites["full"] + pokeid + ".png"}
+                alt={props.evolData.name}
+              />
+              <p>{cleanName(props.evolData.name)}</p>
+            </div>
+          </Link>
         )}
       </>
     );

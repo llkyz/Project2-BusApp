@@ -44,7 +44,7 @@ a {
 
 .searchBy {
   position: absolute;
-  right: 10%;
+  left: 10%;
   top: 10px;
   line-height: 25px;
   text-align: center;
@@ -52,10 +52,11 @@ a {
 
 .header p {
   margin: 5px 5px;
-  padding: 0 5px;
+  padding: 0 7px;
   font-size: 18px;
   display: inline-block;
   border: 2px solid white;
+  border-radius: 10px;
 }
 
 .header p:hover {
@@ -1231,8 +1232,8 @@ label {
   width: 120%;
   left: -10%;
   top: -10%;
-  opacity: 0.7;
-  z-index: 2;
+  opacity: 0.5;
+  z-index: -2;
   animation: pulse 5s ease-in-out infinite;
 }
 
@@ -1241,8 +1242,8 @@ label {
   width: 120%;
   left: -10%;
   top: -10%;
-  opacity: 0.85;
-  z-index: 2;
+  opacity: 0.5;
+  z-index: -2;
   animation: rotate 25s linear infinite;
 }
 
@@ -1251,9 +1252,9 @@ label {
   width: 120%;
   left: -10%;
   top: -10%;
-  opacity: 1;
+  opacity: 0.5;
   z-index: 2;
-  animation: pulseStrong 5s ease-in-out infinite;
+  animation: pulseStrong 3s ease-in-out infinite;
 }
 
 .showcaseImage .crosshair4 {
@@ -1261,9 +1262,9 @@ label {
   width: 120%;
   left: -10%;
   top: -10%;
-  opacity: 1;
+  opacity: 0.5;
   z-index: 2;
-  animation: pulseInner 5s linear infinite;
+  animation: pulseInner 3s linear infinite;
 }
 
 @keyframes pulse {
@@ -1300,4 +1301,40 @@ label {
   100% {
     transform: rotate(-360deg) scale(1);
   }
+}
+
+.favourites {
+  width: fit-content;
+  margin-top: 13px;
+  margin-right: 15%;
+  margin-left: auto;
+}
+
+.starContainer {
+  margin-left: auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  background-color: white;
+}
+
+.star {
+  margin: 0 auto;
+  height: 100%;
+  width: fit-content;
+  vertical-align: middle;
+}
+
+.favouriteList {
+  margin-top: 17px;
+  width: fit-content;
+  padding: 0 30px;
+  height: fit-content;
+  background-color: rgb(255, 243, 224);
+  border: 5px solid rgb(202, 154, 75);
+  border-radius: 0 0 30px 30px;
+}
+
+.favouriteList h4 {
+  color: black;
 }

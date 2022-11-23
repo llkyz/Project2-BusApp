@@ -1,17 +1,15 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Navigation } from "../App";
+import React, { useState, useEffect } from "react";
 import { cleanTitle } from "../Assets/cleanup";
 import Area from "./Area";
 import { LoadingImg } from "../Assets/cleanup";
 import { LoadingImgLarge } from "../Assets/cleanup";
 
 export default function Location(props) {
-  const nav = useContext(Navigation);
   const [locationData, setLocationData] = useState("");
 
   useEffect(() => {
     const getLocation = async () => {
-      const response = await fetch(nav.data.location);
+      const response = await fetch(props.data);
       let data = await response.json();
       setLocationData(data);
     };
@@ -25,15 +23,15 @@ export default function Location(props) {
       <div className="areaContainer">
         <h1>{cleanTitle(props.data.name)}</h1>
         <h4>
-          <Area url={props.data.url} setSpecies={props.setSpecies} />
+          <Area url={props.data.url} />
         </h4>
       </div>
     );
   }
 
   function goBack() {
-    nav.set({ location: "" });
-    setLocationData("");
+    props.reset();
+    setLocationData();
   }
 
   function ShowLocation() {
@@ -46,11 +44,7 @@ export default function Location(props) {
         <div className="areas">
           {locationData.areas.length !== 0 ? (
             locationData.areas.map((data, index) => (
-              <ListAreas
-                key={index}
-                data={data}
-                setSpecies={props.setSpecies}
-              />
+              <ListAreas key={index} data={data} />
             ))
           ) : (
             <h3>No areas found</h3>

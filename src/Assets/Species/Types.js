@@ -5,11 +5,12 @@ export default function Types(props) {
   return (
     <>
       {props.data
-        ? props.data.map((data) => {
+        ? props.data.map((data, index) => {
             let name = data.type.name.toUpperCase();
 
             return (
               <Link
+                key={index}
                 to="/pokedex/type"
                 state={{
                   source: data.type.url,

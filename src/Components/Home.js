@@ -18,7 +18,7 @@ export default function Home() {
             </div>
           </div>
         </Link>
-        <Link to="/region">
+        <Link to="/regionlist">
           <div className="selectionContainer">
             <h1>REGION</h1>
             <div id="imageContainer">

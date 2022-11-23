@@ -3,65 +3,52 @@ import React, { useState, createContext } from "react";
 import Home from "./Components/Home";
 import Generation from "./Components/Generation";
 import RegionList from "./Components/RegionList";
+import Region from "./Components/Region";
 import Pokedex from "./Components/Pokedex";
+import Species from "./Components/Species";
+import Favourites from "./Components/Favourites";
 import { Route, Routes, Link } from "react-router-dom";
 
-export const Navigation = createContext();
+export const FavouriteList = createContext();
 
 function App() {
-  const initialState = {
-    regionList: "",
-    region: "",
-    regionData: "",
-    location: "",
-  };
-
-  const [data, setData] = useState(initialState);
-
-  function set(mydata) {
-    setData({ ...data, ...mydata });
-  }
-
-  function clearNavigation(myData) {
-    setData({ ...initialState, ...myData });
-  }
+  const [favourites, setFavourites] = useState([]);
 
   return (
     <div className="App">
-      <div>
-        <div className="header">
-          <Link to="/">
-            <h1 onClick={clearNavigation}>POKÉDEX LITE</h1>
-          </Link>
-          <div className="searchBy">
-            <h4>Search By</h4>
-            <Link to="/generation">
-              <p onClick={() => clearNavigation()}>Generation</p>
+      <FavouriteList.Provider value={{ favourites, setFavourites }}>
+        <div>
+          <div className="header">
+            <Link to="/">
+              <h1>POKÉDEX LITE</h1>
             </Link>
-            <Link to="/region">
-              <p
-                onClick={() => clearNavigation({ regionList: data.regionList })}
+            <Favourites />
+            <div className="searchBy">
+              <h4>Search By</h4>
+              <Link to="/generation">
+                <p>Generation</p>
+              </Link>
+              <Link to="/regionlist">
+                <p>Region</p>
+              </Link>
+              <Link
+                to="/pokedex/full"
+                state={{ source: "None", title: "Searching entire Pokédex" }}
               >
-                Region
-              </p>
-            </Link>
-            <Link
-              to="/pokedex/full"
-              state={{ source: "None", title: "Searching entire Pokédex" }}
-            >
-              <p onClick={() => clearNavigation()}>Pokedex</p>
-            </Link>
+                <p>Pokedex</p>
+              </Link>
+            </div>
           </div>
-        </div>
-        <Navigation.Provider value={{ data, set }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/generation" element={<Generation />} />
-            <Route path="/region" element={<RegionList />} />
+            <Route path="/regionlist" element={<RegionList />} />
+            <Route path="/region/:id" element={<Region />} />
             <Route path="/pokedex/:type" element={<Pokedex />} />
+            <Route path="/pokemon/:id" element={<Species />} />
           </Routes>
-        </Navigation.Provider>
-      </div>
+        </div>
+      </FavouriteList.Provider>
     </div>
   );
 }

@@ -3,8 +3,7 @@ import Species from "./Species";
 import SearchBarPokemon from "./SearchBarPokemon";
 import MakeRegularList from "./MakeRegularList";
 import MakeFilteredList from "./MakeFilteredList";
-import { Link, useParams, useLocation } from "react-router-dom";
-import BackButton from "./BackButton";
+import { useParams, useLocation } from "react-router-dom";
 import { LoadingImgLarge } from "../Assets/cleanup";
 import {
   fullPokedex,
@@ -67,9 +66,6 @@ export default function Pokedex() {
               />
             </div>
           </div>
-          <Link to="/">
-            <BackButton back={"fromPokeList"} />
-          </Link>
           <div className="pokemonContainer">
             {pokemonData ? (
               searchBar.searchQuery ? (

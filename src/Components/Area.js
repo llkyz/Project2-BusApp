@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { cleanName } from "../Assets/cleanup";
 import versions from "../Assets/versions";
-import { pokemonToSpecies } from "../Assets/sortPokemon";
+import { useNavigate } from "react-router-dom";
 
 export default function Area(props) {
-  const [areaData, setAreaData] = useState("");
+  const navigate = useNavigate();
+  const [areaData, setAreaData] = useState();
 
   useEffect(() => {
     const getArea = async () => {
@@ -37,8 +38,13 @@ export default function Area(props) {
           <h3
             className="versionContainerPokemon"
             onClick={() => {
-              pokemonToSpecies(data.pokemon.url, props.setSpecies);
-              window.scrollTo(0, 0);
+              async function pokemonToSpecies() {
+                const response = await fetch(data.pokemon.url);
+                const data2 = await response.json();
+                let pokeid = data2.species.url.split("/").slice(-2, -1);
+                navigate(`/pokemon/${pokeid}`);
+              }
+              pokemonToSpecies();
             }}
           >
             {cleanName(data.pokemon.name)}
