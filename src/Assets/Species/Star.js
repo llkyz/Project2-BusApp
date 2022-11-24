@@ -3,28 +3,35 @@ import { FavouriteList } from "../../App";
 
 export default function Star(props) {
   const favList = useContext(FavouriteList);
-  const [favourite, setFavourite] = useState();
+  const [favourite, setFavourite] = useState(false);
 
-  //favList.favourites, favList.setFavourites
   useEffect(() => {
     function checkFav() {
-      if (favList.favourites.includes(props.pokeid)) {
-        setFavourite(true);
-      } else {
-        setFavourite(false);
+      for (let x of favList.favourites) {
+        if (x.id === props.pokeid) {
+          setFavourite(true);
+        }
       }
     }
     checkFav();
   }, [favList, props.pokeid]);
 
   function toggleFavourite() {
+    let newfavList = null;
+
     if (favourite) {
-      favList.setFavourites(
-        favList.favourites.filter((id) => id !== props.pokeid)
+      newfavList = favList.favourites.filter(
+        (data) => data.id !== props.pokeid
       );
     } else {
-      favList.setFavourites([...favList.favourites, props.pokeid]);
+      newfavList = [
+        ...favList.favourites,
+        { id: props.pokeid, name: props.name },
+      ];
     }
+
+    localStorage.setItem("favourites", JSON.stringify(newfavList));
+    favList.setFavourites(newfavList);
   }
 
   return (

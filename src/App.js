@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import Home from "./Components/Home";
 import Generation from "./Components/Generation";
 import RegionList from "./Components/RegionList";
@@ -13,6 +13,13 @@ export const FavouriteList = createContext();
 
 function App() {
   const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const storedFavs = JSON.parse(localStorage.getItem("favourites"));
+    if (storedFavs) {
+      setFavourites(storedFavs);
+    }
+  }, []);
 
   return (
     <div className="App">

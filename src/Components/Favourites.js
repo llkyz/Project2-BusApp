@@ -1,10 +1,36 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { FavouriteList } from "../App";
+import generationSprites from "../Assets/generationSprites";
 
 export default function Favourites() {
   const favList = useContext(FavouriteList);
   const [lightUp, setLightUp] = useState();
   const [showList, setShowList] = useState(false);
+
+  function FavouriteEntry(props) {
+    return (
+      <div className="favouriteEntry">
+        <div className="id">#{props.data.id}</div>
+        <Link to={`/pokemon/${props.data.id}`}>
+          <div className="name">{props.data.name}</div>
+        </Link>
+        <img
+          src={generationSprites["full"] + props.data.id + ".png"}
+          alt={props.data.name}
+        />
+        <div className="remove" onClick={() => removeFavourite(props.data.id)}>
+          x
+        </div>
+      </div>
+    );
+  }
+
+  function removeFavourite(id) {
+    const newfavList = favList.favourites.filter((data) => data.id !== id);
+    localStorage.setItem("favourites", JSON.stringify(newfavList));
+    favList.setFavourites(newfavList);
+  }
 
   function DisplayList() {
     return (
@@ -12,7 +38,11 @@ export default function Favourites() {
         {favList.favourites.length === 0 ? (
           <h4>No favourites saved</h4>
         ) : (
-          <h4>Grabbing favs</h4>
+          <>
+            {favList.favourites.map((data, index) => {
+              return <FavouriteEntry key={index} data={data} />;
+            })}
+          </>
         )}
       </div>
     );

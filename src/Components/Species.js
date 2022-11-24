@@ -23,6 +23,11 @@ export default function Species() {
   const [pokemonData, setPokemonData] = useState();
   const [formSelected, setFormSelected] = useState(0);
   const [formFromPokedex, setformFromPokedex] = useState(location.state);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  function onLoad() {
+    setImageLoaded(true);
+  }
 
   useEffect(() => {
     const getSpeciesData = async () => {
@@ -31,7 +36,6 @@ export default function Species() {
       );
       const data = await response.json();
       setSpeciesData(data);
-
       let myIndex = 0;
       if (formFromPokedex !== null) {
         data.varieties.forEach((data, index) => {
@@ -59,7 +63,6 @@ export default function Species() {
       const data = await response.json();
       setPokemonData(data);
     };
-
     if (speciesData) {
       getPokemonData();
     }
@@ -91,32 +94,47 @@ export default function Species() {
             >
               {cleanName(speciesData.name)}
             </h1>
-            <Star pokeid={speciesData.id} />
+            <Star pokeid={speciesData.id} name={cleanName(speciesData.name)} />
             <div className="showcaseImage">
               <img
                 className="crosshair1"
                 src={crosshair.crosshair1}
                 alt="crosshair"
+                style={{ display: imageLoaded ? "block" : "none" }}
               />
               <img
                 className="crosshair2"
                 src={crosshair.crosshair2}
                 alt="crosshair"
+                style={{ display: imageLoaded ? "block" : "none" }}
               />
               <img
                 className="crosshair3"
                 src={crosshair.crosshair3}
                 alt="crosshair"
+                style={{ display: imageLoaded ? "block" : "none" }}
               />
               <img
                 className="crosshair4"
                 src={crosshair.crosshair4}
                 alt="crosshair"
+                style={{ display: imageLoaded ? "block" : "none" }}
+              />
+              <img
+                className="loadingImgPokemon"
+                src={PokeballImg}
+                alt="loading"
+                style={{
+                  width: "300px",
+                  display: imageLoaded ? "none" : "block",
+                }}
               />
               <img
                 src={config.ARTWORK + pokemonData.id + ".png"}
                 alt={speciesData.name}
                 onError={(event) => (event.target.src = PokeballImg)}
+                onLoad={onLoad}
+                style={{ display: imageLoaded ? "block" : "none" }}
               />
             </div>
           </div>
