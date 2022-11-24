@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import homeImg from "../Assets/Home/homeImg";
+import Favourites from "./Favourites";
 
 export default function Home() {
   return (
     <>
+      <Favourites />
       <h1>
         <u>Welcome to Pokédex Lite!</u>
       </h1>

@@ -2,30 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import generationSprites from "../Assets/generationSprites";
 
-export default function Favourites(props) {
+export default function FavouritesSpecies(props) {
   const [lightUp, setLightUp] = useState();
   const [showList, setShowList] = useState(false);
-  const [favourites, setFavourites] = useState();
-
-  useEffect(() => {
-    const storedFavs = JSON.parse(localStorage.getItem("favourites"));
-    if (storedFavs) {
-      setFavourites(storedFavs);
-    }
-  }, []);
-
-  useEffect(() => {
-    function checkFavourites() {
-      if (favourites.length > 0) {
-        setLightUp(true);
-      } else {
-        setLightUp(false);
-      }
-    }
-    if (favourites) {
-      checkFavourites();
-    }
-  }, [favourites]);
 
   function FavouriteEntry(props) {
     return (
@@ -54,11 +33,11 @@ export default function Favourites(props) {
   function DisplayList() {
     return (
       <div className="favouriteList">
-        {favourites.length === 0 ? (
+        {props.favourites.length === 0 ? (
           <h4>No favourites saved</h4>
         ) : (
           <>
-            {favourites.map((data, index) => {
+            {props.favourites.map((data, index) => {
               return <FavouriteEntry key={index} data={data} />;
             })}
           </>
@@ -66,6 +45,17 @@ export default function Favourites(props) {
       </div>
     );
   }
+
+  useEffect(() => {
+    function checkFavourites() {
+      if (props.favourites.length > 0) {
+        setLightUp(true);
+      } else {
+        setLightUp(false);
+      }
+    }
+    checkFavourites();
+  }, [props.favourites]);
 
   function toggleShow() {
     if (showList) {

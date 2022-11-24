@@ -6,7 +6,6 @@ import RegionList from "./Components/RegionList";
 import Region from "./Components/Region";
 import Pokedex from "./Components/Pokedex";
 import Species from "./Components/Species";
-import Favourites from "./Components/Favourites";
 import { Route, Routes, Link } from "react-router-dom";
 
 export const FavouriteList = createContext();
@@ -29,7 +28,6 @@ function App() {
             <Link to="/">
               <h1>POKÉDEX LITE</h1>
             </Link>
-            <Favourites />
             <div className="searchBy">
               <h4>Search By</h4>
               <Link to="/generation">

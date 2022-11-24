@@ -1318,10 +1318,14 @@ label {
 }
 
 .favourites {
+  position: fixed;
+  right: 0;
+  top: 0;
   width: fit-content;
   margin-top: 13px;
   margin-right: 15%;
   margin-left: auto;
+  z-index: 998;
 }
 
 .starContainer {
@@ -1334,6 +1338,7 @@ label {
 
 .star {
   margin: 0 auto;
+  padding-top: 7px;
   height: 100%;
   width: fit-content;
   vertical-align: middle;

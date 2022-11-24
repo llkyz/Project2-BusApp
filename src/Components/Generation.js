@@ -3,6 +3,7 @@ import config from "../config";
 import generationImg from "../Assets/Generations/generationImg";
 import { Link } from "react-router-dom";
 import { LoadingImgLarge } from "../Assets/cleanup";
+import Favourites from "./Favourites";
 
 export default function Generation() {
   const [generationList, setGenerationList] = useState("");
@@ -47,6 +48,7 @@ export default function Generation() {
 
   return (
     <>
+      <Favourites />
       {generationList ? (
         <div className="generationDiv">
           <h1>

@@ -1,37 +1,33 @@
-import { useState, useEffect, useContext } from "react";
-import { FavouriteList } from "../../App";
+import { useState, useEffect } from "react";
 
 export default function Star(props) {
-  const favList = useContext(FavouriteList);
   const [favourite, setFavourite] = useState(false);
 
   useEffect(() => {
     function checkFav() {
-      for (let x of favList.favourites) {
-        if (x.id === props.pokeid) {
-          setFavourite(true);
-        }
+      if (props.favourites.findIndex((x) => x.id === props.pokeid) !== -1) {
+        setFavourite(true);
+      } else {
+        setFavourite(false);
       }
     }
     checkFav();
-  }, [favList, props.pokeid]);
+  }, [props.favourites, props.pokeid]);
 
   function toggleFavourite() {
     let newfavList = null;
 
     if (favourite) {
-      newfavList = favList.favourites.filter(
-        (data) => data.id !== props.pokeid
-      );
+      newfavList = props.favourites.filter((data) => data.id !== props.pokeid);
     } else {
       newfavList = [
-        ...favList.favourites,
+        ...props.favourites,
         { id: props.pokeid, name: props.name },
       ];
     }
 
     localStorage.setItem("favourites", JSON.stringify(newfavList));
-    favList.setFavourites(newfavList);
+    props.setFavourites(newfavList);
   }
 
   return (

@@ -7,6 +7,7 @@ import { LoadingImgLarge } from "../Assets/cleanup";
 import config from "../config";
 import SearchBarLocation from "./SearchBarLocation";
 import { sortNameAsc, checkAgainstSearchLocation } from "../Assets/sortPokemon";
+import Favourites from "./Favourites";
 
 export default function Region() {
   const params = useParams();
@@ -125,60 +126,63 @@ export default function Region() {
   // return <div>{regionData ? <DisplayRegion /> : <LoadingImgLarge />}</div>;
 
   return (
-    <div className="region">
-      {regionData ? (
-        <>
-          <div className="regionHeader">
-            <h1>{regionData.name.toUpperCase()}</h1>
-            {regionData.main_generation ? (
-              <GenerationLink />
-            ) : (
-              <h2>NO GENERATION</h2>
-            )}
-          </div>
-          <img
-            className="regionImg"
-            src={regionImg[regionData.name]}
-            alt={regionData.name}
-          />
-        </>
-      ) : (
-        <LoadingImgLarge />
-      )}
-      <h1>Locations</h1>
-      <div className="locationList">
-        <SearchBarLocation
-          setSearchBar={setSearchBar}
-          searchBar={searchBar}
-          setRegionData={setRegionData}
-          regionData={regionData}
-        />
+    <>
+      <Favourites />
+      <div className="region">
         {regionData ? (
           <>
-            {regionData.locations.length !== 0 ? (
-              <>
-                {location ? (
-                  <Location data={location} reset={setLocation} />
-                ) : (
-                  <>
-                    <div>
-                      {searchBar.searchQuery ? (
-                        <ListLocations searchCheck={true} />
-                      ) : (
-                        <ListLocations searchCheck={false} />
-                      )}
-                    </div>
-                  </>
-                )}
-              </>
-            ) : (
-              <h1>No Locations Found</h1>
-            )}
+            <div className="regionHeader">
+              <h1>{regionData.name.toUpperCase()}</h1>
+              {regionData.main_generation ? (
+                <GenerationLink />
+              ) : (
+                <h2>NO GENERATION</h2>
+              )}
+            </div>
+            <img
+              className="regionImg"
+              src={regionImg[regionData.name]}
+              alt={regionData.name}
+            />
           </>
         ) : (
           <LoadingImgLarge />
         )}
+        <h1>Locations</h1>
+        <div className="locationList">
+          <SearchBarLocation
+            setSearchBar={setSearchBar}
+            searchBar={searchBar}
+            setRegionData={setRegionData}
+            regionData={regionData}
+          />
+          {regionData ? (
+            <>
+              {regionData.locations.length !== 0 ? (
+                <>
+                  {location ? (
+                    <Location data={location} reset={setLocation} />
+                  ) : (
+                    <>
+                      <div>
+                        {searchBar.searchQuery ? (
+                          <ListLocations searchCheck={true} />
+                        ) : (
+                          <ListLocations searchCheck={false} />
+                        )}
+                      </div>
+                    </>
+                  )}
+                </>
+              ) : (
+                <h1>No Locations Found</h1>
+              )}
+            </>
+          ) : (
+            <LoadingImgLarge />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }

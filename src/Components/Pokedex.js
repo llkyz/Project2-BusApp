@@ -10,6 +10,7 @@ import {
   generationSearch,
   typeSearch,
 } from "../Assets/pokedexSearch";
+import Favourites from "./Favourites";
 
 export default function Pokedex() {
   const [pokemonData, setPokemonData] = useState("");
@@ -48,6 +49,7 @@ export default function Pokedex() {
 
   return (
     <>
+      <Favourites />
       {species ? (
         <Species data={species} selectForm={selectForm} />
       ) : (

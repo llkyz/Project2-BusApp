@@ -19,7 +19,7 @@ export function EvolutionChain(props) {
     }
     // eslint-disable-next-line
   }, []);
-
+  const resetForm = props.setFormSelected;
   const currentPoke = props.pokeid.toString();
 
   function ProcessPokemon(props) {
@@ -41,6 +41,7 @@ export function EvolutionChain(props) {
               className="evolutionNode"
               onClick={() => {
                 window.scrollTo(0, 0);
+                resetForm(0);
               }}
             >
               <img

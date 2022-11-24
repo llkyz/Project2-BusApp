@@ -11,6 +11,7 @@ const abbreviation = {
 
 export default function Stats(props) {
   const [stats, setStats] = useState();
+  const [fillStats, setFillStats] = useState();
 
   useEffect(() => {
     function processStats() {
@@ -20,6 +21,11 @@ export default function Stats(props) {
       setStats(statList);
     }
     processStats();
+
+    setFillStats(false);
+    setTimeout(() => {
+      setFillStats(true);
+    }, 1000);
   }, [props.data]);
 
   function DisplayStats() {
@@ -32,7 +38,11 @@ export default function Stats(props) {
           <div className="statBarContainer">
             <div
               className="statBar"
-              style={{ maxWidth: `${(data.value / 255) * 100}%` }}
+              style={
+                fillStats
+                  ? { width: "100%", maxWidth: `${(data.value / 255) * 100}%` }
+                  : { maxWidth: `${(data.value / 255) * 100}%` }
+              }
             />
           </div>
           <div className="statBarIndicator" />

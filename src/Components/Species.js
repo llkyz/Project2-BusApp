@@ -14,6 +14,7 @@ import Encounters from "../Assets/Species/Encounters";
 import Moves from "../Assets/Species/Moves";
 import AttrTable from "../Assets/Species/AttrTable";
 import { LoadingImgLarge } from "../Assets/cleanup";
+import FavouritesSpecies from "./FavouritesSpecies";
 
 export default function Species() {
   const params = useParams();
@@ -24,10 +25,18 @@ export default function Species() {
   const [formSelected, setFormSelected] = useState(0);
   const [formFromPokedex, setformFromPokedex] = useState(location.state);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [favourites, setFavourites] = useState();
 
   function onLoad() {
     setImageLoaded(true);
   }
+
+  useEffect(() => {
+    const storedFavs = JSON.parse(localStorage.getItem("favourites"));
+    if (storedFavs) {
+      setFavourites(storedFavs);
+    }
+  }, []);
 
   useEffect(() => {
     const getSpeciesData = async () => {
@@ -69,10 +78,25 @@ export default function Species() {
     // eslint-disable-next-line
   }, [formSelected, speciesData]);
 
-  function RenderSpecies() {
-    return (
-      <>
-        <div className="showcaseContainer">
+  // useEffect(() => {
+  //   function resetForm() {
+  //     setFormSelected(0);
+  //   }
+  //   resetForm();
+  // }, [speciesData]);
+
+  return (
+    <div>
+      {favourites ? (
+        <FavouritesSpecies
+          favourites={favourites}
+          setFavourites={setFavourites}
+        />
+      ) : (
+        ""
+      )}
+      <div className="showcaseContainer">
+        {pokemonData ? (
           <div className="showcase">
             <Forms
               data={speciesData.varieties}
@@ -82,7 +106,11 @@ export default function Species() {
               selectForm={location.state}
             />
           </div>
-          <div className="showcase">
+        ) : (
+          ""
+        )}
+        <div className="showcase">
+          {pokemonData ? (
             <h1
               style={{
                 fontSize: "3.5em",
@@ -94,7 +122,20 @@ export default function Species() {
             >
               {cleanName(speciesData.name)}
             </h1>
-            <Star pokeid={speciesData.id} name={cleanName(speciesData.name)} />
+          ) : (
+            ""
+          )}
+          {pokemonData ? (
+            <Star
+              pokeid={speciesData.id}
+              name={cleanName(speciesData.name)}
+              favourites={favourites}
+              setFavourites={setFavourites}
+            />
+          ) : (
+            ""
+          )}
+          {pokemonData ? (
             <div className="showcaseImage">
               <img
                 className="crosshair1"
@@ -137,11 +178,19 @@ export default function Species() {
                 style={{ display: imageLoaded ? "block" : "none" }}
               />
             </div>
-          </div>
+          ) : (
+            ""
+          )}
+        </div>
+        {pokemonData ? (
           <div className="showcase">
             <Stats data={pokemonData.stats} />
           </div>
-        </div>
+        ) : (
+          ""
+        )}
+      </div>
+      {pokemonData ? (
         <div className="speciesContainer">
           <AttrTable pokemonData={pokemonData} speciesData={speciesData} />
           <div>
@@ -160,9 +209,9 @@ export default function Species() {
           <Encounters data={pokemonData.location_area_encounters} />
           <FlavorText data={speciesData.flavor_text_entries} />
         </div>
-      </>
-    );
-  }
-
-  return <div>{pokemonData ? <RenderSpecies /> : <LoadingImgLarge />}</div>;
+      ) : (
+        <LoadingImgLarge />
+      )}
+    </div>
+  );
 }

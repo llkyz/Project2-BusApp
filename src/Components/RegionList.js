@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import config from "../config";
 import regionImg from "../Assets/Regions/regionImg";
 import { LoadingImgLarge } from "../Assets/cleanup";
+import Favourites from "./Favourites";
 
 export default function RegionList() {
   const [regionList, setRegionList] = useState();
@@ -40,6 +41,7 @@ export default function RegionList() {
 
   return (
     <>
+      <Favourites />
       {regionList ? (
         <>
           <h1>
