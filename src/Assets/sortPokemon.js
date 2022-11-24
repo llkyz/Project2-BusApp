@@ -15,11 +15,11 @@ export function createPokeId(myData) {
 export function createPokeIdType(myData) {
   let myList = [];
   myList = myData.map((data) => {
-    let name = data.name.split("-")
-    let firstName = cleanName(name[0])
-    name.shift()
+    let name = data.name.split("-");
+    let firstName = cleanName(name[0]);
+    name.shift();
     if (name.length > 0) {
-      name = "(" + name.map((data)=>data.toUpperCase()).join(" ") + ")"
+      name = "(" + name.map((data) => data.toUpperCase()).join(" ") + ")";
     }
 
     return {
@@ -51,7 +51,7 @@ function sortPokedexDsc(myList) {
   return myList;
 }
 
-function sortNameAsc(myList) {
+export function sortNameAsc(myList) {
   myList.sort((a, b) => {
     let idA = a.name.toLowerCase();
     let idB = b.name.toLowerCase();
@@ -83,6 +83,10 @@ export function checkAgainstSearch(name, id, searchQuery) {
   );
 }
 
+export function checkAgainstSearchLocation(name, searchQuery) {
+  return name.toLowerCase().includes(searchQuery.toLowerCase());
+}
+
 export function doSort(sortType, pokemonData) {
   let newList = pokemonData.speciesList.map((data) => data);
   switch (sortType) {
@@ -104,6 +108,25 @@ export function doSort(sortType, pokemonData) {
     }
     default: {
       newList = sortPokedexAsc(newList);
+      break;
+    }
+  }
+  return newList;
+}
+
+export function doSortLocation(sortType, regionData) {
+  let newList = regionData.map((data) => data);
+  switch (sortType) {
+    case "alphabet-asc": {
+      newList = sortNameAsc(newList);
+      break;
+    }
+    case "alphabet-dsc": {
+      newList = sortNameDsc(newList);
+      break;
+    }
+    default: {
+      newList = sortNameAsc(newList);
       break;
     }
   }

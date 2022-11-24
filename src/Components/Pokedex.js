@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Species from "./Species";
 import SearchBarPokemon from "./SearchBarPokemon";
-import MakeRegularList from "./MakeRegularList";
-import MakeFilteredList from "./MakeFilteredList";
+import MakePokemonList from "./MakePokemonList";
 import { useParams, useLocation } from "react-router-dom";
 import { LoadingImgLarge } from "../Assets/cleanup";
 import {
@@ -69,19 +68,21 @@ export default function Pokedex() {
           <div className="pokemonContainer">
             {pokemonData ? (
               searchBar.searchQuery ? (
-                <MakeFilteredList
+                <MakePokemonList
                   pokemonData={pokemonData}
                   searchBar={searchBar}
                   setSpecies={setSpecies}
                   extended={extended}
                   setSelectForm={setSelectForm}
+                  searchCheck={true}
                 />
               ) : (
-                <MakeRegularList
+                <MakePokemonList
                   pokemonData={pokemonData}
                   setSpecies={setSpecies}
                   extended={extended}
                   setSelectForm={setSelectForm}
+                  searchCheck={false}
                 />
               )
             ) : (
