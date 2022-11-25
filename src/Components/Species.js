@@ -35,6 +35,8 @@ export default function Species() {
     const storedFavs = JSON.parse(localStorage.getItem("favourites"));
     if (storedFavs) {
       setFavourites(storedFavs);
+    } else {
+      setFavourites([]);
     }
   }, []);
 
