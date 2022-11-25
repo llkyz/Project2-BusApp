@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import generationSprites from "../Assets/generationSprites";
 
-export default function Favourites(props) {
+export default function Favourites() {
   const [lightUp, setLightUp] = useState();
   const [showList, setShowList] = useState(false);
   const [favourites, setFavourites] = useState();
@@ -11,6 +11,8 @@ export default function Favourites(props) {
     const storedFavs = JSON.parse(localStorage.getItem("favourites"));
     if (storedFavs) {
       setFavourites(storedFavs);
+    } else {
+      setFavourites([]);
     }
   }, []);
 
@@ -46,9 +48,9 @@ export default function Favourites(props) {
   }
 
   function removeFavourite(id) {
-    const newfavList = props.favourites.filter((data) => data.id !== id);
+    const newfavList = favourites.filter((data) => data.id !== id);
     localStorage.setItem("favourites", JSON.stringify(newfavList));
-    props.setFavourites(newfavList);
+    setFavourites(newfavList);
   }
 
   function DisplayList() {
