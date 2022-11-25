@@ -78,13 +78,6 @@ export default function Species() {
     // eslint-disable-next-line
   }, [formSelected, speciesData]);
 
-  // useEffect(() => {
-  //   function resetForm() {
-  //     setFormSelected(0);
-  //   }
-  //   resetForm();
-  // }, [speciesData]);
-
   return (
     <div>
       {favourites ? (
