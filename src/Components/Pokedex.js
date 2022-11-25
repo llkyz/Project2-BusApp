@@ -27,8 +27,6 @@ export default function Pokedex() {
     extended = true;
   }
 
-  console.log(location);
-
   useEffect(
     () => {
       if (params.type === "full") {
