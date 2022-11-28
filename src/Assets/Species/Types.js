@@ -11,11 +11,7 @@ export default function Types(props) {
             return (
               <Link
                 key={index}
-                to="/pokedex/type"
-                state={{
-                  source: data.type.url,
-                  title: `Searching by Type (${name})`,
-                }}
+                to={`/pokedex/type/${data.type.url.split("/").slice(-2, -1)}`}
               >
                 <p
                   onClick={() => {

@@ -6,9 +6,12 @@ import { useParams, useLocation } from "react-router-dom";
 import { LoadingImgLarge } from "../Assets/cleanup";
 import {
   fullPokedex,
-  otherSearch,
   generationSearch,
   typeSearch,
+  colorSearch,
+  eggGroupSearch,
+  habitatSearch,
+  shapeSearch,
 } from "../Assets/pokedexSearch";
 import Favourites from "./Favourites";
 
@@ -22,6 +25,7 @@ export default function Pokedex() {
   const [selectForm, setSelectForm] = useState();
   const params = useParams();
   const location = useLocation();
+  const [title, setTitle] = useState("");
   let extended = false;
   if (params.type === "type") {
     extended = true;
@@ -29,18 +33,43 @@ export default function Pokedex() {
 
   useEffect(
     () => {
-      if (params.type === "full") {
-        setSpecies();
-        fullPokedex(setPokemonData);
-      } else if (params.type === "generation") {
-        setSpecies();
-        generationSearch(setPokemonData, location.state);
-      } else if (params.type === "other") {
-        setSpecies();
-        otherSearch(setPokemonData, location.state.source);
-      } else if (params.type === "type") {
-        setSpecies();
-        typeSearch(setPokemonData, location.state.source);
+      setSpecies();
+
+      switch (params.type) {
+        case "full": {
+          setTitle("Browsing Entire Pokédex");
+          fullPokedex(setPokemonData);
+          break;
+        }
+        case "generation": {
+          setTitle(`Browsing Generation ${params.id}`);
+          generationSearch(setPokemonData, params.id);
+          break;
+        }
+        case "type": {
+          typeSearch(setPokemonData, params.id, setTitle);
+          break;
+        }
+        case "color": {
+          colorSearch(setPokemonData, params.id, setTitle);
+          break;
+        }
+        case "egg-group": {
+          eggGroupSearch(setPokemonData, params.id, setTitle);
+          break;
+        }
+        case "habitat": {
+          habitatSearch(setPokemonData, params.id, setTitle);
+          break;
+        }
+        case "shape": {
+          shapeSearch(setPokemonData, params.id, setTitle);
+          break;
+        }
+        default: {
+          console.log("ERROR");
+          break;
+        }
       }
     },
     // eslint-disable-next-line
@@ -57,7 +86,7 @@ export default function Pokedex() {
           <div className="fixedBar">
             <div id="container">
               <h1>
-                <u>{location.state.title}</u>
+                <u>{title}</u>
               </h1>
               <SearchBarPokemon
                 setSearchBar={setSearchBar}

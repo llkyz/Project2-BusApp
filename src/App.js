@@ -36,10 +36,7 @@ function App() {
               <Link to="/regionlist">
                 <p>Region</p>
               </Link>
-              <Link
-                to="/pokedex/full"
-                state={{ source: "None", title: "Searching entire Pokédex" }}
-              >
+              <Link to="/pokedex/full">
                 <p>Pokedex</p>
               </Link>
             </div>
@@ -49,6 +46,7 @@ function App() {
             <Route path="/generation" element={<Generation />} />
             <Route path="/regionlist" element={<RegionList />} />
             <Route path="/region/:id" element={<Region />} />
+            <Route path="/pokedex/:type/:id" element={<Pokedex />} />
             <Route path="/pokedex/:type" element={<Pokedex />} />
             <Route path="/pokemon/:id" element={<Species />} />
           </Routes>

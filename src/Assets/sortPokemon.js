@@ -138,3 +138,26 @@ export async function pokemonToSpecies(url, setSpecies) {
   const data = await response.json();
   setSpecies(data.species.url);
 }
+
+export const romanList = [
+  "i",
+  "ii",
+  "iii",
+  "iv",
+  "v",
+  "vi",
+  "vii",
+  "viii",
+  "ix",
+  "x",
+  "xi",
+  "xii",
+  "xiii",
+  "xiv",
+  "xv",
+  "xvi",
+  "xvii",
+  "xviii",
+  "xix",
+  "xx",
+];

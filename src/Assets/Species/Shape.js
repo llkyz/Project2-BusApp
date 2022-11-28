@@ -9,13 +9,7 @@ export default function Shape(props) {
   return (
     <>
       {props.data ? (
-        <Link
-          to="/pokedex/other"
-          state={{
-            source: props.data.url,
-            title: `Browsing Shape (${name})`,
-          }}
-        >
+        <Link to={`/pokedex/shape/${props.data.url.split("/").slice(-2, -1)}`}>
           <p
             onClick={() => {
               window.scrollTo(0, 0);

@@ -12,13 +12,7 @@ export default function Color(props) {
   };
 
   return (
-    <Link
-      to="/pokedex/other"
-      state={{
-        source: props.data.url,
-        title: `Searching by Color (${props.data.name.toUpperCase()})`,
-      }}
-    >
+    <Link to={`/pokedex/color/${props.data.url.split("/").slice(-2, -1)}`}>
       <div
         className="link"
         style={styles}

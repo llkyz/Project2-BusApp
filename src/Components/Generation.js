@@ -24,19 +24,12 @@ export default function Generation() {
     return generationList.results.map((data, index) => (
       <Link
         key={index}
-        to="/pokedex/generation"
-        state={{
-          source: generationList.results[index].url,
-          title: "Browsing Generation " + data.name.split("-")[1].toUpperCase(),
-          id: data.name,
-        }}
+        to={`/pokedex/generation/${data.url.substring(
+          data.url.length - 2,
+          data.url.length - 1
+        )}`}
       >
-        <div
-          className="generation"
-          id={
-            "gen" + data.url.substring(data.url.length - 2, data.url.length - 1)
-          }
-        >
+        <div className="generation">
           <p>{data.name.replace("-", " ").toUpperCase()}</p>
           <div className="imageContainer">
             <img src={generationImg[data.name]} alt={data.name} />

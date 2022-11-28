@@ -10,11 +10,7 @@ export default function Habitat(props) {
     <>
       {props.data ? (
         <Link
-          to="/pokedex/other"
-          state={{
-            source: props.data.url,
-            title: `Browsing Habitat (${name})`,
-          }}
+          to={`/pokedex/habitat/${props.data.url.split("/").slice(-2, -1)}`}
         >
           <p
             onClick={() => {

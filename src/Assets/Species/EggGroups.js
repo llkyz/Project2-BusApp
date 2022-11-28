@@ -16,11 +16,7 @@ export default function EggGroups(props) {
       return (
         <Link
           key={index}
-          to="/pokedex/other"
-          state={{
-            source: data.url,
-            title: `Searching by Egg Group (${name})`,
-          }}
+          to={`/pokedex/egg-group/${data.url.split("/").slice(-2, -1)}`}
         >
           <p
             onClick={() => {

@@ -6,12 +6,10 @@ export default function Generation(props) {
   return (
     <>
       <Link
-        to="/pokedex/generation"
-        state={{
-          source: props.data.url,
-          title: `Browsing ${name}`,
-          id: props.data.name,
-        }}
+        to={`/pokedex/generation/${props.data.url.substring(
+          props.data.url.length - 2,
+          props.data.url.length - 1
+        )}`}
       >
         <p
           onClick={() => {
