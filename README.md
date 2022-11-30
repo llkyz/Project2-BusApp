@@ -14,3 +14,46 @@ To deploy the app locally, clone the project into a Create-React-App directory, 
 - HTML5 <picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/llkyz/llkyz/icons/html5/html5-white-original-wordmark.svg"><img height="30" width="30" src="https://cdn.jsdelivr.net/gh/llkyz/llkyz/icons/html5/html5-original-wordmark.svg"></picture>
 - CSS3 <picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/llkyz/llkyz/icons/css3/css3-white-original-wordmark.svg"><img height="30" width="30" src="https://cdn.jsdelivr.net/gh/llkyz/llkyz/icons/css3/css3-original-wordmark.svg"></picture>
 - JavaScript <picture><source media="(prefers-color-scheme: dark)" srcset="https://cdn.jsdelivr.net/gh/llkyz/llkyz/icons/javascript/javascript-original.svg"><img height="30" width="30" src="https://cdn.jsdelivr.net/gh/llkyz/llkyz/icons/javascript/javascript-original.svg"></picture>
+
+## User Stories
+
+As a Pokémon gamer, I want a Pokémon list so that I can easily find the Pokémon I'm looking for and all the information about it.
+
+## Layout
+
+### Wireframe
+
+The overall navigation flow of the app. The main pages are the Pokédex and Pokémon page, with the other pages acting as navigation aids to direct users toward the main pages.
+
+![layout](https://user-images.githubusercontent.com/115427253/204695718-2d1a6b7c-7078-4f90-943d-a3bb2b7bca92.png)
+---
+
+### Region page
+
+Displays a list of locations in that region. Users can click specific locations to get a list of Pokémon found in that location.
+
+![page3](https://user-images.githubusercontent.com/115427253/204696919-d87f04e2-73f6-45c5-a1f1-e48801ab5991.jpg)
+---
+
+### Pokédex page
+
+Currently displaying the full list of Pokémon available. Clicking any Pokémon card will display detailed information regarding that Pokémon. This page can be used to filter by various properties like Type or Color.
+
+![page1](https://user-images.githubusercontent.com/115427253/204696899-728e044a-b0c5-43f3-a9df-2dfd0edc7d06.jpg)
+---
+
+### Pokémon Species page
+
+Displays a comprehensive list of information regarding the Pokémon, including:
+- Name
+- Picture
+- Forms
+- Stats
+- Attributes
+- Evolution Chain
+- Abilities
+- Moves
+- Encounters
+- Flavor Text
+
+![page2](https://user-images.githubusercontent.com/115427253/204696909-f80f01b4-7f46-415d-9c40-d3f88e4cdd25.jpg)
