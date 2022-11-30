@@ -57,3 +57,21 @@ Displays a comprehensive list of information regarding the Pokémon, including:
 - Flavor Text
 
 ![page2](https://user-images.githubusercontent.com/115427253/204696909-f80f01b4-7f46-415d-9c40-d3f88e4cdd25.jpg)
+
+## Challenges
+
+The PokéAPI provides access to an extensive amount of information and resources. While this was incredibly helpful in building an informational app, it also proved challenging to sift through the mountain of data to grab what I required.
+
+Due to the way certain information was structured within the API, I often had to filter, clean, and re-organize the information before it could be presented to the user.
+
+As the project developed, it also gradually became bulkier and harder to make changes without affecting a significant portion of the existing code. This is especially so when modifying data structures that could potentially run through the majority of the app. Thus I understood the importance of planning and tying down the data flow properly before starting on a project.
+
+<hr>
+
+## APIs Used
+
+- [PokéAPI](https://pokeapi.co/)
+
+## References
+
+- [CSS Only 3D Bar Graph](https://codepen.io/TimRuby/pen/DGYoYz)
