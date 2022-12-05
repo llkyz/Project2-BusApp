@@ -75,56 +75,6 @@ export default function Region() {
     );
   }
 
-  // function DisplayRegion() {
-  //   return (
-  //     <div className="region">
-  //       <div className="regionHeader">
-  //         <h1>{regionData.name.toUpperCase()}</h1>
-  //         {regionData.main_generation ? (
-  //           <GenerationLink />
-  //         ) : (
-  //           <h2>NO GENERATION</h2>
-  //         )}
-  //       </div>
-  //       <img
-  //         className="regionImg"
-  //         src={regionImg[regionData.name]}
-  //         alt={regionData.name}
-  //       />
-  //       {regionData.locations.length !== 0 ? (
-  //         <>
-  //           <h1>Locations</h1>
-  //           <div className="locationList">
-  //             {location ? (
-  //               <Location data={location} reset={setLocation} />
-  //             ) : (
-  //               <>
-  //                 <SearchBarLocation
-  //                   setSearchBar={setSearchBar}
-  //                   searchBar={searchBar}
-  //                   setRegionData={setRegionData}
-  //                   regionData={regionData}
-  //                 />
-  //                 <div>
-  //                   {searchBar.searchQuery ? (
-  //                     <ListLocations searchCheck={true} />
-  //                   ) : (
-  //                     <ListLocations searchCheck={false} />
-  //                   )}
-  //                 </div>
-  //               </>
-  //             )}
-  //           </div>
-  //         </>
-  //       ) : (
-  //         <h1>No Locations Found</h1>
-  //       )}
-  //     </div>
-  //   );
-  // }
-
-  // return <div>{regionData ? <DisplayRegion /> : <LoadingImgLarge />}</div>;
-
   return (
     <>
       <Favourites />

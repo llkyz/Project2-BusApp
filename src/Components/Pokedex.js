@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Species from "./Species";
 import SearchBarPokemon from "./SearchBarPokemon";
 import MakePokemonList from "./MakePokemonList";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { LoadingImgLarge } from "../Assets/cleanup";
 import {
   fullPokedex,
@@ -24,7 +24,6 @@ export default function Pokedex() {
   const [species, setSpecies] = useState();
   const [selectForm, setSelectForm] = useState();
   const params = useParams();
-  const location = useLocation();
   const [title, setTitle] = useState("");
   let extended = false;
   if (params.type === "type") {

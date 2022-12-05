@@ -27,17 +27,6 @@ export const fullPokedex = async (setPokemonData) => {
   });
 };
 
-// export const otherSearch = async (setPokemonData, source) => {
-//   const response = await fetch(source);
-//   let data = await response.json();
-//   data = createPokeId(data.pokemon_species);
-//   data = sortPokedexAsc(data);
-//   setPokemonData({
-//     speciesList: data,
-//     sprite: generationSprites.full,
-//   });
-// };
-
 export const generationSearch = async (setPokemonData, id) => {
   const response = await fetch(
     config.BASE_API_DOMAIN + config.ENDPOINT_GENERATION + id
