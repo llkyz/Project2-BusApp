@@ -7,6 +7,7 @@ import kalosImg from "./Kalos.png";
 import alolaImg from "./Alola.png";
 import galarImg from "./Galar.jpg";
 import hisuiImg from "./Hisui.jpg";
+import paldeaImg from "./Paldea.jpg";
 
 const regionImg = {
   kanto: kantoImg,
@@ -18,6 +19,7 @@ const regionImg = {
   alola: alolaImg,
   galar: galarImg,
   hisui: hisuiImg,
+  paldea: paldeaImg,
 };
 
 export default regionImg;
