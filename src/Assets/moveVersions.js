@@ -19,6 +19,7 @@ const moveVersions = {
   "sword-shield": { letter: "SwSh", col: "versionMove" },
   colosseum: { letter: "Colo", col: "versionMove" },
   xd: { letter: "XD", col: "versionMove" },
+  "scarlet-violet": { letter: "SV", col: "versionMove" },
 };
 
 export default moveVersions;

@@ -19,6 +19,7 @@ const moveVersionOrder = [
   "sword-shield",
   "colosseum",
   "xd",
+  "scarlet-violet",
 ];
 
 export default moveVersionOrder;

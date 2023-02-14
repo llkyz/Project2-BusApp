@@ -45,7 +45,14 @@ export default function FlavorText(props) {
             );
           })}
         </div>
-        <h3 dangerouslySetInnerHTML={{ __html: entries[currentText].text }} />
+        <h3
+          dangerouslySetInnerHTML={{
+            __html:
+              entries[currentText] === undefined
+                ? "No flavor text available"
+                : entries[currentText].text,
+          }}
+        />
       </>
     );
   }
