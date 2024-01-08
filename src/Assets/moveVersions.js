@@ -20,6 +20,7 @@ const moveVersions = {
   colosseum: { letter: "Colo", col: "versionMove" },
   xd: { letter: "XD", col: "versionMove" },
   "scarlet-violet": { letter: "SV", col: "versionMove" },
+  "brilliant-diamond-and-shining-pearl": { letter: "BDSP", col: "versionMove" },
 };
 
 export default moveVersions;
